@@ -18,5 +18,15 @@
   "bugs": {
     "url": "https://gitlab.com/massimo-ua/plm/issues"
   },
-  "homepage": "https://gitlab.com/massimo-ua/plm#readme"
+  "homepage": "https://gitlab.com/massimo-ua/plm#readme",
+  "dependencies": {
+    "awilix": "^4.0.1",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.0.2",
+    "sequelize": "^4.41.2"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
 }
