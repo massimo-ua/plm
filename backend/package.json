@@ -1,0 +1,22 @@
+{
+  "name": "plm-backend",
+  "version": "1.0.0",
+  "description": "Profit and Loss manager API",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/massimo-ua/plm.git"
+  },
+  "keywords": [
+    "Finances"
+  ],
+  "author": "grishkov.m@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/massimo-ua/plm/issues"
+  },
+  "homepage": "https://gitlab.com/massimo-ua/plm#readme"
+}
