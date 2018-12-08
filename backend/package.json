@@ -2,9 +2,10 @@
   "name": "plm-backend",
   "version": "1.0.0",
   "description": "Profit and Loss manager API",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -21,12 +22,25 @@
   "homepage": "https://gitlab.com/massimo-ua/plm#readme",
   "dependencies": {
     "awilix": "^4.0.1",
+    "cnfg": "^1.2.0",
+    "compression": "^1.7.3",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.0.2",
+    "log4js": "^3.0.6",
+    "module-alias": "^2.1.0",
+    "morgan": "^1.9.1",
     "sequelize": "^4.41.2"
   },
   "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "jest": "^23.6.0"
+  },
+  "_moduleAliases": {
+    "@config": "config",
+    "@core": "src/core",
+    "@app": "src/app"
   }
 }
