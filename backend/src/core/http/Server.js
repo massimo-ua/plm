@@ -2,12 +2,12 @@ const express = require('express');
 const http = require('http');
 
 class AppHttpServer {
-  constructor({ config, router, logger }) {
+  constructor({ config, appRouter, logger }) {
     this.config = config;
     this.logger = logger;
     this.app = express();
     this.app.disable('x-powered-by');
-    this.app.use(router);
+    this.app.use(appRouter.rootRouter);
   }
 
   start() {

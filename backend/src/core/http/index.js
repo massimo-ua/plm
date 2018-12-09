@@ -1,7 +1,9 @@
 const Server = require('./Server');
-const router = require('./router');
+const AppRouter = require('./router');
+const errorHandler = require('./errorHandler');
 
 module.exports = {
   Server,
-  router,
+  AppRouter,
+  errorHandler,
 };
