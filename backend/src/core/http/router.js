@@ -2,12 +2,11 @@ const { Router } = require('express');
 const compression = require('compression');
 
 class AppRouter {
-  constructor({ httpRequestsLogger, errorHandler }) {
+  constructor({ httpRequestsLogger, errorHandler, notFoundHandler }) {
     this.versions = {};
     this.root = Router();
     this.root.use(httpRequestsLogger);
     this.root.use(compression());
-    this.root.use(errorHandler);
     this.addVersion('v1');
     this.versions.v1.get('/', (req, res) => {
       res.json({
@@ -15,6 +14,8 @@ class AppRouter {
         version: 'v1',
       });
     });
+    this.root.use(notFoundHandler);
+    this.root.use(errorHandler);
   }
 
   addVersion(version) {
@@ -30,6 +31,8 @@ class AppRouter {
   attach({ version, path, subRouter }) {
     if (this.versions[version]) {
       this.versions[version].use(`/${path}`, subRouter);
+    } else {
+      throw new Error(`API version "${version}" is not registered`);
     }
   }
 }

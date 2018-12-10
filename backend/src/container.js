@@ -7,9 +7,15 @@ const {
 const config = require('@config');
 const logger = require('@core/logger');
 const { httpRequestsLogger } = require('@core/middleware');
-const { Server, AppRouter, errorHandler } = require('@core/http');
+const {
+  Server,
+  AppRouter,
+  errorHandler,
+  notFoundHandler,
+} = require('@core/http');
 const Application = require('@app/Application');
 const db = require('@core/database');
+const Core = require('@core/CoreModule');
 
 const container = createContainer();
 
@@ -22,6 +28,8 @@ container.register({
   httpRequestsLogger: asFunction(httpRequestsLogger).singleton(),
   db: asClass(db).singleton(),
   errorHandler: asFunction(errorHandler).singleton(),
+  notFoundHandler: asFunction(notFoundHandler).singleton(),
+  core: asClass(Core).singleton(),
 });
 
 module.exports = container;
