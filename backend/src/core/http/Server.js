@@ -2,12 +2,18 @@ const express = require('express');
 const http = require('http');
 
 class AppHttpServer {
-  constructor({ config, appRouter, logger }) {
+  constructor({
+    config,
+    appRouter,
+    logger,
+    graphQL,
+  }) {
     this.config = config;
     this.logger = logger;
     this.app = express();
     this.app.disable('x-powered-by');
     this.app.use(appRouter.rootRouter);
+    console.log(graphQL.whoami());
   }
 
   start() {
