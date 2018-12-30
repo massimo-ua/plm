@@ -5,20 +5,9 @@ const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLInt,
-  GraphQLBoolean,
-  buildSchema,
+  GraphQLList,
+  GraphQLNonNull,
 } = require('graphql');
-
-const schema = buildSchema(`
-  type Query {
-    user(id: Int!): User
-    users: [User]
-  },
-  type User {
-    id: Int
-    name: String
-  }
-`);
 
 const users = [
   {
@@ -38,16 +27,50 @@ const getUser = ({ id }) => {
 
 const getUsers = () => users;
 
-const root = {
-  user: getUser,
-  users: getUsers,
-};
+const userType = new GraphQLObjectType({
+  name: 'User',
+  description: 'User shchema',
+  fields: {
+    id: {
+      type: GraphQLNonNull(GraphQLInt),
+      description: 'User id',
+    },
+    name: {
+      type: GraphQLNonNull(GraphQLString),
+      description: 'User name',
+    },
+  },
+});
+
+const query = new GraphQLObjectType({
+  name: 'Query',
+  fields: () => ({
+    user: {
+      type: userType,
+      args: {
+        id: {
+          type: GraphQLNonNull(GraphQLInt),
+          description: 'User id',
+        },
+      },
+      resolve: (root, args) => getUser(args),
+    },
+    users: {
+      type: GraphQLList(userType),
+      resolve: () => getUsers(),
+    },
+  }),
+});
+
+const schema = new GraphQLSchema({
+  query,
+  types: [userType],
+});
 
 module.exports = ({ core }) => {
   const router = Router();
   router.use('/', graphqlHTTP({
     schema,
-    rootValue: root,
     graphiql: true,
   }));
 

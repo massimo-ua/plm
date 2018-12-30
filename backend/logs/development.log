@@ -1030,3 +1030,25 @@
 [2018-12-23T23:30:54.585] [INFO] default - [p 10189] Listening at port 3333
 [2018-12-23T23:31:02.550] [INFO] default - [0mPOST /api/v1/graphql/? [32m200 [0m46.606 ms - 43[0m
 [2018-12-23T23:31:10.606] [INFO] default - [0mPOST /api/v1/graphql/? [32m200 [0m6.032 ms - 40[0m
+[2018-12-30T18:48:49.045] [INFO] default - Module [GraphqlModule] registered successfully
+[2018-12-30T18:48:49.056] [INFO] default - [p 8800] Listening at port 3333
+[2018-12-30T18:50:29.094] [INFO] default - [0mGET /api/v1/graphql [32m200 [0m50.392 ms - -[0m
+[2018-12-30T18:50:29.932] [INFO] default - [0mPOST /api/v1/graphql? [31m500 [0m66.398 ms - 146[0m
+[2018-12-30T18:50:29.952] [INFO] default - [0mPOST /api/v1/graphql? [31m500 [0m1.374 ms - 146[0m
+[2018-12-30T18:50:30.039] [INFO] default - [0mGET /favicon.ico [33m404 [0m1.258 ms - 65[0m
+[2018-12-30T18:50:47.651] [INFO] default - [0mPOST /api/v1/graphql? [31m500 [0m2.517 ms - 146[0m
+[2018-12-30T18:56:12.195] [INFO] default - Module [GraphqlModule] registered successfully
+[2018-12-30T18:56:12.211] [INFO] default - [p 9158] Listening at port 3333
+[2018-12-30T18:58:42.648] [INFO] default - [0mGET /api/v1/graphql [32m200 [0m20.454 ms - -[0m
+[2018-12-30T18:58:43.403] [INFO] default - [0mPOST /api/v1/graphql? [31m500 [0m24.860 ms - 146[0m
+[2018-12-30T18:58:43.500] [INFO] default - [0mPOST /api/v1/graphql? [31m500 [0m1.569 ms - 146[0m
+[2018-12-30T18:59:37.577] [INFO] default - Module [GraphqlModule] registered successfully
+[2018-12-30T18:59:37.592] [INFO] default - [p 9420] Listening at port 3333
+[2018-12-30T19:05:02.635] [INFO] default - Module [GraphqlModule] registered successfully
+[2018-12-30T19:05:02.646] [INFO] default - [p 9604] Listening at port 3333
+[2018-12-30T19:05:08.076] [INFO] default - [0mGET /api/v1/graphql [32m200 [0m17.926 ms - -[0m
+[2018-12-30T19:05:08.692] [INFO] default - [0mPOST /api/v1/graphql? [32m200 [0m77.026 ms - -[0m
+[2018-12-30T19:06:40.106] [INFO] default - [0mPOST /api/v1/graphql? [33m400 [0m5.258 ms - 100[0m
+[2018-12-30T19:07:07.239] [INFO] default - [0mPOST /api/v1/graphql? [32m200 [0m6.469 ms - 69[0m
+[2018-12-30T19:09:07.222] [INFO] default - [0mPOST /api/v1/graphql? [32m200 [0m5.668 ms - 43[0m
+[2018-12-30T19:09:15.658] [INFO] default - [0mPOST /api/v1/graphql? [32m200 [0m5.250 ms - 40[0m
