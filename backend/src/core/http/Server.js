@@ -6,14 +6,12 @@ class AppHttpServer {
     config,
     appRouter,
     logger,
-    graphQL,
   }) {
     this.config = config;
     this.logger = logger;
     this.app = express();
     this.app.disable('x-powered-by');
     this.app.use(appRouter.rootRouter);
-    console.log(graphQL.whoami());
   }
 
   start() {

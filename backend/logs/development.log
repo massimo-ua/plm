@@ -1052,3 +1052,31 @@
 [2018-12-30T19:07:07.239] [INFO] default - [0mPOST /api/v1/graphql? [32m200 [0m6.469 ms - 69[0m
 [2018-12-30T19:09:07.222] [INFO] default - [0mPOST /api/v1/graphql? [32m200 [0m5.668 ms - 43[0m
 [2018-12-30T19:09:15.658] [INFO] default - [0mPOST /api/v1/graphql? [32m200 [0m5.250 ms - 40[0m
+[2018-12-31T01:56:58.990] [INFO] default - Module [GraphqlModule] registered successfully
+[2018-12-31T01:56:59.000] [INFO] default - [p 9992] Listening at port 3333
+[2018-12-31T02:01:35.939] [INFO] default - Module [GraphqlModule] registered successfully
+[2018-12-31T02:01:35.950] [INFO] default - [p 10157] Listening at port 3333
+[2018-12-31T02:04:17.555] [INFO] default - Module [GraphqlModule] registered successfully
+[2018-12-31T02:04:17.565] [INFO] default - [p 10333] Listening at port 3333
+[2018-12-31T02:07:24.297] [INFO] default - Module [GraphqlModule] registered successfully
+[2018-12-31T02:07:24.307] [INFO] default - [p 10384] Listening at port 3333
+[2018-12-31T02:08:53.722] [INFO] default - Module [GraphqlModule] registered successfully
+[2018-12-31T02:08:53.733] [INFO] default - [p 10463] Listening at port 3333
+[2019-01-15T23:30:10.650] [INFO] default - [p 7652] Listening at port 3333
+[2019-01-15T23:32:03.703] [INFO] default - [0mGET /api/v1 [32m200 [0m8.193 ms - 40[0m
+[2019-01-15T23:32:04.132] [INFO] default - [0mGET /favicon.ico [33m404 [0m1.188 ms - 65[0m
+[2019-01-15T23:32:10.966] [INFO] default - [0mGET /api/v1/graphql [33m404 [0m1.131 ms - 65[0m
+[2019-01-15T23:34:30.824] [INFO] default - [p 8058] Listening at port 3333
+[2019-01-15T23:36:40.861] [INFO] default - [p 8156] Listening at port 3333
+[2019-01-15T23:37:38.346] [INFO] default - [p 8195] Listening at port 3333
+[2019-01-15T23:41:08.569] [INFO] default - API namespace [Users] registered successfully
+[2019-01-15T23:41:08.580] [INFO] default - Module [GraphqlModule] registered successfully
+[2019-01-15T23:41:08.585] [INFO] default - [p 8353] Listening at port 3333
+[2019-01-15T23:41:16.320] [INFO] default - API namespace [Users] registered successfully
+[2019-01-15T23:41:16.331] [INFO] default - Module [GraphqlModule] registered successfully
+[2019-01-15T23:41:16.339] [INFO] default - [p 8376] Listening at port 3333
+[2019-01-15T23:41:28.954] [INFO] default - [0mGET /api/v1/graphql [32m200 [0m16.626 ms - -[0m
+[2019-01-15T23:41:30.306] [INFO] default - [0mPOST /api/v1/graphql? [32m200 [0m97.393 ms - -[0m
+[2019-01-15T23:41:33.250] [INFO] default - [0mPOST /api/v1/graphql? [32m200 [0m9.724 ms - 40[0m
+[2019-01-15T23:41:40.652] [INFO] default - [0mPOST /api/v1/graphql? [32m200 [0m5.312 ms - 43[0m
+[2019-01-15T23:41:53.439] [INFO] default - [0mPOST /api/v1/graphql? [32m200 [0m3.773 ms - 69[0m

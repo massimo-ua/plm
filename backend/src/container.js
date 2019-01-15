@@ -16,7 +16,7 @@ const {
 const Application = require('@app/Application');
 const db = require('@core/database');
 const Core = require('@core/CoreModule');
-const GraphQL = require('@app/graphql');
+const ModulesLoader = require('@app/ModulesLoader');
 
 const container = createContainer();
 
@@ -31,7 +31,7 @@ container.register({
   errorHandler: asFunction(errorHandler).singleton(),
   notFoundHandler: asFunction(notFoundHandler).singleton(),
   core: asClass(Core).singleton(),
-  graphQL: asFunction(GraphQL).singleton(),
+  modulesLoader: asFunction(ModulesLoader).singleton(),
 });
 
 module.exports = container;
