@@ -2,7 +2,7 @@ class Application {
   constructor({ server, logger, modulesLoader }) {
     this.server = server;
     this.logger = logger;
-    console.log(modulesLoader);
+    this.loader = modulesLoader;
   }
 
   async start() {
