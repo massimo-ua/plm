@@ -7,25 +7,25 @@ class CoreModule {
     this.logger = logger;
     this.router = appRouter;
     this.db = db;
-    this.APIs = {};
+    this.apis = {};
   }
 
   registerRouter(moduleRouter) {
     try {
       this.router.attach(moduleRouter);
-      this.logger.info(`Module [${moduleRouter.name}] registered successfully`);
+      this.logger.info(`Router [${moduleRouter.name}] registered successfully`);
     } catch (error) {
       this.logger.error(error);
     }
   }
 
   registerAPI({ namespace, api }) {
-    this.APIs[namespace] = api;
+    this.apis[namespace] = api;
     this.logger.info(`API namespace [${namespace}] registered successfully`);
   }
 
   get modules() {
-    return this.APIs;
+    return this.apis;
   }
 }
 

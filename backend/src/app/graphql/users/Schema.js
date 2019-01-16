@@ -18,6 +18,6 @@ module.exports = service => ({
   },
   users: {
     type: GraphQLList(User),
-    resolve: () => service.getAll(),
+    resolve: () => service.findAll(),
   },
 });

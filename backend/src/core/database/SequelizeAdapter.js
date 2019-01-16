@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 class SequelizeAdapter {
   constructor({ config, logger }) {
     this.logger = logger;
-    this.modelsRegistry = {};
+    this.models = {};
     const { db } = config;
     if (db) {
       this.db = new Sequelize(db);
@@ -12,12 +12,12 @@ class SequelizeAdapter {
     }
   }
 
-  registerModel(schemaDefinition, modelName, modelOptions = {}) {
-    this.modelsRegistry[modelName] = this.db.define(modelName, schemaDefinition, modelOptions);
-  }
-
-  get models() {
-    return this.modelsRegistry;
+  registerModel(tableName, schemaDefinition, modelOptions = {}) {
+    this.models[tableName] = this.db.define(tableName, schemaDefinition, {
+      underscored: true,
+      timestamps: true,
+      ...modelOptions,
+    });
   }
 }
 module.exports = SequelizeAdapter;

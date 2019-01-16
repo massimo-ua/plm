@@ -8,7 +8,7 @@ const User = require('./users/User');
 const UsersSchema = require('./users/Schema');
 
 module.exports = (core) => {
-  const { Users: usersService } = core.APIs;
+  const { Users: usersService } = core.modules;
   const query = new GraphQLObjectType({
     name: 'Query',
     fields: () => ({
