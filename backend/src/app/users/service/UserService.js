@@ -1,25 +1,14 @@
 class UserService {
   constructor(model) {
     this.model = model;
-    this.users = [
-      {
-        id: 1,
-        name: 'Massimo',
-      },
-      {
-        id: 2,
-        name: 'Test',
-      },
-    ];
   }
 
   findById({ id }) {
-    const [selectedUser] = this.users.filter(user => user.id === id);
-    return selectedUser;
+    return this.model.findById(id);
   }
 
   findAll() {
-    return this.users;
+    return this.model.findAll({});
   }
 }
 

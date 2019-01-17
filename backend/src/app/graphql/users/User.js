@@ -17,6 +17,10 @@ const User = new GraphQLObjectType({
       type: GraphQLNonNull(GraphQLString),
       description: 'User name',
     },
+    login: {
+      type: GraphQLNonNull(GraphQLString),
+      description: 'User login',
+    },
   },
 });
 

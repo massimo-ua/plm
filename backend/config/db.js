@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'plm',
+  database: 'plm',
   username: 'plm',
   password: 'plm',
   host: '127.0.0.1',

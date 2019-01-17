@@ -14,8 +14,6 @@ class SequelizeAdapter {
 
   registerModel(tableName, schemaDefinition, modelOptions = {}) {
     this.models[tableName] = this.db.define(tableName, schemaDefinition, {
-      underscored: true,
-      timestamps: true,
       ...modelOptions,
     });
   }
