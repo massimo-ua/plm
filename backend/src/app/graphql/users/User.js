@@ -3,7 +3,9 @@ const {
   GraphQLString,
   GraphQLInt,
   GraphQLNonNull,
+  GraphQLBoolean,
 } = require('graphql');
+const Team = require('./Team');
 
 const User = new GraphQLObjectType({
   name: 'User',
@@ -20,6 +22,18 @@ const User = new GraphQLObjectType({
     login: {
       type: GraphQLNonNull(GraphQLString),
       description: 'User login',
+    },
+    isActive: {
+      type: GraphQLBoolean,
+      description: 'Is user account active/suspended',
+    },
+    team: {
+      type: Team,
+      description: 'Team that user belongs to',
+    },
+    isAdmin: {
+      type: GraphQLBoolean,
+      description: 'Is account belongs to admin/regular user',
     },
   },
 });

@@ -1,12 +1,12 @@
-const Sequelize = require('sequelize');
-
-const User = {
-  name: Sequelize.STRING,
-  login: Sequelize.STRING,
-  password: Sequelize.STRING,
-  isActive: Sequelize.BOOLEAN,
-  teamId: Sequelize.INTEGER,
-  isAdmin: Sequelize.BOOLEAN,
+module.exports = (sequelize, DataTypes, models) => {
+  const User = sequelize.define('User', {
+    name: DataTypes.STRING,
+    login: DataTypes.STRING,
+    password: DataTypes.STRING,
+    isActive: DataTypes.BOOLEAN,
+    teamId: DataTypes.INTEGER,
+    isAdmin: DataTypes.BOOLEAN,
+  }, {});
+  User.belongsTo(models.Team, { as: 'team' });
+  return User;
 };
-
-module.exports = User;

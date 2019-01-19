@@ -4,7 +4,7 @@ const {
   GraphQLSchema,
   GraphQLObjectType,
 } = require('graphql');
-const User = require('./users/User');
+const { Types } = require('./users');
 const UsersSchema = require('./users/Schema');
 
 module.exports = (core) => {
@@ -18,9 +18,7 @@ module.exports = (core) => {
 
   const schema = new GraphQLSchema({
     query,
-    types: [
-      User,
-    ],
+    types: [...Types],
   });
 
 

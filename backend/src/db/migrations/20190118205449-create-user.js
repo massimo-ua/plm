@@ -9,21 +9,33 @@ module.exports = {
       type: Sequelize.INTEGER,
     },
     name: {
+      allowNull: false,
       type: Sequelize.STRING,
     },
     login: {
+      allowNull: false,
       type: Sequelize.STRING,
+      unique: true,
     },
     password: {
+      allowNull: false,
       type: Sequelize.STRING,
     },
     isActive: {
+      allowNull: false,
+      defaultValue: false,
       type: Sequelize.BOOLEAN,
     },
     teamId: {
       type: Sequelize.INTEGER,
+      references: {
+        model: 'Teams',
+        key: 'id',
+      },
     },
     isAdmin: {
+      allowNull: false,
+      defaultValue: false,
       type: Sequelize.BOOLEAN,
     },
     createdAt: {
@@ -35,5 +47,5 @@ module.exports = {
       type: Sequelize.DATE,
     },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('Users'),
+  down: queryInterface => queryInterface.dropTable('Users'),
 };
