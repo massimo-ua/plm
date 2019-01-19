@@ -17,6 +17,8 @@ const Application = require('@app/Application');
 const db = require('@core/database');
 const Core = require('@core/CoreModule');
 const ModulesLoader = require('@app/ModulesLoader');
+const crypto = require('@core/crypto');
+const jwt = require('@core/jwt');
 
 const container = createContainer();
 
@@ -30,6 +32,8 @@ container.register({
   db: asClass(db).singleton(),
   errorHandler: asFunction(errorHandler).singleton(),
   notFoundHandler: asFunction(notFoundHandler).singleton(),
+  crypto: asValue(crypto),
+  jwt: asFunction(jwt).singleton(),
   core: asClass(Core).singleton(),
   modulesLoader: asFunction(ModulesLoader).singleton(),
 });

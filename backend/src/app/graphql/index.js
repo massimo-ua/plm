@@ -1,26 +1,20 @@
 const { Router } = require('express');
 const graphqlHTTP = require('express-graphql');
-const {
-  GraphQLSchema,
-  GraphQLObjectType,
-} = require('graphql');
+const { GraphQLSchema } = require('graphql');
 const { Types } = require('./users');
-const UsersSchema = require('./users/Schema');
+const Query = require('./Query');
+const Mutation = require('./Mutation');
+
 
 module.exports = (core) => {
-  const { Users: usersService } = core.modules;
-  const query = new GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-      ...UsersSchema(usersService),
-    }),
-  });
+  const query = Query(core);
+  const mutation = Mutation(core);
 
   const schema = new GraphQLSchema({
     query,
+    mutation,
     types: [...Types],
   });
-
 
   const router = Router();
   router.use('/', graphqlHTTP({

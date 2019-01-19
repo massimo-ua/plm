@@ -1,3 +1,3 @@
 const UserService = require('./UserService');
 
-module.exports = User => new UserService(User);
+module.exports = (...args) => new UserService(...args);

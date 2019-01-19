@@ -1,6 +1,9 @@
 class UserService {
-  constructor(model) {
+  constructor(model, { crypto, jwt, comparePassword }) {
     this.model = model;
+    this.crypto = crypto;
+    this.jwt = jwt;
+    this.comparePassword = comparePassword;
   }
 
   findById({ id }) {
@@ -13,6 +16,34 @@ class UserService {
     return this.model.findAll({
       include: ['team'],
     });
+  }
+
+  async signup({ username, login, password }) {
+    const user = await this.model.create({
+      name: username,
+      login,
+      password: await this.crypto.hash(password),
+    });
+
+    return this.jwt.sign(user);
+  }
+
+  async login({ login, password }) {
+    const errorMessage = 'Invalid login or password. Please try again.';
+    const user = await this.model.findOne({
+      where: {
+        login,
+        isActive: true,
+      },
+    });
+
+    const isPasswordValid = await this.comparePassword(password, user, this.crypto.compare);
+
+    if (isPasswordValid) {
+      return this.jwt.sign(user);
+    }
+
+    throw new Error(errorMessage);
   }
 }
 

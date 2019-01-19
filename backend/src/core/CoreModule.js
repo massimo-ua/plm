@@ -3,11 +3,17 @@ class CoreModule {
     logger,
     appRouter,
     db,
+    crypto,
+    jwt,
   }) {
     this.logger = logger;
     this.router = appRouter;
     this.db = db;
     this.apis = {};
+    this.utils = {
+      crypto,
+      jwt,
+    };
   }
 
   registerRouter(moduleRouter) {
