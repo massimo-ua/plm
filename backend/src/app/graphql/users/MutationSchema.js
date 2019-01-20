@@ -2,6 +2,7 @@ const {
   GraphQLNonNull,
   GraphQLString,
 } = require('graphql');
+const { Resolver } = require('../helpers');
 
 module.exports = service => ({
   signup: {
@@ -20,7 +21,7 @@ module.exports = service => ({
         description: 'User password',
       },
     },
-    resolve: (root, args) => service.signup(args),
+    resolve: Resolver(service.signup, { authRequired: false }),
   },
   login: {
     type: GraphQLString,
@@ -34,6 +35,6 @@ module.exports = service => ({
         description: 'User password',
       },
     },
-    resolve: (root, args) => service.login(args),
+    resolve: Resolver(service.login, { authRequired: false }),
   },
 });

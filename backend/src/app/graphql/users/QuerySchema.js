@@ -4,6 +4,7 @@ const {
   GraphQLList,
 } = require('graphql');
 const User = require('./User');
+const { Resolver } = require('../helpers');
 
 module.exports = service => ({
   user: {
@@ -14,10 +15,10 @@ module.exports = service => ({
         description: 'User id',
       },
     },
-    resolve: (root, args) => service.findById(args),
+    resolve: Resolver(service.findById),
   },
   users: {
     type: GraphQLList(User),
-    resolve: () => service.findAll(),
+    resolve: Resolver(service.findAll),
   },
 });

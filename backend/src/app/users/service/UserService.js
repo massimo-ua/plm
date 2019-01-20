@@ -4,6 +4,10 @@ class UserService {
     this.crypto = crypto;
     this.jwt = jwt;
     this.comparePassword = comparePassword;
+    this.findById = this.findById.bind(this);
+    this.findAll = this.findAll.bind(this);
+    this.signup = this.signup.bind(this);
+    this.login = this.login.bind(this);
   }
 
   findById({ id }) {

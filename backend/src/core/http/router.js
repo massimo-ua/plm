@@ -2,10 +2,16 @@ const { Router } = require('express');
 const compression = require('compression');
 
 class AppRouter {
-  constructor({ httpRequestsLogger, errorHandler, notFoundHandler }) {
+  constructor({
+    httpRequestsLogger,
+    errorHandler,
+    notFoundHandler,
+    jwtAuth,
+  }) {
     this.versions = {};
     this.root = Router();
     this.root.use(httpRequestsLogger);
+    this.root.use(jwtAuth);
     this.root.use(compression());
     this.addVersion('v1');
     this.versions.v1.get('/', (req, res) => {

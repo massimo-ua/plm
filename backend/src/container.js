@@ -6,7 +6,10 @@ const {
 } = require('awilix');
 const config = require('@config');
 const logger = require('@core/logger');
-const { httpRequestsLogger } = require('@core/middleware');
+const {
+  jwtAuth,
+  httpRequestsLogger,
+} = require('@core/middleware');
 const {
   Server,
   AppRouter,
@@ -29,6 +32,7 @@ container.register({
   app: asClass(Application).singleton(),
   appRouter: asClass(AppRouter).singleton(),
   httpRequestsLogger: asFunction(httpRequestsLogger).singleton(),
+  jwtAuth: asFunction(jwtAuth).singleton(),
   db: asClass(db).singleton(),
   errorHandler: asFunction(errorHandler).singleton(),
   notFoundHandler: asFunction(notFoundHandler).singleton(),
