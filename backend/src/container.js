@@ -19,7 +19,7 @@ const {
 const Application = require('@app/Application');
 const db = require('@core/database');
 const Core = require('@core/CoreModule');
-const ModulesLoader = require('@app/ModulesLoader');
+const ModulesLoader = require('@core/ModulesLoader');
 const crypto = require('@core/crypto');
 const jwt = require('@core/jwt');
 
