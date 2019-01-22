@@ -1,9 +1,19 @@
-const check = (rules = {}, ctx = {}) => Object.keys(rules).reduce((acc, key) => {
-  if (Object.prototype.hasOwnProperty.apply(ctx, key)) {
-    return acc && ctx[key] === rules[key];
+const isAdmin = (ctx) => {
+  const { user = {} } = ctx;
+  if (!user.isAdmin) {
+    throw new Error('Not authorized');
   }
-  return false;
-}, true);
+};
+
+const loggedIn = (ctx) => {
+  const { user, isLoginRequired = true } = ctx;
+  const pass = isLoginRequired ? !!user : true;
+  if (!pass) {
+    throw new Error('Authentification required');
+  }
+};
+
 module.exports = {
-  check,
+  isAdmin,
+  loggedIn,
 };

@@ -1,20 +1,16 @@
-const defaultOptions = {
-  authRequired: true,
-};
+const runner = require('./MiddlewareRunner');
 
-const checkAuthorization = (authRequired, { user }) => (authRequired ? !!user : true);
-
-const resolver = (handler, { authRequired }) => (root, args, ctx) => {
-  if (checkAuthorization(authRequired, ctx)) {
-    return handler(args, ctx);
-  }
-  throw new Error('Not Authorized');
+const resolver = (handler, middleware, additionalContext) => (root, args, ctx) => {
+  const combinedCtx = { ...ctx, ...additionalContext };
+  runner(middleware, combinedCtx);
+  return handler(args, combinedCtx);
 };
 
 const wrapper = (
   requestHandler,
-  options = defaultOptions,
+  middleware = [],
+  additionalContext = {},
   resolverFn = resolver,
-) => resolverFn(requestHandler, options);
+) => resolverFn(requestHandler, middleware, additionalContext);
 
 module.exports = wrapper;
