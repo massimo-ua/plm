@@ -8,6 +8,7 @@ class UserService {
     this.findAll = this.findAll.bind(this);
     this.signup = this.signup.bind(this);
     this.login = this.login.bind(this);
+    this.me = this.me.bind(this);
   }
 
   findById({ id }) {
@@ -48,6 +49,22 @@ class UserService {
     }
 
     throw new Error(errorMessage);
+  }
+
+  me({ user }) {
+    return this.model.findById(user.id, {
+      include: ['team'],
+    });
+  }
+
+  async update({ user, id, ...args }) {
+    const record = await this.model.unscoped().findById(id);
+    if (record) {
+      Object.assign(record, args);
+      await record.save();
+      return record;
+    }
+    throw new Error('User not found');
   }
 }
 

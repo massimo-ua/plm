@@ -6,7 +6,14 @@ module.exports = (sequelize, DataTypes, models) => {
     isActive: DataTypes.BOOLEAN,
     teamId: DataTypes.INTEGER,
     isAdmin: DataTypes.BOOLEAN,
-  }, {});
+  },
+  {
+    defaultScope: {
+      where: {
+        isActive: true,
+      },
+    },
+  });
   User.belongsTo(models.Team, { as: 'team' });
   return User;
 };

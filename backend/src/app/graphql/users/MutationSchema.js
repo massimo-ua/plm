@@ -1,10 +1,13 @@
 const {
   GraphQLNonNull,
   GraphQLString,
+  GraphQLBoolean,
+  GraphQLInt,
 } = require('graphql');
 const { Resolver } = require('../helpers');
+const User = require('./User');
 
-module.exports = (service, { loggedIn }) => ({
+module.exports = (service, { loggedIn, isAdmin }) => ({
   signup: {
     type: GraphQLString,
     args: {
@@ -36,5 +39,35 @@ module.exports = (service, { loggedIn }) => ({
       },
     },
     resolve: Resolver(service.login, loggedIn, { isLoginRequired: false }),
+  },
+  update: {
+    type: User,
+    args: {
+      id: {
+        type: GraphQLInt,
+        description: 'User id',
+      },
+      name: {
+        type: GraphQLString,
+        description: 'User name',
+      },
+      password: {
+        type: GraphQLString,
+        description: 'User password',
+      },
+      isActive: {
+        type: GraphQLBoolean,
+        description: 'is User active?',
+      },
+      teamId: {
+        type: GraphQLInt,
+        description: 'User team id',
+      },
+      isAdmin: {
+        type: GraphQLBoolean,
+        description: 'is User admin?',
+      },
+    },
+    resolve: Resolver(service.update, [loggedIn, isAdmin]),
   },
 });

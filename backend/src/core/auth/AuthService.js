@@ -6,6 +6,7 @@ const isAdmin = (ctx) => {
 };
 
 const loggedIn = (ctx) => {
+  console.log(ctx);
   const { user, isLoginRequired = true } = ctx;
   const pass = isLoginRequired ? !!user : true;
   if (!pass) {

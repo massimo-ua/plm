@@ -21,4 +21,8 @@ module.exports = (service, { loggedIn }) => ({
     type: GraphQLList(User),
     resolve: Resolver(service.findAll, loggedIn),
   },
+  me: {
+    type: User,
+    resolve: Resolver(service.me, loggedIn),
+  },
 });
