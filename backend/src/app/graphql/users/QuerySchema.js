@@ -6,6 +6,8 @@ const {
 const User = require('./User');
 const { Resolver } = require('../helpers');
 
+const resolver = new Resolver();
+
 module.exports = (service, { loggedIn }) => ({
   user: {
     type: User,
@@ -15,14 +17,20 @@ module.exports = (service, { loggedIn }) => ({
         description: 'User id',
       },
     },
-    resolve: Resolver(service.findById, loggedIn),
+    resolve: resolver
+      .middleware(loggedIn)
+      .resolve(service.findById),
   },
   users: {
     type: GraphQLList(User),
-    resolve: Resolver(service.findAll, loggedIn),
+    resolve: resolver
+      .middleware(loggedIn)
+      .resolve(service.findAll),
   },
   me: {
     type: User,
-    resolve: Resolver(service.me, loggedIn),
+    resolve: resolver
+      .middleware(loggedIn)
+      .resolve(service.me),
   },
 });

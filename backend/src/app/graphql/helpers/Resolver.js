@@ -1,23 +1,33 @@
 const runner = require('./MiddlewareRunner');
 
-const combineParams = (args = {}, { user, query = {} }, additionalContext = {}) => ({
-  ...args,
-  ...query,
-  user,
-  ...additionalContext,
-});
+function Resolver(middlewareRunner = runner) {
+  this.combinedCtx = {};
+  this.middlewares = [];
+  this.middlewareRunner = middlewareRunner;
+}
 
-const resolver = (handler, middleware, additionalContext) => (root, args, ctx) => {
-  const combinedCtx = combineParams(args, ctx, additionalContext);
-  runner(middleware, combinedCtx);
-  return handler(combinedCtx);
-};
+function resolve(handler) {
+  return (root, args, ctx) => {
+    const combinedCtx = { ...ctx, ...this.context };
+    this.middlewareRunner(this.middlewares, combinedCtx);
+    return handler(args, combinedCtx);
+  };
+}
 
-const wrapper = (
-  requestHandler,
-  middleware = [],
-  additionalContext = {},
-  resolverFn = resolver,
-) => resolverFn(requestHandler, middleware, additionalContext);
+function context(ctx) {
+  this.combinedCtx = { ...this.combinedCtx, ...ctx };
+  return this;
+}
 
-module.exports = wrapper;
+function middleware(...args) {
+  this.middlewares = [...this.middlewares, ...args];
+  return this;
+}
+
+Resolver.prototype.context = context;
+
+Resolver.prototype.middleware = middleware;
+
+Resolver.prototype.resolve = resolve;
+
+module.exports = Resolver;

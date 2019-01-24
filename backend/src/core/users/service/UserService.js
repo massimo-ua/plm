@@ -51,16 +51,16 @@ class UserService {
     throw new Error(errorMessage);
   }
 
-  me({ user }) {
+  me(args, { user }) {
     return this.model.findById(user.id, {
       include: ['team'],
     });
   }
 
-  async update({ user, id, ...args }) {
+  async update({ id, ...body }) {
     const record = await this.model.unscoped().findById(id);
     if (record) {
-      Object.assign(record, args);
+      Object.assign(record, body);
       await record.save();
       return record;
     }
