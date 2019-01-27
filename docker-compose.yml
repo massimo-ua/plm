@@ -16,3 +16,26 @@ services:
       - "5432:5432"
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+  backend:
+    build:
+      context: './backend'
+    depends_on:
+      - postgres
+    ports:
+      - "3333:3333"
+      - "9230:9229"
+    command:
+      - /bin/sh
+      - -c
+      - |
+        npm run migrate && npm run seed && npm run dev
+    volumes:
+      - ./backend:/usr/src/app
+    environment:
+      - NODE_ENV=development
+      - CNFG_DB__HOST=postgres
+      - CNFG_DB__USERNAME=plm
+      - CNFG_DB__PASSWORD=plm
+      - CNFG_DB__DATABASE=plm
+      - CNFG_APP__HOST=0.0.0.0
+      - CNFG_APP__PORT=3333
