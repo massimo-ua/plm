@@ -1,8 +1,8 @@
+/* eslint-disable import/no-unresolved */
 require('module-alias/register');
-const container = require('./src/container');
+const app = require('@app');
 
-const app = container.resolve('app');
-const logger = container.resolve('logger');
+const { logger } = app;
 
 app
   .start()

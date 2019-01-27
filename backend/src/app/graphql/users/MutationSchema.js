@@ -7,8 +7,6 @@ const {
 const { Resolver } = require('../helpers');
 const User = require('./User');
 
-const resolver = new Resolver();
-
 module.exports = (service, { loggedIn, isAdmin }) => ({
   signup: {
     type: GraphQLString,
@@ -26,7 +24,7 @@ module.exports = (service, { loggedIn, isAdmin }) => ({
         description: 'User password',
       },
     },
-    resolve: resolver
+    resolve: Resolver()
       .context({ isLoginRequired: false })
       .middleware(loggedIn)
       .resolve(service.signup),
@@ -43,7 +41,7 @@ module.exports = (service, { loggedIn, isAdmin }) => ({
         description: 'User password',
       },
     },
-    resolve: resolver
+    resolve: Resolver()
       .context({ isLoginRequired: false })
       .middleware(loggedIn)
       .resolve(service.login),
@@ -76,7 +74,7 @@ module.exports = (service, { loggedIn, isAdmin }) => ({
         description: 'is User admin?',
       },
     },
-    resolve: resolver
+    resolve: Resolver()
       .middleware(loggedIn, isAdmin)
       .resolve(service.update),
   },

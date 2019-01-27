@@ -5,10 +5,12 @@ class CoreModule {
     db,
     crypto,
     jwt,
+    server,
   }) {
     this.logger = logger;
     this.router = appRouter;
     this.db = db;
+    this.server = server;
     this.apis = {};
     this.utils = {
       crypto,
@@ -32,6 +34,10 @@ class CoreModule {
 
   get modules() {
     return this.apis;
+  }
+
+  loadModule(moduleLoader) {
+    moduleLoader(this);
   }
 }
 

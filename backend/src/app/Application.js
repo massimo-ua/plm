@@ -1,8 +1,7 @@
 class Application {
-  constructor({ server, logger, modulesLoader }) {
-    this.server = server;
-    this.logger = logger;
-    this.loader = modulesLoader;
+  constructor(core) {
+    this.server = core.server;
+    this.logger = core.logger;
   }
 
   async start() {

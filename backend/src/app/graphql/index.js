@@ -4,6 +4,7 @@ const { GraphQLSchema } = require('graphql');
 const { Types } = require('./users');
 const Query = require('./Query');
 const Mutation = require('./Mutation');
+const { auth } = require('./middleware');
 
 
 module.exports = (core) => {
@@ -17,6 +18,7 @@ module.exports = (core) => {
   });
 
   const router = Router();
+  router.use(auth(core));
   router.use('/', graphqlHTTP({
     schema,
     graphiql: true,

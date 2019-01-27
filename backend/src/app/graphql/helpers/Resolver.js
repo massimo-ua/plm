@@ -8,7 +8,7 @@ function Resolver(middlewareRunner = runner) {
 
 function resolve(handler) {
   return (root, args, ctx) => {
-    const combinedCtx = { ...ctx, ...this.context };
+    const combinedCtx = { ...ctx, ...this.combinedCtx };
     this.middlewareRunner(this.middlewares, combinedCtx);
     return handler(args, combinedCtx);
   };
@@ -30,4 +30,4 @@ Resolver.prototype.middleware = middleware;
 
 Resolver.prototype.resolve = resolve;
 
-module.exports = Resolver;
+module.exports = () => new Resolver();

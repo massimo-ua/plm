@@ -1,7 +1,6 @@
-const httpRequestsLogger = require('./httpRequestsLogger');
-const jwtAuth = require('./jwtAuth');
+const logger = require('../logger');
+const httpRequestsLogger = require('./httpRequestsLogger')(logger);
 
 module.exports = {
   httpRequestsLogger,
-  jwtAuth,
 };

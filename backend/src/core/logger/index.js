@@ -1,6 +1,5 @@
-const Log4js = require('log4js');
+/* eslint-disable import/no-unresolved */
+const config = require('@config');
+const Logger = require('./logger');
 
-module.exports = ({ config }) => {
-  Log4js.configure(config.logging);
-  return Log4js.getLogger();
-};
+module.exports = Logger(config);

@@ -2,14 +2,11 @@ const { User, Team } = require('./models');
 const serviceCreator = require('./service');
 const helpers = require('./helpers');
 
-const registerModels = (db) => {
-  db.registerModel(Team);
-  db.registerModel(User);
-};
-
 module.exports = (core) => {
-  registerModels(core.db);
-  const { User: UserModel } = core.db.models;
+  const { db, utils } = core;
+  db.registerModel(Team);
+  db.registerModel(User(utils));
+  const { User: UserModel } = db.models;
   const api = serviceCreator(UserModel, { ...core.utils, ...helpers });
   core.registerAPI({
     namespace: 'Users',

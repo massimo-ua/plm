@@ -1,5 +1,8 @@
 class UserService {
   constructor(model, { crypto, jwt, comparePassword }) {
+    this.defaultOptions = {
+      include: ['team'],
+    };
     this.model = model;
     this.crypto = crypto;
     this.jwt = jwt;
@@ -9,25 +12,22 @@ class UserService {
     this.signup = this.signup.bind(this);
     this.login = this.login.bind(this);
     this.me = this.me.bind(this);
+    this.update = this.update.bind(this);
   }
 
-  findById({ id }) {
-    return this.model.findById(id, {
-      include: ['team'],
-    });
+  findById({ id }, options = {}) {
+    return this.model.findByPk(id, { ...this.defaultOptions, ...options });
   }
 
-  findAll() {
-    return this.model.findAll({
-      include: ['team'],
-    });
+  findAll(options = {}) {
+    return this.model.findAll({ ...this.defaultOptions, ...options });
   }
 
   async signup({ username, login, password }) {
     const user = await this.model.create({
       name: username,
       login,
-      password: await this.crypto.hash(password),
+      password,
     });
 
     return this.jwt.sign(user);
@@ -52,7 +52,7 @@ class UserService {
   }
 
   me(args, { user }) {
-    return this.model.findById(user.id, {
+    return this.model.findByPk(user.id, {
       include: ['team'],
     });
   }

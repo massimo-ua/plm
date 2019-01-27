@@ -22,7 +22,6 @@
   },
   "homepage": "https://gitlab.com/massimo-ua/plm#readme",
   "dependencies": {
-    "awilix": "^4.0.1",
     "bcrypt": "^3.0.3",
     "cnfg": "^1.2.0",
     "compression": "^1.7.3",
