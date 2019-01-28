@@ -5,7 +5,7 @@ module.exports = {
     {
       name: 'John Doe',
       login: 'john',
-      password: '1234567890',
+      password: '$2b$10$Nyc3SyZAwBdbc7MdnUM0KelSwAk3IiySSQz4ODtEjm4JvJoay6nDC',
       isActive: true,
       teamId: 1,
       isAdmin: true,
@@ -15,7 +15,7 @@ module.exports = {
     {
       name: 'John Smith',
       login: 'john.s',
-      password: '1234567890',
+      password: '$2b$10$Nyc3SyZAwBdbc7MdnUM0KelSwAk3IiySSQz4ODtEjm4JvJoay6nDC',
       isActive: true,
       teamId: 1,
       isAdmin: true,
