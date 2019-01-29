@@ -11,8 +11,9 @@ class UserService {
     this.findAll = this.findAll.bind(this);
     this.signup = this.signup.bind(this);
     this.login = this.login.bind(this);
-    this.me = this.me.bind(this);
+    this.profile = this.profile.bind(this);
     this.update = this.update.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
   }
 
   findById({ id }, options = {}) {
@@ -51,20 +52,27 @@ class UserService {
     throw new Error(errorMessage);
   }
 
-  me(args, { user }) {
+  profile(args, { user }) {
     return this.model.findByPk(user.id, {
       include: ['team'],
     });
   }
 
   async update({ id, ...body }) {
-    const record = await this.model.unscoped().findById(id);
-    if (record) {
-      Object.assign(record, body);
-      await record.save();
-      return record;
+    const user = await this.model.unscoped().findByPk(id);
+    if (user) {
+      Object.assign(user, body);
+      await user.save();
+      return user;
     }
     throw new Error('User not found');
+  }
+
+  async updateProfile(args, { user: caller }) {
+    const user = await this.model.findByPk(caller.id, { ...this.defaultOptions });
+    Object.assign(user, args);
+    await user.save();
+    return user;
   }
 }
 

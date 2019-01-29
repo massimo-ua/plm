@@ -78,4 +78,20 @@ module.exports = (service, { loggedIn, isAdmin }) => ({
       .middleware(loggedIn, isAdmin)
       .resolve(service.update),
   },
+  me: {
+    type: User,
+    args: {
+      name: {
+        type: GraphQLString,
+        description: 'User name',
+      },
+      password: {
+        type: GraphQLString,
+        description: 'User password',
+      },
+    },
+    resolve: Resolver()
+      .middleware(loggedIn)
+      .resolve(service.updateProfile),
+  },
 });

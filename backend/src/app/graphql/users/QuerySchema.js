@@ -30,6 +30,6 @@ module.exports = (service, { loggedIn }) => ({
     type: User,
     resolve: Resolver()
       .middleware(loggedIn)
-      .resolve(service.me),
+      .resolve(service.profile),
   },
 });
