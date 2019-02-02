@@ -1,5 +1,5 @@
 const Category = require('./category.model');
 
-module.exports = {
-  Category,
+module.exports = (db) => {
+  db.registerModel(Category);
 };

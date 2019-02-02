@@ -1,13 +1,13 @@
-const { Category } = require('./models');
-// const serviceCreator = require('./service');
+const modelsCreator = require('./models');
+const serviceCreator = require('./services');
 
 module.exports = (core) => {
   const { db } = core;
-  db.registerModel(Category);
-  const { Category: CategoryModel } = db.models;
-  // const api = serviceCreator(UserModel, { ...core.utils, ...helpers });
+  modelsCreator(db);
+  const { Category } = db.models;
+  const api = serviceCreator(Category);
   core.registerAPI({
     namespace: 'Categories',
-    api: {},
+    api,
   });
 };
