@@ -1,27 +1,24 @@
 class Utils {
   static isObject(item) {
-    return (item && typeof item === 'object' && !Array.isArray(item) && item !== null);
+    return (!!item && typeof item === 'object' && !Array.isArray(item));
   }
 
-  static mergeDeep(target = {}, source = {}) {
-    const combined = {};
+  static mergeDeep(target, source) {
     if (Utils.isObject(target) && Utils.isObject(source)) {
+      const combined = Object.assign({}, target);
       Object.keys(source).forEach((key) => {
-        if (Utils.isObject(source[key])) {
-          Object.assign(
-            combined,
-            (Object.prototype.hasOwnProperty.call(target, key)
-              ? { [key]: Utils.mergeDeep(target[key], source[key]) }
-              : (target, { [key]: {} })
-            ),
-          );
-        }
-        Object.assign(combined, target, { [key]: source[key] });
+        combined[key] = Utils.merge(target[key], source[key]);
       });
-    } else {
-      throw new Error('MERGING_NOT_APPLICABLE');
+      return combined;
     }
-    return combined;
+    throw new Error('MERGING_NOT_APPLICABLE');
+  }
+
+  static merge(target, source) {
+    if (Utils.isObject(target) && Utils.isObject(source)) {
+      return Utils.mergeDeep(target, source);
+    }
+    return source;
   }
 }
 
