@@ -10,7 +10,12 @@ class Find {
 
   execute(options = {}, { user }) {
     const { teamId } = user;
-    return this.model.findAll(Utils.mergeDeep(this.defaultOptions, options, { teamId }));
+    return this.model.findAll(
+      Utils.mergeDeep(
+        { ...this.defaultOptions, ...options },
+        { where: { teamId } },
+      ),
+    );
   }
 }
 

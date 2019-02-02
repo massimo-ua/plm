@@ -24,7 +24,7 @@ const Category = new GraphQLObjectType({
     },
     isHidden: {
       type: GraphQLBoolean,
-      description: 'Is user account active/suspended',
+      description: 'Is Category hidden/visible',
     },
     teamId: {
       type: GraphQLNonNull(GraphQLInt),

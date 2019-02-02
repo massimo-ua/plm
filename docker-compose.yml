@@ -32,7 +32,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - "9230:9229"
+      - "9229:9229"
     command:
       - /bin/sh
       - -c
