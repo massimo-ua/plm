@@ -6,6 +6,8 @@ const {
   GraphQLBoolean,
 } = require('graphql');
 
+const Team = require('../teams/Team');
+
 const Category = new GraphQLObjectType({
   name: 'Category',
   description: 'Category shchema',
@@ -26,8 +28,8 @@ const Category = new GraphQLObjectType({
       type: GraphQLBoolean,
       description: 'Is Category hidden/visible',
     },
-    teamId: {
-      type: GraphQLNonNull(GraphQLInt),
+    team: {
+      type: GraphQLNonNull(Team),
       description: 'Team id that category belongs to',
     },
   },

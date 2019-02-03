@@ -18,8 +18,11 @@ const middleware = ({ jwt, service }) => async (req, res, next) => {
     const token = extractToken(req.headers.authorization);
     const { id, exp } = await jwt.verify(token);
     validateTokenExpiration(exp);
-    const user = await service.findById({ id }, {
-      attributes: ['id', 'isAdmin', 'teamId'],
+    const user = await service.findById({
+      args: { id },
+      options: {
+        attributes: ['id', 'isAdmin', 'teamId'],
+      },
     });
     req.user = user;
   } catch (error) {

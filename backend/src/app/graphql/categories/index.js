@@ -1,5 +1,5 @@
 const Category = require('./Category');
 
-module.exports.Types = [
+module.exports.CategoryTypes = [
   Category,
 ];

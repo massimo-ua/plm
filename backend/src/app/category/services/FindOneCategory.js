@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
-const { Find } = require('@core/services');
+const { FindOne } = require('@core/services');
 
-class FindCategory extends Find {
+class FindOneCategory extends FindOne {
   constructor(model) {
     super(model, {
       include: ['team'],
@@ -9,4 +9,4 @@ class FindCategory extends Find {
   }
 }
 
-module.exports = FindCategory;
+module.exports = FindOneCategory;

@@ -5,7 +5,7 @@ const {
   GraphQLNonNull,
   GraphQLBoolean,
 } = require('graphql');
-const Team = require('./Team');
+const Team = require('../teams/Team');
 
 const User = new GraphQLObjectType({
   name: 'User',

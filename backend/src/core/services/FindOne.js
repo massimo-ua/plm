@@ -1,16 +1,17 @@
 /* eslint-disable import/no-unresolved */
 const Utils = require('@core/utils');
 
-class Find {
+class FindOne {
   constructor(model, defaultOptions = {}) {
     this.model = model;
     this.defaultOptions = defaultOptions;
     this.execute = this.execute.bind(this);
   }
 
-  execute({ options = {}, ctx: { user } }) {
+  execute({ args: { id }, ctx: { user }, options = {} }) {
     const { teamId } = user;
-    return this.model.findAll(
+    return this.model.findByPk(
+      id,
       Utils.mergeDeep(
         { ...this.defaultOptions, ...options },
         { where: { teamId } },
@@ -19,4 +20,4 @@ class Find {
   }
 }
 
-module.exports = Find;
+module.exports = FindOne;

@@ -1,7 +1,5 @@
 const User = require('./User');
-const Team = require('./Team');
 
-module.exports.Types = [
+module.exports.UserTypes = [
   User,
-  Team,
 ];

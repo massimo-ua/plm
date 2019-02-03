@@ -16,15 +16,15 @@ class UserService {
     this.updateProfile = this.updateProfile.bind(this);
   }
 
-  findById({ id }, options = {}) {
-    return this.model.findByPk(id, { ...this.defaultOptions, ...options });
+  findById({ args = {}, options = {} }) {
+    return this.model.findByPk(args.id, { ...this.defaultOptions, ...options });
   }
 
-  findAll(options = {}) {
+  findAll({ options = {} }) {
     return this.model.findAll({ ...this.defaultOptions, ...options });
   }
 
-  async signup({ username, login, password }) {
+  async signup({ args: { username, login, password } = {} }) {
     const user = await this.model.create({
       name: username,
       login,
@@ -34,7 +34,7 @@ class UserService {
     return this.jwt.sign(user);
   }
 
-  async login({ login, password }) {
+  async login({ args: { login, password } = {} }) {
     const errorMessage = 'Invalid login or password. Please try again.';
     const user = await this.model.findOne({
       where: {
@@ -52,13 +52,13 @@ class UserService {
     throw new Error(errorMessage);
   }
 
-  profile(args, { user }) {
-    return this.model.findByPk(user.id, {
+  profile({ ctx }) {
+    return this.model.findByPk(ctx.user.id, {
       include: ['team'],
     });
   }
 
-  async update({ id, ...body }) {
+  async update({ args: { id, ...body } }) {
     const user = await this.model.unscoped().findByPk(id);
     if (user) {
       Object.assign(user, body);
@@ -68,7 +68,7 @@ class UserService {
     throw new Error('User not found');
   }
 
-  async updateProfile(args, { user: caller }) {
+  async updateProfile({ args, ctx: { user: caller } }) {
     const user = await this.model.findByPk(caller.id, { ...this.defaultOptions });
     Object.assign(user, args);
     await user.save();
