@@ -7,7 +7,12 @@ const {
 const { Resolver } = require('../helpers');
 const User = require('./User');
 
-module.exports = (service, { loggedIn, isAdmin }) => ({
+module.exports = ({
+  signup,
+  login,
+  update,
+  updateProfile,
+}, { loggedIn, isAdmin }) => ({
   signup: {
     type: GraphQLString,
     args: {
@@ -27,7 +32,7 @@ module.exports = (service, { loggedIn, isAdmin }) => ({
     resolve: Resolver()
       .context({ isLoginRequired: false })
       .middleware(loggedIn)
-      .resolve(service.signup),
+      .resolve(signup),
   },
   login: {
     type: GraphQLString,
@@ -44,7 +49,7 @@ module.exports = (service, { loggedIn, isAdmin }) => ({
     resolve: Resolver()
       .context({ isLoginRequired: false })
       .middleware(loggedIn)
-      .resolve(service.login),
+      .resolve(login),
   },
   update: {
     type: User,
@@ -76,7 +81,7 @@ module.exports = (service, { loggedIn, isAdmin }) => ({
     },
     resolve: Resolver()
       .middleware(loggedIn, isAdmin)
-      .resolve(service.update),
+      .resolve(update),
   },
   me: {
     type: User,
@@ -92,6 +97,6 @@ module.exports = (service, { loggedIn, isAdmin }) => ({
     },
     resolve: Resolver()
       .middleware(loggedIn)
-      .resolve(service.updateProfile),
+      .resolve(updateProfile),
   },
 });

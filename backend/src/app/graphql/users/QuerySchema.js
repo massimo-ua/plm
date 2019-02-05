@@ -7,7 +7,7 @@ const User = require('./User');
 const { Resolver } = require('../helpers');
 
 
-module.exports = (service, { loggedIn }) => ({
+module.exports = ({ find, findOne, profile }, { loggedIn }) => ({
   user: {
     type: User,
     args: {
@@ -18,18 +18,18 @@ module.exports = (service, { loggedIn }) => ({
     },
     resolve: Resolver()
       .middleware(loggedIn)
-      .resolve(service.findById),
+      .resolve(findOne),
   },
   users: {
     type: GraphQLList(User),
     resolve: Resolver()
       .middleware(loggedIn)
-      .resolve(service.findAll),
+      .resolve(find),
   },
   me: {
     type: User,
     resolve: Resolver()
       .middleware(loggedIn)
-      .resolve(service.profile),
+      .resolve(profile),
   },
 });

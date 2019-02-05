@@ -25,6 +25,6 @@ module.exports = ({ create }, { loggedIn }) => ({
     },
     resolve: Resolver()
       .middleware(loggedIn)
-      .resolve(create.execute),
+      .resolve(create),
   },
 });

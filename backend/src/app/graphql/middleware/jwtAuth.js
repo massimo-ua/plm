@@ -13,12 +13,12 @@ const validateTokenExpiration = (exp) => {
   }
 };
 
-const middleware = ({ jwt, service }) => async (req, res, next) => {
+const middleware = ({ jwt, service: { findOne } }) => async (req, res, next) => {
   try {
     const token = extractToken(req.headers.authorization);
     const { id, exp } = await jwt.verify(token);
     validateTokenExpiration(exp);
-    const user = await service.findById({
+    const user = await findOne.execute({
       args: { id },
       options: {
         attributes: ['id', 'isAdmin', 'teamId'],

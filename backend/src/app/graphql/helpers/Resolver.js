@@ -10,7 +10,7 @@ function resolve(handler) {
   return (root, args, ctx) => {
     const combinedCtx = { ...ctx, ...this.combinedCtx };
     this.middlewareRunner(this.middlewares, combinedCtx);
-    return handler({ args, ctx: combinedCtx });
+    return handler.execute({ args, ctx: combinedCtx });
   };
 }
 

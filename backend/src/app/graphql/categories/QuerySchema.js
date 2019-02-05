@@ -12,7 +12,7 @@ module.exports = ({ find, findOne }, { loggedIn }) => ({
     type: GraphQLList(Category),
     resolve: Resolver()
       .middleware(loggedIn)
-      .resolve(find.execute),
+      .resolve(find),
   },
   category: {
     type: Category,
@@ -24,6 +24,6 @@ module.exports = ({ find, findOne }, { loggedIn }) => ({
     },
     resolve: Resolver()
       .middleware(loggedIn)
-      .resolve(findOne.execute),
+      .resolve(findOne),
   },
 });
