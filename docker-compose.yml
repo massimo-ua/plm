@@ -1,0 +1,52 @@
+version: '3'
+services:
+  postgres:
+    image: "postgres:alpine"
+    restart: always
+    environment:
+      - TEST_USER=plm_test
+      - TEST_PASSWORD=plm_test
+      - TEST_DATABASE=plm_test
+      - DEV_USER=plm
+      - DEV_PASSWORD=plm
+      - DEV_DATABASE=plm
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+  nginx:
+    image: "nginx:alpine"
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    links:
+      - backend
+  backend:
+    build:
+      context: './backend'
+    depends_on:
+      - postgres
+    ports:
+      - "9229:9229"
+    command:
+      - /bin/sh
+      - -c
+      - |
+        npm run migrate && npm run seed && npm run dev
+    volumes:
+      - ./backend:/usr/src/app
+    environment:
+      - NODE_ENV=development
+      - CNFG_DB__HOST=postgres
+      - CNFG_DB__USERNAME=plm
+      - CNFG_DB__PASSWORD=plm
+      - CNFG_DB__DATABASE=plm
+      - CNFG_APP__HOST=0.0.0.0
+      - CNFG_APP__PORT=3333
+    links:
+      - postgres
