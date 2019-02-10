@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const graphqlHTTP = require('express-graphql');
 const { GraphQLSchema } = require('graphql');
-const { Types } = require('./Types');
 const Query = require('./Query');
 const Mutation = require('./Mutation');
 const { auth } = require('./middleware');
@@ -14,7 +13,6 @@ module.exports = (core) => {
   const schema = new GraphQLSchema({
     query,
     mutation,
-    types: [...Types],
   });
 
   const router = Router();

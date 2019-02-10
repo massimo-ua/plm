@@ -5,9 +5,7 @@ class Profile {
   }
 
   execute({ ctx }) {
-    return this.model.findByPk(ctx.user.id, {
-      include: ['team'],
-    });
+    return this.model.findByPk(ctx.user.id);
   }
 }
 

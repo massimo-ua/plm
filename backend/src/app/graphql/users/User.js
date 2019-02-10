@@ -5,10 +5,13 @@ const {
   GraphQLID,
 } = require('graphql');
 const Team = require('../teams/Team');
+const { Resolver } = require('../helpers');
 
-const User = new GraphQLObjectType({
+let UserType = null;
+
+const createUserType = findTeam => new GraphQLObjectType({
   name: 'User',
-  description: 'User shchema',
+  description: 'User schema',
   fields: {
     id: {
       type: GraphQLID,
@@ -29,6 +32,8 @@ const User = new GraphQLObjectType({
     team: {
       type: Team,
       description: 'Team that user belongs to',
+      resolve: Resolver()
+        .resolve(findTeam),
     },
     isAdmin: {
       type: GraphQLBoolean,
@@ -37,4 +42,9 @@ const User = new GraphQLObjectType({
   },
 });
 
-module.exports = User;
+module.exports = ({ findTeam }) => {
+  if (!UserType) {
+    UserType = createUserType(findTeam);
+  }
+  return UserType;
+};

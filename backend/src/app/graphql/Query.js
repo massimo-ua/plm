@@ -4,6 +4,7 @@ const CategoriesSchema = require('./categories/QuerySchema');
 
 module.exports = (core) => {
   const {
+    Teams: { findOne: findTeam },
     Users: usersService,
     Auth: authService,
     Categories: categoriesService,
@@ -11,7 +12,10 @@ module.exports = (core) => {
   return new GraphQLObjectType({
     name: 'Query',
     fields: () => ({
-      ...UsersSchema(usersService, authService),
+      ...UsersSchema({
+        ...usersService,
+        findTeam,
+      }, authService),
       ...CategoriesSchema(categoriesService, authService),
     }),
   });

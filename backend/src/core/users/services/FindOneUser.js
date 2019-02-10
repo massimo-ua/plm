@@ -1,9 +1,7 @@
 class FindOneUser {
   constructor(model) {
     this.model = model;
-    this.defaultOptions = {
-      include: ['team'],
-    };
+    this.defaultOptions = {};
   }
 
   execute({ args = {}, options = {} }) {

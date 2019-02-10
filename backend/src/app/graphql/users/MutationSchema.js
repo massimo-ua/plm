@@ -12,91 +12,98 @@ module.exports = ({
   login,
   update,
   updateProfile,
-}, { loggedIn, isAdmin }) => ({
-  signup: {
-    type: GraphQLString,
-    args: {
-      username: {
-        type: GraphQLNonNull(GraphQLString),
-        description: 'User display name',
+  findTeam,
+}, {
+  loggedIn,
+  isAdmin,
+}) => {
+  const UserType = User({ findTeam });
+  return {
+    signup: {
+      type: GraphQLString,
+      args: {
+        username: {
+          type: GraphQLNonNull(GraphQLString),
+          description: 'User display name',
+        },
+        login: {
+          type: GraphQLNonNull(GraphQLString),
+          description: 'User login name',
+        },
+        password: {
+          type: GraphQLNonNull(GraphQLString),
+          description: 'User password',
+        },
       },
-      login: {
-        type: GraphQLNonNull(GraphQLString),
-        description: 'User login name',
-      },
-      password: {
-        type: GraphQLNonNull(GraphQLString),
-        description: 'User password',
-      },
+      resolve: Resolver()
+        .context({ isLoginRequired: false })
+        .middleware(loggedIn)
+        .resolve(signup),
     },
-    resolve: Resolver()
-      .context({ isLoginRequired: false })
-      .middleware(loggedIn)
-      .resolve(signup),
-  },
-  login: {
-    type: GraphQLString,
-    args: {
-      login: {
-        type: GraphQLNonNull(GraphQLString),
-        description: 'User login name',
+    login: {
+      type: GraphQLString,
+      args: {
+        login: {
+          type: GraphQLNonNull(GraphQLString),
+          description: 'User login name',
+        },
+        password: {
+          type: GraphQLNonNull(GraphQLString),
+          description: 'User password',
+        },
       },
-      password: {
-        type: GraphQLNonNull(GraphQLString),
-        description: 'User password',
-      },
+      resolve: Resolver()
+        .context({ isLoginRequired: false })
+        .middleware(loggedIn)
+        .resolve(login),
     },
-    resolve: Resolver()
-      .context({ isLoginRequired: false })
-      .middleware(loggedIn)
-      .resolve(login),
-  },
-  update: {
-    type: User,
-    args: {
-      id: {
-        type: GraphQLNonNull(GraphQLID),
-        description: 'User id',
+    update: {
+      type: UserType,
+      args: {
+        id: {
+          type: GraphQLNonNull(GraphQLID),
+          description: 'User id',
+        },
+        name: {
+          type: GraphQLString,
+          description: 'User name',
+        },
+        password: {
+          type: GraphQLString,
+          description: 'User password',
+        },
+        isActive: {
+          type: GraphQLBoolean,
+          description: 'is User active?',
+        },
+        teamId: {
+          type: GraphQLID,
+          description: 'User team id',
+        },
+        isAdmin: {
+          type: GraphQLBoolean,
+          description: 'is User admin?',
+        },
       },
-      name: {
-        type: GraphQLString,
-        description: 'User name',
-      },
-      password: {
-        type: GraphQLString,
-        description: 'User password',
-      },
-      isActive: {
-        type: GraphQLBoolean,
-        description: 'is User active?',
-      },
-      teamId: {
-        type: GraphQLID,
-        description: 'User team id',
-      },
-      isAdmin: {
-        type: GraphQLBoolean,
-        description: 'is User admin?',
-      },
+      resolve: Resolver()
+        .middleware(loggedIn, isAdmin)
+        .resolve(update),
     },
-    resolve: Resolver()
-      .middleware(loggedIn, isAdmin)
-      .resolve(update),
-  },
-  me: {
-    type: User,
-    args: {
-      name: {
-        type: GraphQLString,
-        description: 'User name',
+    me: {
+      type: UserType,
+      args: {
+        name: {
+          type: GraphQLString,
+          description: 'User name',
+        },
+        password: {
+          type: GraphQLString,
+          description: 'User password',
+        },
       },
-      password: {
-        type: GraphQLString,
-        description: 'User password',
-      },
+      resolve: Resolver()
+        .middleware(loggedIn)
+        .resolve(updateProfile),
     },
-    resolve: Resolver()
-      .middleware(loggedIn)
-      .resolve(updateProfile),
-  },
-});
+  };
+};

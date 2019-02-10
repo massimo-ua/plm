@@ -5,7 +5,7 @@ class UpdateProfile {
   }
 
   async execute({ args, ctx: { user: caller } }) {
-    const user = await this.model.findByPk(caller.id, { include: ['team'] });
+    const user = await this.model.findByPk(caller.id);
     Object.assign(user, args);
     await user.save();
     return user;

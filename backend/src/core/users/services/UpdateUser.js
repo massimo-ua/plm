@@ -5,7 +5,7 @@ class Update {
   }
 
   async execute({ args: { id, ...body } }) {
-    const user = await this.model.unscoped().findByPk(id, { include: ['team'] });
+    const user = await this.model.unscoped().findByPk(id);
     if (user) {
       Object.assign(user, body);
       await user.save();
