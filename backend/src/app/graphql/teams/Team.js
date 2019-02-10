@@ -1,8 +1,7 @@
 const {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLInt,
-  GraphQLNonNull,
+  GraphQLID,
 } = require('graphql');
 
 const Team = new GraphQLObjectType({
@@ -10,11 +9,11 @@ const Team = new GraphQLObjectType({
   description: 'Team schema',
   fields: {
     id: {
-      type: GraphQLNonNull(GraphQLInt),
+      type: GraphQLID,
       description: 'Team id',
     },
     name: {
-      type: GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'Team name',
     },
   },

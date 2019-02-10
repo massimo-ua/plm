@@ -1,8 +1,7 @@
 const {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLInt,
-  GraphQLNonNull,
+  GraphQLID,
   GraphQLBoolean,
 } = require('graphql');
 
@@ -13,15 +12,15 @@ const Category = new GraphQLObjectType({
   description: 'Category shchema',
   fields: {
     id: {
-      type: GraphQLNonNull(GraphQLInt),
+      type: GraphQLID,
       description: 'Category id',
     },
     name: {
-      type: GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'Category name',
     },
     type: {
-      type: GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'Category type either P(Profit) or L(Loss)',
     },
     isHidden: {
@@ -29,7 +28,7 @@ const Category = new GraphQLObjectType({
       description: 'Is Category hidden/visible',
     },
     team: {
-      type: GraphQLNonNull(Team),
+      type: Team,
       description: 'Team id that category belongs to',
     },
   },

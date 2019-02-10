@@ -1,8 +1,8 @@
 const {
+  GraphQLID,
   GraphQLNonNull,
   GraphQLString,
   GraphQLBoolean,
-  GraphQLInt,
 } = require('graphql');
 const { Resolver } = require('../helpers');
 const User = require('./User');
@@ -55,7 +55,7 @@ module.exports = ({
     type: User,
     args: {
       id: {
-        type: GraphQLInt,
+        type: GraphQLNonNull(GraphQLID),
         description: 'User id',
       },
       name: {
@@ -71,7 +71,7 @@ module.exports = ({
         description: 'is User active?',
       },
       teamId: {
-        type: GraphQLInt,
+        type: GraphQLID,
         description: 'User team id',
       },
       isAdmin: {

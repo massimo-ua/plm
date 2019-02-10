@@ -13,5 +13,5 @@ module.exports = (...args) => ({
   login: new Login(...args),
   profile: new Profile(...args),
   updateProfile: new UpdateProfile(...args),
-  updateUser: new UpdateUser(...args),
+  update: new UpdateUser(...args),
 });

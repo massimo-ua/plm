@@ -1,9 +1,8 @@
 const {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLInt,
-  GraphQLNonNull,
   GraphQLBoolean,
+  GraphQLID,
 } = require('graphql');
 const Team = require('../teams/Team');
 
@@ -12,15 +11,15 @@ const User = new GraphQLObjectType({
   description: 'User shchema',
   fields: {
     id: {
-      type: GraphQLNonNull(GraphQLInt),
+      type: GraphQLID,
       description: 'User id',
     },
     name: {
-      type: GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'User name',
     },
     login: {
-      type: GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'User login',
     },
     isActive: {

@@ -1,5 +1,5 @@
 const {
-  GraphQLInt,
+  GraphQLID,
   GraphQLNonNull,
   GraphQLList,
 } = require('graphql');
@@ -12,7 +12,7 @@ module.exports = ({ find, findOne, profile }, { loggedIn }) => ({
     type: User,
     args: {
       id: {
-        type: GraphQLNonNull(GraphQLInt),
+        type: GraphQLNonNull(GraphQLID),
         description: 'User id',
       },
     },
