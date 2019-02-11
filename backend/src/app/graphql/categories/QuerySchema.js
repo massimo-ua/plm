@@ -6,24 +6,32 @@ const {
 const Category = require('./Category');
 const { Resolver } = require('../helpers');
 
-
-module.exports = ({ find, findOne }, { loggedIn }) => ({
-  categories: {
-    type: GraphQLList(Category),
-    resolve: Resolver()
-      .middleware(loggedIn)
-      .resolve(find),
-  },
-  category: {
-    type: Category,
-    args: {
-      id: {
-        type: GraphQLNonNull(GraphQLID),
-        description: 'Category id',
-      },
+module.exports = ({
+  find,
+  findOne,
+  findTeam,
+}, {
+  loggedIn,
+}) => {
+  const CategoryType = Category({ findTeam });
+  return {
+    categories: {
+      type: GraphQLList(CategoryType),
+      resolve: Resolver()
+        .middleware(loggedIn)
+        .resolve(find),
     },
-    resolve: Resolver()
-      .middleware(loggedIn)
-      .resolve(findOne),
-  },
-});
+    category: {
+      type: CategoryType,
+      args: {
+        id: {
+          type: GraphQLNonNull(GraphQLID),
+          description: 'Category id',
+        },
+      },
+      resolve: Resolver()
+        .middleware(loggedIn)
+        .resolve(findOne),
+    },
+  };
+};

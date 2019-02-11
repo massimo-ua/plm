@@ -16,7 +16,10 @@ module.exports = (core) => {
         ...usersService,
         findTeam,
       }, authService),
-      ...CategoriesSchema(categoriesService, authService),
+      ...CategoriesSchema({
+        ...categoriesService,
+        findTeam,
+      }, authService),
     }),
   });
 };

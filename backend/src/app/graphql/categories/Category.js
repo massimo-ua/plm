@@ -6,10 +6,13 @@ const {
 } = require('graphql');
 
 const Team = require('../teams/Team');
+const { Resolver } = require('../helpers');
 
-const Category = new GraphQLObjectType({
+let CategoryType = null;
+
+const createCategoryType = findTeam => new GraphQLObjectType({
   name: 'Category',
-  description: 'Category shchema',
+  description: 'Category schema',
   fields: {
     id: {
       type: GraphQLID,
@@ -30,8 +33,15 @@ const Category = new GraphQLObjectType({
     team: {
       type: Team,
       description: 'Team id that category belongs to',
+      resolve: Resolver()
+        .resolve(findTeam),
     },
   },
 });
 
-module.exports = Category;
+module.exports = ({ findTeam }) => {
+  if (!CategoryType) {
+    CategoryType = createCategoryType(findTeam);
+  }
+  return CategoryType;
+};
