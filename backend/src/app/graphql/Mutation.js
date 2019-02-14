@@ -1,16 +1,32 @@
 const { GraphQLObjectType } = require('graphql');
-const UsersSchema = require('./users/MutationSchema');
+const UserMutation = require('./users/MutationSchema');
+const CategoryMutation = require('./categories/MutationSchema');
 
 module.exports = (core) => {
   const {
     Teams: { findOne: findTeam },
     Users: usersService,
     Auth: authService,
+    Categories: categoriesService,
   } = core.modules;
+
   return new GraphQLObjectType({
     name: 'Mutation',
-    fields: () => ({
-      ...UsersSchema({ ...usersService, findTeam }, authService),
-    }),
+    fields: {
+      ...UserMutation(
+        {
+          ...usersService,
+          findTeam,
+        },
+        authService,
+      ),
+      ...CategoryMutation(
+        {
+          ...categoriesService,
+          findTeam,
+        },
+        authService,
+      ),
+    },
   });
 };
