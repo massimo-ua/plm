@@ -1,14 +1,13 @@
 const {
-  GraphQLNonNull,
-  GraphQLString,
-  GraphQLBoolean,
   GraphQLObjectType,
 } = require('graphql');
+const { Create, Update } = require('./mutations');
 const { Resolver } = require('../helpers');
 const Category = require('./Category');
 
 module.exports = ({
   create,
+  update,
   findTeam,
 }, {
   loggedIn,
@@ -20,28 +19,17 @@ module.exports = ({
         name: 'CategoryMutation',
         description: 'Category mutation schema',
         fields: {
-          create: {
-            type: CategoryType,
-            args: {
-              name: {
-                type: GraphQLNonNull(GraphQLString),
-                description: 'Category name',
-              },
-              type: {
-                type: GraphQLNonNull(GraphQLString),
-                description: 'Category type either P or L',
-              },
-              isHidden: {
-                type: GraphQLBoolean,
-                description: 'is Category hidden?',
-              },
-            },
-            resolve: Resolver()
-              .middleware(loggedIn)
-              .resolve(create),
-          },
+          ...Create({
+            CategoryType,
+            resolver: Resolver().middleware(loggedIn).resolve(create),
+          }),
+          ...Update({
+            CategoryType,
+            resolver: Resolver().middleware(loggedIn).resolve(update),
+          }),
         },
       }),
+      resolve: () => true,
     },
   };
 };
