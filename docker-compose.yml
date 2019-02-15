@@ -39,7 +39,7 @@ services:
       - |
         npm run migrate && npm run seed && npm run dev
     volumes:
-      - ./backend:/usr/src/app
+     - ./backend/src:/usr/src/app/src
     environment:
       - NODE_ENV=development
       - CNFG_DB__HOST=postgres
