@@ -1,13 +1,14 @@
 const {
   GraphQLObjectType,
 } = require('graphql');
-const { Create, Update } = require('./mutations');
+const { Create, Update, Delete } = require('./mutations');
 const { Resolver } = require('../helpers');
 const Category = require('./Category');
 
 module.exports = ({
   create,
   update,
+  remove,
   findTeam,
 }, {
   loggedIn,
@@ -26,6 +27,10 @@ module.exports = ({
           ...Update({
             CategoryType,
             resolver: Resolver().middleware(loggedIn).resolve(update),
+          }),
+          ...Delete({
+            CategoryType,
+            resolver: Resolver().middleware(loggedIn).resolve(remove),
           }),
         },
       }),

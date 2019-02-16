@@ -1,10 +1,10 @@
-class Update {
+class Delete {
   constructor(model) {
     this.model = model;
     this.execute = this.execute.bind(this);
   }
 
-  async execute({ args: { id, ...body }, ctx: { user } }) {
+  async execute({ args: { id }, ctx: { user } }) {
     const { teamId } = user;
     const record = await this.model.findOne({
       where: {
@@ -13,7 +13,7 @@ class Update {
       },
     });
     if (record) {
-      Object.assign(record, body);
+      Object.assign(record, { deletedAt: new Date() });
       await record.save();
       return record;
     }
@@ -21,4 +21,4 @@ class Update {
   }
 }
 
-module.exports = Update;
+module.exports = Delete;
