@@ -1,6 +1,7 @@
 const { GraphQLObjectType } = require('graphql');
-const UserQuery = require('./users/QuerySchema');
+const UsersSchema = require('./users/QuerySchema');
 const CategoriesSchema = require('./categories/QuerySchema');
+const CurrenciesSchema = require('./currencies/QuerySchema');
 
 module.exports = (core) => {
   const {
@@ -8,11 +9,12 @@ module.exports = (core) => {
     Users: usersService,
     Auth: authService,
     Categories: categoriesService,
+    Currencies: currenciesService,
   } = core.modules;
   return new GraphQLObjectType({
     name: 'Query',
     fields: {
-      ...UserQuery(
+      ...UsersSchema(
         {
           ...usersService,
           findTeam,
@@ -23,6 +25,7 @@ module.exports = (core) => {
         ...categoriesService,
         findTeam,
       }, authService),
+      ...CurrenciesSchema(currenciesService, authService),
     },
   });
 };

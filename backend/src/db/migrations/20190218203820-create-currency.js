@@ -25,6 +25,11 @@ module.exports = {
       allowNull: false,
       defaultValue: false,
     },
+    rate: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
     deletedAt: {
       type: Sequelize.DATE,
     },

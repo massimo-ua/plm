@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     shortName: DataTypes.STRING,
     name: DataTypes.STRING,
     home: DataTypes.BOOLEAN,
+    rate: DataTypes.INTEGER,
     deletedAt: DataTypes.DATE,
   },
   {
