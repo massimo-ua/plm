@@ -4,7 +4,7 @@ const {
 } = require('graphql');
 
 module.exports = ({ CategoryType, resolver }) => ({
-  delete: {
+  update: {
     type: CategoryType,
     args: {
       id: {

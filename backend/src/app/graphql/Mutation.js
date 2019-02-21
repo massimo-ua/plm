@@ -1,6 +1,7 @@
 const { GraphQLObjectType } = require('graphql');
 const UserMutation = require('./users/MutationSchema');
 const CategoryMutation = require('./categories/MutationSchema');
+const CurrencyMutation = require('./currencies/MutationSchema');
 
 module.exports = (core) => {
   const {
@@ -8,6 +9,7 @@ module.exports = (core) => {
     Users: usersService,
     Auth: authService,
     Categories: categoriesService,
+    Currencies: currenciesService,
   } = core.modules;
 
   return new GraphQLObjectType({
@@ -25,6 +27,10 @@ module.exports = (core) => {
           ...categoriesService,
           findTeam,
         },
+        authService,
+      ),
+      ...CurrencyMutation(
+        currenciesService,
         authService,
       ),
     },

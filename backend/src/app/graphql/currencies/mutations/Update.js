@@ -2,7 +2,7 @@ const {
   GraphQLID,
   GraphQLNonNull,
   GraphQLString,
-  GraphQLBoolean,
+  GraphQLInt,
 } = require('graphql');
 
 module.exports = ({ CategoryType, resolver }) => ({
@@ -11,15 +11,19 @@ module.exports = ({ CategoryType, resolver }) => ({
     args: {
       id: {
         type: GraphQLNonNull(GraphQLID),
-        description: 'Category id',
+        description: 'Currency id',
+      },
+      code: {
+        type: GraphQLInt,
+        description: 'Currency code',
+      },
+      shortName: {
+        type: GraphQLString,
+        description: 'Currency short name',
       },
       name: {
         type: GraphQLString,
-        description: 'Category name',
-      },
-      isHidden: {
-        type: GraphQLBoolean,
-        description: 'is Category hidden?',
+        description: 'Currency name',
       },
     },
     resolve: resolver,

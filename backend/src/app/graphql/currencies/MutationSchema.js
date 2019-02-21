@@ -1,40 +1,47 @@
 const {
   GraphQLObjectType,
 } = require('graphql');
-const { Create, Update, Delete } = require('./mutations');
+const {
+  Create,
+  Update,
+  Delete,
+  SetAsHome,
+} = require('./mutations');
 const { Resolver } = require('../helpers');
-const Category = require('./Currency');
+const CurrencyType = require('./Currency');
 
 module.exports = ({
   create,
   update,
   remove,
-  findTeam,
+  setAsHome,
 }, {
   loggedIn,
-}) => {
-  const CategoryType = Category({ findTeam });
-  return {
-    categories: {
-      type: new GraphQLObjectType({
-        name: 'CategoryMutation',
-        description: 'Category mutation schema',
-        fields: {
-          ...Create({
-            CategoryType,
-            resolver: Resolver().middleware(loggedIn).resolve(create),
-          }),
-          ...Update({
-            CategoryType,
-            resolver: Resolver().middleware(loggedIn).resolve(update),
-          }),
-          ...Delete({
-            CategoryType,
-            resolver: Resolver().middleware(loggedIn).resolve(remove),
-          }),
-        },
-      }),
-      resolve: () => true,
-    },
-  };
-};
+  isAdmin,
+}) => ({
+  categories: {
+    type: new GraphQLObjectType({
+      name: 'CurrencyMutation',
+      description: 'Currency mutation schema',
+      fields: {
+        ...Create({
+          CurrencyType,
+          resolver: Resolver().middleware(loggedIn, isAdmin).resolve(create),
+        }),
+        ...Update({
+          CurrencyType,
+          resolver: Resolver().middleware(loggedIn, isAdmin).resolve(update),
+        }),
+        ...Delete({
+          CurrencyType,
+          resolver: Resolver().middleware(loggedIn, isAdmin).resolve(remove),
+        }),
+        ...SetAsHome({
+          CurrencyType,
+          resolver: Resolver().middleware(loggedIn, isAdmin).resolve(setAsHome),
+        }),
+      },
+    }),
+    resolve: () => true,
+  },
+});

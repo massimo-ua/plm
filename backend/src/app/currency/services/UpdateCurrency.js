@@ -1,6 +1,18 @@
 /* eslint-disable import/no-unresolved */
 const { Update } = require('@core/services');
 
-class UpdateCurrency extends Update {}
+class UpdateCurrency extends Update {
+  async execute({ args: { id, ...body } }) {
+    const record = await this.model.findOne({
+      where: { id },
+    });
+    if (record) {
+      Object.assign(record, body);
+      await record.save();
+      return record;
+    }
+    throw new Error('Record not found');
+  }
+}
 
 module.exports = UpdateCurrency;
