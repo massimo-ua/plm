@@ -1,11 +1,12 @@
-/* eslint-disable import/no-unresolved */
-const sequelize = require('sequelize');
-const { Update } = require('@core/services');
+class SetAsHomeCurrency {
+  constructor(model, { db }) {
+    this.model = model;
+    this.db = db;
+  }
 
-class SetAsHomeCurrency extends Update {
   async execute({ args: { id } }) {
     try {
-      await sequelize.transaction(async (transaction) => {
+      const updated = await this.db.transaction(async (transaction) => {
         await this.model.update({
           home: false,
         },
@@ -21,11 +22,13 @@ class SetAsHomeCurrency extends Update {
         });
         if (record) {
           record.home = true;
+          record.rate = 1;
           await record.save({ transaction });
           return record;
         }
         throw new Error('Record not found');
       });
+      return updated;
     } catch (error) {
       throw new Error('Operation failed');
     }

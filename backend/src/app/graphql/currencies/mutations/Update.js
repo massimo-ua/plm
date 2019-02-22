@@ -5,9 +5,9 @@ const {
   GraphQLInt,
 } = require('graphql');
 
-module.exports = ({ CategoryType, resolver }) => ({
+module.exports = ({ CurrencyType, resolver }) => ({
   update: {
-    type: CategoryType,
+    type: CurrencyType,
     args: {
       id: {
         type: GraphQLNonNull(GraphQLID),

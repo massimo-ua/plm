@@ -3,9 +3,9 @@ const {
   GraphQLNonNull,
 } = require('graphql');
 
-module.exports = ({ CategoryType, resolver }) => ({
+module.exports = ({ CurrencyType, resolver }) => ({
   delete: {
-    type: CategoryType,
+    type: CurrencyType,
     args: {
       id: {
         type: GraphQLNonNull(GraphQLID),

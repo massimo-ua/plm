@@ -19,7 +19,7 @@ module.exports = ({
   loggedIn,
   isAdmin,
 }) => ({
-  categories: {
+  currencies: {
     type: new GraphQLObjectType({
       name: 'CurrencyMutation',
       description: 'Currency mutation schema',
