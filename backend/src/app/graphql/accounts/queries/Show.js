@@ -3,8 +3,8 @@ const {
   GraphQLNonNull,
 } = require('graphql');
 
-module.exports = ({ AccountType, resolver }) => ({
-  list: {
+module.exports = ({ AccountType, resolve }) => ({
+  show: {
     type: AccountType,
     args: {
       id: {
@@ -12,6 +12,6 @@ module.exports = ({ AccountType, resolver }) => ({
         description: 'Account id',
       },
     },
-    resolve: resolver,
+    resolve,
   },
 });

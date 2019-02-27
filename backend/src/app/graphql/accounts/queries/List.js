@@ -2,9 +2,9 @@ const {
   GraphQLList,
 } = require('graphql');
 
-module.exports = ({ AccountType, resolver }) => ({
+module.exports = ({ AccountType, resolve }) => ({
   list: {
     type: GraphQLList(AccountType),
-    resolve: resolver,
+    resolve,
   },
 });

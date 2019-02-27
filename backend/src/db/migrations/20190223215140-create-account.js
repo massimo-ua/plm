@@ -27,7 +27,7 @@ module.exports = {
     },
     balance: {
       type: Sequelize.INTEGER,
-      default: 0,
+      defaultValue: 0,
     },
     deletedAt: {
       type: Sequelize.DATE,

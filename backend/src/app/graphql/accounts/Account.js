@@ -25,7 +25,7 @@ const createAccountType = (findTeam, findCurrency) => new GraphQLObjectType({
     },
     type: {
       type: GraphQLString,
-      description: 'Account type either P(Profit) or L(Loss)',
+      description: 'Account type either S(Saving) or C(Credit) or SC(Saving/Credit)',
     },
     balance: {
       type: GraphQLInt,
