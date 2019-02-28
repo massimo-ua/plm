@@ -3,12 +3,14 @@ const {
 } = require('graphql');
 const {
   Create,
+  Update,
 } = require('./mutations');
 const { Resolver } = require('../helpers');
 const Account = require('./Account');
 
 module.exports = ({
   create,
+  update,
   findTeam,
   findCurrency,
 }, {
@@ -24,6 +26,10 @@ module.exports = ({
           ...Create({
             AccountType,
             resolve: Resolver().middleware(loggedIn).resolve(create),
+          }),
+          ...Update({
+            AccountType,
+            resolve: Resolver().middleware(loggedIn).resolve(update),
           }),
         },
       }),
