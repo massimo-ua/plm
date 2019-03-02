@@ -4,6 +4,7 @@ const {
 const {
   Create,
   Update,
+  Delete,
 } = require('./mutations');
 const { Resolver } = require('../helpers');
 const Account = require('./Account');
@@ -11,6 +12,7 @@ const Account = require('./Account');
 module.exports = ({
   create,
   update,
+  remove,
   findTeam,
   findCurrency,
 }, {
@@ -30,6 +32,10 @@ module.exports = ({
           ...Update({
             AccountType,
             resolve: Resolver().middleware(loggedIn).resolve(update),
+          }),
+          ...Delete({
+            AccountType,
+            resolve: Resolver().middleware(loggedIn).resolve(remove),
           }),
         },
       }),
