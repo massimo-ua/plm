@@ -10,11 +10,10 @@ class FindOne {
 
   execute({ args: { id }, ctx: { user }, options = {} }) {
     const { teamId } = user;
-    return this.model.findByPk(
-      id,
+    return this.model.findOne(
       Utils.mergeDeep(
         { ...this.defaultOptions, ...options },
-        { where: { teamId } },
+        { where: { teamId, id } },
       ),
     );
   }

@@ -4,6 +4,14 @@ module.exports = (sequelize, DataTypes, models) => {
     type: DataTypes.ENUM('P', 'L'),
     isHidden: DataTypes.BOOLEAN,
     teamId: DataTypes.INTEGER,
+    deletedAt: DataTypes.DATE,
+  },
+  {
+    defaultScope: {
+      where: {
+        deletedAt: null,
+      },
+    },
   });
   Category.belongsTo(models.Team, { as: 'team' });
   return Category;

@@ -1,27 +1,29 @@
 const {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLInt,
-  GraphQLNonNull,
+  GraphQLID,
   GraphQLBoolean,
 } = require('graphql');
 
 const Team = require('../teams/Team');
+const { Resolver } = require('../helpers');
 
-const Category = new GraphQLObjectType({
+let CategoryType = null;
+
+const createCategoryType = findTeam => new GraphQLObjectType({
   name: 'Category',
-  description: 'Category shchema',
+  description: 'Category schema',
   fields: {
     id: {
-      type: GraphQLNonNull(GraphQLInt),
+      type: GraphQLID,
       description: 'Category id',
     },
     name: {
-      type: GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'Category name',
     },
     type: {
-      type: GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'Category type either P(Profit) or L(Loss)',
     },
     isHidden: {
@@ -29,10 +31,17 @@ const Category = new GraphQLObjectType({
       description: 'Is Category hidden/visible',
     },
     team: {
-      type: GraphQLNonNull(Team),
+      type: Team,
       description: 'Team id that category belongs to',
+      resolve: Resolver()
+        .resolve(findTeam),
     },
   },
 });
 
-module.exports = Category;
+module.exports = ({ findTeam }) => {
+  if (!CategoryType) {
+    CategoryType = createCategoryType(findTeam);
+  }
+  return CategoryType;
+};
