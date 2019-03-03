@@ -7,24 +7,24 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    sourceAccountId: {
+    accountId: {
       type: Sequelize.INTEGER,
       index: true,
       allowNull: false,
-    },
-    destinationAccountId: {
-      type: Sequelize.INTEGER,
     },
     actualDate: {
       type: Sequelize.DATE,
       allowNull: false,
     },
     type: {
-      type: Sequelize.STRING,
+      type: Sequelize.ENUM('D', 'C'),
       allowNull: false,
     },
-    mirrorTransactionId: {
+    mirrorId: {
       type: Sequelize.INTEGER,
+    },
+    notes: {
+      type: Sequelize.STRING,
     },
     deletedAt: {
       type: Sequelize.DATE,
