@@ -26,6 +26,10 @@ module.exports = {
     notes: {
       type: Sequelize.STRING,
     },
+    teamId: {
+      type: Sequelize.INTEGER,
+      required: true,
+    },
     deletedAt: {
       type: Sequelize.DATE,
     },

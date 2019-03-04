@@ -20,6 +20,10 @@ module.exports = {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
+    teamId: {
+      type: Sequelize.INTEGER,
+      required: true,
+    },
     deletedAt: {
       type: Sequelize.DATE,
     },
