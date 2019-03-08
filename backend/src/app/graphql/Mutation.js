@@ -11,7 +11,6 @@ module.exports = (core) => {
     Auth: authService,
     Categories: categoriesService,
     Currencies: currenciesService,
-    Accounts: accountsService,
   } = core.modules;
 
   return new GraphQLObjectType({
@@ -35,11 +34,7 @@ module.exports = (core) => {
         currenciesService,
         authService,
       ),
-      ...AccountMutation({
-        ...accountsService,
-        findTeam,
-        findCurrency: currenciesService.findOne,
-      }, authService),
+      ...AccountMutation(core.modules),
     },
   });
 };

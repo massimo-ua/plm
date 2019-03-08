@@ -11,7 +11,6 @@ module.exports = (core) => {
     Auth: authService,
     Categories: categoriesService,
     Currencies: currenciesService,
-    Accounts: accountsService,
   } = core.modules;
   return new GraphQLObjectType({
     name: 'Query',
@@ -27,11 +26,7 @@ module.exports = (core) => {
         ...categoriesService,
         findTeam,
       }, authService),
-      ...AccountsSchema({
-        ...accountsService,
-        findTeam,
-        findCurrency: currenciesService.findOne,
-      }, authService),
+      ...AccountsSchema(core.modules),
       ...CurrenciesSchema(currenciesService, authService),
     },
   });

@@ -10,15 +10,12 @@ const { Resolver } = require('../helpers');
 const Account = require('./Account');
 
 module.exports = ({
-  create,
-  update,
-  remove,
-  findTeam,
-  findCurrency,
-}, {
-  loggedIn,
+  Teams,
+  Accounts,
+  Currencies,
+  Auth,
 }) => {
-  const AccountType = Account({ findTeam, findCurrency });
+  const AccountType = Account({ Teams, Currencies });
   return {
     accounts: {
       type: new GraphQLObjectType({
@@ -27,15 +24,15 @@ module.exports = ({
         fields: {
           ...Create({
             AccountType,
-            resolve: Resolver().middleware(loggedIn).resolve(create),
+            resolve: Resolver().middleware(Auth.loggedIn).resolve(Accounts.create),
           }),
           ...Update({
             AccountType,
-            resolve: Resolver().middleware(loggedIn).resolve(update),
+            resolve: Resolver().middleware(Auth.loggedIn).resolve(Accounts.update),
           }),
           ...Delete({
             AccountType,
-            resolve: Resolver().middleware(loggedIn).resolve(remove),
+            resolve: Resolver().middleware(Auth.loggedIn).resolve(Accounts.remove),
           }),
         },
       }),

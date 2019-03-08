@@ -6,14 +6,12 @@ const { Resolver } = require('../helpers');
 const { List, Show } = require('./queries');
 
 module.exports = ({
-  find,
-  findOne,
-  findTeam,
-  findCurrency,
-}, {
-  loggedIn,
+  Accounts,
+  Currencies,
+  Teams,
+  Auth,
 }) => {
-  const AccountType = Account({ findTeam, findCurrency });
+  const AccountType = Account({ Teams, Currencies });
   return {
     accounts: {
       type: new GraphQLObjectType({
@@ -22,11 +20,11 @@ module.exports = ({
         fields: {
           ...List({
             AccountType,
-            resolve: Resolver().middleware(loggedIn).resolve(find),
+            resolve: Resolver().middleware(Auth.loggedIn).resolve(Accounts.find),
           }),
           ...Show({
             AccountType,
-            resolve: Resolver().middleware(loggedIn).resolve(findOne),
+            resolve: Resolver().middleware(Auth.loggedIn).resolve(Accounts.findOne),
           }),
         },
       }),

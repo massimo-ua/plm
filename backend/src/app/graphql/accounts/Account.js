@@ -46,9 +46,9 @@ const createAccountType = (findTeam, findCurrency) => new GraphQLObjectType({
   },
 });
 
-module.exports = ({ findTeam, findCurrency }) => {
+module.exports = ({ Teams, Currencies }) => {
   if (!AccountType) {
-    AccountType = createAccountType(findTeam, findCurrency);
+    AccountType = createAccountType(Teams.findOne, Currencies.findOne);
   }
   return AccountType;
 };
