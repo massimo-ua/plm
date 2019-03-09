@@ -1,10 +1,6 @@
-const {
-  GraphQLList,
-} = require('graphql');
+const { QueryListFactory } = require('../../helpers');
 
-module.exports = ({ AccountType, resolve }) => ({
-  list: {
-    type: GraphQLList(AccountType),
-    resolve,
-  },
+module.exports = ({ AccountType, resolve }) => QueryListFactory({
+  Type: AccountType,
+  resolve,
 });

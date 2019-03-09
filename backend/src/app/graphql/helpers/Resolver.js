@@ -10,12 +10,14 @@ function resolve(handler) {
   return (parent, args, ctx, info) => {
     const combinedCtx = { ...ctx, ...this.combinedCtx };
     this.middlewareRunner(this.middlewares, combinedCtx);
-    return handler.execute({
+    const resolverCtx = {
       parent,
       args,
       ctx: combinedCtx,
       info,
-    });
+    };
+    return this.mapperFn ? handler.execute(this.mapperFn(resolverCtx))
+      : handler.execute(resolverCtx);
   };
 }
 
@@ -29,9 +31,16 @@ function middleware(...args) {
   return this;
 }
 
+function mapper(mapperFn) {
+  this.mapperFn = mapperFn;
+  return this;
+}
+
 Resolver.prototype.context = context;
 
 Resolver.prototype.middleware = middleware;
+
+Resolver.prototype.mapper = mapper;
 
 Resolver.prototype.resolve = resolve;
 

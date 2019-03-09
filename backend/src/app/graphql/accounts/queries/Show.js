@@ -1,17 +1,6 @@
-const {
-  GraphQLID,
-  GraphQLNonNull,
-} = require('graphql');
+const { QueryShowFactory } = require('../../helpers');
 
-module.exports = ({ AccountType, resolve }) => ({
-  show: {
-    type: AccountType,
-    args: {
-      id: {
-        type: GraphQLNonNull(GraphQLID),
-        description: 'Account id',
-      },
-    },
-    resolve,
-  },
+module.exports = ({ AccountType, resolve }) => QueryShowFactory({
+  Type: AccountType,
+  resolve,
 });
