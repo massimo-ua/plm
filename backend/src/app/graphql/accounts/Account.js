@@ -8,6 +8,7 @@ const {
 const Team = require('../teams/Team');
 const Currency = require('../currencies/Currency');
 const { Resolver } = require('../helpers');
+const { currencyMapper, teamMapper } = require('../helpers/mappers');
 
 let AccountType = null;
 
@@ -35,12 +36,14 @@ const createAccountType = (findTeam, findCurrency) => new GraphQLObjectType({
       type: Team,
       description: 'Team that account belongs to',
       resolve: Resolver()
+        .mapper(teamMapper)
         .resolve(findTeam),
     },
     currency: {
       type: Currency,
       description: 'Currency that account belongs to',
       resolve: Resolver()
+        .mapper(currencyMapper)
         .resolve(findCurrency),
     },
   },

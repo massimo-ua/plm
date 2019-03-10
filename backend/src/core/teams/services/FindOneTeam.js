@@ -1,11 +1,7 @@
-class FindOneTeam {
-  constructor(model) {
-    this.model = model;
-    this.defaultOptions = {};
-  }
+const { FindOne } = require('../../services');
 
-  execute({ parent = {}, args = {}, options = {} }) {
-    const id = parent.teamId || args.id;
+class FindOneTeam extends FindOne {
+  execute({ args: { id } = {}, options = {} }) {
     return this.model.findByPk(id, { ...this.defaultOptions, ...options });
   }
 }

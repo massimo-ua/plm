@@ -11,16 +11,12 @@ const {
 const Team = require('../teams/Team');
 const AccountType = require('../accounts/Account');
 const { Resolver } = require('../helpers');
+const { accountMapper, mirrorMapper, teamMapper } = require('../helpers/mappers');
 
 let TransactionType = null;
 
-const accountMapper = (ctx) => {
-  const { parent, args = {} } = ctx;
-  return { ...ctx, args: { ...args, id: parent.accountId } };
-};
-
 const createTransactionType = ({
-  findTransaction,
+  findOne,
   findTeam,
   findAccount,
   Account,
@@ -49,14 +45,14 @@ const createTransactionType = ({
       team: {
         type: Team,
         description: 'Team that Transaction belongs to',
-        resolve: Resolver().resolve(findTeam),
+        resolve: Resolver().mapper(teamMapper).resolve(findTeam),
       },
       mirror: {
         get type() {
           return Transaction;
         },
         description: 'Currency that Transaction belongs to',
-        resolve: Resolver().resolve(findTransaction),
+        resolve: Resolver().mapper(mirrorMapper).resolve(findOne),
       },
       notes: {
         type: GraphQLString,
@@ -76,7 +72,7 @@ module.exports = ({
   if (!TransactionType) {
     const Account = AccountType({ Teams, Currencies });
     TransactionType = createTransactionType({
-      findTransaction: Transactions.findOne,
+      findOne: Transactions.findOne,
       findTeam: Teams.findOne,
       findAccount: Accounts.findOne,
       Account,
