@@ -17,7 +17,7 @@ module.exports = {
       allowNull: false,
     },
     type: {
-      type: Sequelize.ENUM('D', 'C'),
+      type: Sequelize.ENUM('P', 'L'),
       allowNull: false,
     },
     mirrorId: {

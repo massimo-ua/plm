@@ -3,6 +3,7 @@ const UserMutation = require('./users/MutationSchema');
 const CategoryMutation = require('./categories/MutationSchema');
 const CurrencyMutation = require('./currencies/MutationSchema');
 const AccountMutation = require('./accounts/MutationSchema');
+const { MutationSchema: TransactionMutation } = require('./transactions');
 
 module.exports = (core) => {
   const {
@@ -35,6 +36,7 @@ module.exports = (core) => {
         authService,
       ),
       ...AccountMutation(core.modules),
+      ...TransactionMutation(core.modules),
     },
   });
 };

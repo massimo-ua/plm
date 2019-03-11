@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes, models) => {
   const Transaction = sequelize.define('Transaction', {
     accountId: DataTypes.INTEGER,
     actualDate: DataTypes.DATE,
-    type: DataTypes.ENUM('D', 'C'),
+    type: DataTypes.ENUM('P', 'L'),
     teamId: DataTypes.INTEGER,
     mirrorId: DataTypes.INTEGER,
     notes: DataTypes.STRING,
