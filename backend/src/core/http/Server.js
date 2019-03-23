@@ -4,14 +4,14 @@ const http = require('http');
 class AppHttpServer {
   constructor({
     config,
-    appRouter,
+    router,
     logger,
   }) {
     this.config = config;
     this.logger = logger;
     this.app = express();
     this.app.disable('x-powered-by');
-    this.app.use(appRouter.rootRouter);
+    this.app.use(router.rootRouter);
   }
 
   start() {

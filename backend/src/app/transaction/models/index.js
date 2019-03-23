@@ -1,5 +1,5 @@
 const Transaction = require('./transaction.model');
 
-module.exports = (db) => {
+module.exports = db => {
   db.registerModel(Transaction);
 };

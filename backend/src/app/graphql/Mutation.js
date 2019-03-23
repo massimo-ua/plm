@@ -3,40 +3,15 @@ const UserMutation = require('./users/MutationSchema');
 const CategoryMutation = require('./categories/MutationSchema');
 const CurrencyMutation = require('./currencies/MutationSchema');
 const AccountMutation = require('./accounts/MutationSchema');
-const { MutationSchema: TransactionMutation } = require('./transactions');
+const { TransactionMutation } = require('./transactions');
 
-module.exports = (core) => {
-  const {
-    Teams: { findOne: findTeam },
-    Users: usersService,
-    Auth: authService,
-    Categories: categoriesService,
-    Currencies: currenciesService,
-  } = core.modules;
-
-  return new GraphQLObjectType({
-    name: 'Mutation',
-    fields: {
-      ...UserMutation(
-        {
-          ...usersService,
-          findTeam,
-        },
-        authService,
-      ),
-      ...CategoryMutation(
-        {
-          ...categoriesService,
-          findTeam,
-        },
-        authService,
-      ),
-      ...CurrencyMutation(
-        currenciesService,
-        authService,
-      ),
-      ...AccountMutation(core.modules),
-      ...TransactionMutation(core.modules),
-    },
-  });
-};
+module.exports = container => new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    ...UserMutation(container),
+    ...CategoryMutation(container),
+    ...CurrencyMutation(container),
+    ...AccountMutation(container),
+    ...TransactionMutation(container),
+  },
+});

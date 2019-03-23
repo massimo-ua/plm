@@ -5,12 +5,9 @@ const {
   GraphQLBoolean,
 } = require('graphql');
 
-const Team = require('../teams/Team');
 const { Resolver } = require('../helpers');
 
-let CategoryType = null;
-
-const createCategoryType = findTeam => new GraphQLObjectType({
+const createCategoryType = ({ Teams, Team, }) => new GraphQLObjectType({
   name: 'Category',
   description: 'Category schema',
   fields: {
@@ -33,15 +30,9 @@ const createCategoryType = findTeam => new GraphQLObjectType({
     team: {
       type: Team,
       description: 'Team id that category belongs to',
-      resolve: Resolver()
-        .resolve(findTeam),
+      resolve: Resolver().resolve(Teams.findOne),
     },
   },
 });
 
-module.exports = ({ findTeam }) => {
-  if (!CategoryType) {
-    CategoryType = createCategoryType(findTeam);
-  }
-  return CategoryType;
-};
+module.exports = container => createCategoryType(container);

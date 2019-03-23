@@ -1,7 +1,7 @@
-const QuerySchema = require('./QuerySchema');
-const MutationSchema = require('./MutationSchema');
+const TransactionQuery = require('./QuerySchema');
+const TransactionMutation = require('./MutationSchema');
 
 module.exports = {
-  QuerySchema,
-  MutationSchema,
+  TransactionQuery,
+  TransactionMutation,
 };

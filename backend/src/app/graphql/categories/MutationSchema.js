@@ -3,38 +3,31 @@ const {
 } = require('graphql');
 const { Create, Update, Delete } = require('./mutations');
 const { Resolver } = require('../helpers');
-const Category = require('./Category');
 
 module.exports = ({
-  create,
-  update,
-  remove,
-  findTeam,
-}, {
-  loggedIn,
-}) => {
-  const CategoryType = Category({ findTeam });
-  return {
-    categories: {
-      type: new GraphQLObjectType({
-        name: 'CategoryMutation',
-        description: 'Category mutation schema',
-        fields: {
-          ...Create({
-            CategoryType,
-            resolver: Resolver().middleware(loggedIn).resolve(create),
-          }),
-          ...Update({
-            CategoryType,
-            resolver: Resolver().middleware(loggedIn).resolve(update),
-          }),
-          ...Delete({
-            CategoryType,
-            resolver: Resolver().middleware(loggedIn).resolve(remove),
-          }),
-        },
-      }),
-      resolve: () => true,
-    },
-  };
-};
+  Category,
+  Categories,
+  auth,
+}) => ({
+  categories: {
+    type: new GraphQLObjectType({
+      name: 'CategoryMutation',
+      description: 'Category mutation schema',
+      fields: {
+        ...Create({
+          Category,
+          resolver: Resolver().middleware(auth.loggedIn).resolve(Categories.create),
+        }),
+        ...Update({
+          Category,
+          resolver: Resolver().middleware(auth.loggedIn).resolve(Categories.update),
+        }),
+        ...Delete({
+          Category,
+          resolver: Resolver().middleware(auth.loggedIn).resolve(Categories.remove),
+        }),
+      },
+    }),
+    resolve: () => true,
+  },
+});

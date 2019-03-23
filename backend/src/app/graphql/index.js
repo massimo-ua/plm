@@ -1,31 +1,39 @@
-const { Router } = require('express');
 const graphqlHTTP = require('express-graphql');
 const { GraphQLSchema } = require('graphql');
 const Query = require('./Query');
 const Mutation = require('./Mutation');
 const { auth } = require('./middleware');
+const {
+  Account,
+  Category,
+} = require('./Types');
 
 
-module.exports = (core) => {
-  const query = Query(core);
-  const mutation = Mutation(core);
-
-  const schema = new GraphQLSchema({
-    query,
-    mutation,
-  });
-
-  const router = Router();
-  router.use(auth(core));
-  router.use('/', graphqlHTTP({
-    schema,
-    graphiql: true,
-  }));
-
-  core.registerRouter({
-    version: 'v1',
-    path: 'graphql',
-    subRouter: router,
-    name: 'GraphqlModule',
-  });
+module.exports = {
+  register(container) {
+    const query = Query(container);
+    const mutation = Mutation(container);
+    const schema = new GraphQLSchema({
+      query,
+      mutation,
+    });
+    container.register('AppGraphQLSchema', schema);
+    container.register('Account', Account, ['Team', 'Currency', 'Teams', 'Currencies']);
+    container.register('Category', Category, ['Team', 'Teams']);
+  },
+  run(container) {
+    const { router, AppGraphQLSchema } = container;
+    const moduleRouter = router.create();
+    moduleRouter.use(auth(container));
+    moduleRouter.use('/', graphqlHTTP({
+      schema: AppGraphQLSchema,
+      graphiql: true,
+    }));
+    core.registerRouter({
+      version: 'v1',
+      path: 'graphql',
+      subRouter: moduleRouter,
+      name: 'GraphqlModule',
+    });
+  },
 };

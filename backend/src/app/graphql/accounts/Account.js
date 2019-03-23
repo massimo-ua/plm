@@ -5,14 +5,10 @@ const {
   GraphQLInt,
 } = require('graphql');
 
-const Team = require('../teams/Team');
-const Currency = require('../currencies/Currency');
 const { Resolver } = require('../helpers');
 const { currencyMapper, teamMapper } = require('../helpers/mappers');
 
-let AccountType = null;
-
-const createAccountType = (findTeam, findCurrency) => new GraphQLObjectType({
+const createAccountType = ({Team, Currency, Teams, Currencies}) => new GraphQLObjectType({
   name: 'Account',
   description: 'Account schema',
   fields: {
@@ -37,21 +33,16 @@ const createAccountType = (findTeam, findCurrency) => new GraphQLObjectType({
       description: 'Team that account belongs to',
       resolve: Resolver()
         .mapper(teamMapper)
-        .resolve(findTeam),
+        .resolve(Teams.findOne),
     },
     currency: {
       type: Currency,
       description: 'Currency that account belongs to',
       resolve: Resolver()
         .mapper(currencyMapper)
-        .resolve(findCurrency),
+        .resolve(Currencies.findOne),
     },
   },
 });
 
-module.exports = ({ Teams, Currencies }) => {
-  if (!AccountType) {
-    AccountType = createAccountType(Teams.findOne, Currencies.findOne);
-  }
-  return AccountType;
-};
+module.exports = container => createAccountType(container);

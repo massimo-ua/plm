@@ -1,8 +1,6 @@
 const jwtAuth = require('./jwtAuth');
 
-const auth = (core) => {
-  const { jwt } = core.utils;
-  const { Users: service } = core.modules;
+const auth = ({ jwt, Users: service }) => {
   return jwtAuth({ jwt, service });
 };
 

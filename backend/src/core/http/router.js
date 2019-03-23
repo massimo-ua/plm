@@ -6,7 +6,9 @@ class AppRouter {
     httpRequestsLogger,
     errorHandler,
     notFoundHandler,
+    logger,
   }) {
+    this.logger = logger;
     this.versions = {};
     this.root = Router();
     this.root.use(httpRequestsLogger);
@@ -32,12 +34,21 @@ class AppRouter {
     return this.root;
   }
 
-  attach({ version, path, subRouter }) {
+  attach({ name, version, path, subRouter }) {
     if (this.versions[version]) {
-      this.versions[version].use(`/${path}`, subRouter);
+      try {
+        this.versions[version].use(`/${path}`, subRouter);
+        this.logger.info(`Router [${name}] registered successfully`);
+      } catch (error) {
+        this.logger.error(error);
+      }
     } else {
       throw new Error(`API version "${version}" is not registered`);
     }
+  }
+
+  create() {
+    return Router();
   }
 }
 
