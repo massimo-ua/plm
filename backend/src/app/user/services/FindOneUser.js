@@ -1,6 +1,6 @@
 class FindOneUser {
-  constructor(model) {
-    this.model = model;
+  constructor({ UserModel }) {
+    this.model = UserModel;
     this.defaultOptions = {};
   }
 

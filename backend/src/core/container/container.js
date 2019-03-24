@@ -53,7 +53,7 @@ class Container {
 
     factory(service) {
         const Constructor = service.definition;
-        if (typeof Constructor.prtotype !== 'undefined' && Constructor.prtotype.constructor) {
+        if (Constructor.toString().indexOf('class') === 0) {
             return new Constructor(this.resolveDependencies(service));
         }
         return Constructor(this.resolveDependencies(service));

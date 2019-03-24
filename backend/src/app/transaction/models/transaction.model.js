@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes, models) => {
+module.exports = ({ AccountModel, TeamModel }) => (sequelize, DataTypes) => {
   const Transaction = sequelize.define('Transaction', {
     accountId: DataTypes.INTEGER,
     actualDate: DataTypes.DATE,
@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes, models) => {
       },
     },
   });
-  Transaction.belongsTo(models.Account, { as: 'account' });
-  Transaction.belongsTo(models.Team, { as: 'team' });
+  Transaction.belongsTo(AccountModel, { as: 'account' });
+  Transaction.belongsTo(TeamModel, { as: 'team' });
   Transaction.belongsTo(Transaction, {
     foreignKey: 'mirrorId',
     targetKey: 'id',

@@ -1,6 +1,6 @@
 class Profile {
-  constructor(model) {
-    this.model = model;
+  constructor({ UserModel }) {
+    this.model = UserModel;
     this.execute = this.execute.bind(this);
   }
 

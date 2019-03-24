@@ -40,6 +40,7 @@ class AppRouter {
         this.versions[version].use(`/${path}`, subRouter);
         this.logger.info(`Router [${name}] registered successfully`);
       } catch (error) {
+        console.log(error);
         this.logger.error(error);
       }
     } else {

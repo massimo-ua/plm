@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes, models) => {
+module.exports = ({ CategoryModel, TransactionModel, TeamModel }) => (sequelize, DataTypes) => {
   const Payment = sequelize.define('Payment', {
     categoryId: DataTypes.INTEGER,
     amount: DataTypes.INTEGER,
@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes, models) => {
       },
     },
   });
-  Payment.belongsTo(models.Category, { as: 'category' });
-  Payment.belongsTo(models.Transaction, { as: 'transaction' });
-  Payment.belongsTo(models.Team, { as: 'team' });
+  Payment.belongsTo(CategoryModel, { as: 'category' });
+  Payment.belongsTo(TransactionModel, { as: 'transaction' });
+  Payment.belongsTo(TeamModel, { as: 'team' });
   return Payment;
 };

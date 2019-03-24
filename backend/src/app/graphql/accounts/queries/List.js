@@ -1,6 +1,6 @@
 const { QueryListFactory } = require('../../helpers');
 
-module.exports = ({ AccountType, resolve }) => QueryListFactory({
-  Type: AccountType,
+module.exports = ({ Account, resolve }) => QueryListFactory({
+  Type: Account,
   resolve,
 });

@@ -3,9 +3,7 @@ const serviceCreator = require('./services');
 
 module.exports = {
   register(container) {
-    const { db } = container;
-    modelsCreator(db);
-    const { Payment } = db.models;
-    container.register('Payments', serviceCreator(Payment));
+    container.register('PaymentModel', modelsCreator, ['db', 'CategoryModel', 'TransactionModel', 'TeamModel'])
+    container.register('Payments', serviceCreator, ['PaymentModel']);
   },
 };

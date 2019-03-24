@@ -1,5 +1,5 @@
 const Payment = require('./payment.model');
 
-module.exports = (db) => {
-  db.registerModel(Payment);
+module.exports = container => {
+  return container.db.registerModel(Payment(container));
 };

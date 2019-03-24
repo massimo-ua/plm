@@ -4,10 +4,10 @@ const CreateCategory = require('./CreateCategory');
 const UpdateCategory = require('./UpdateCategory');
 const DeleteCategory = require('./DeleteCategory');
 
-module.exports = (...args) => ({
-  find: new FindCategory(...args),
-  findOne: new FindOneCategory(...args),
-  create: new CreateCategory(...args),
-  update: new UpdateCategory(...args),
-  remove: new DeleteCategory(...args),
+module.exports = container => ({
+  find: new FindCategory(container),
+  findOne: new FindOneCategory(container),
+  create: new CreateCategory(container),
+  update: new UpdateCategory(container),
+  remove: new DeleteCategory(container),
 });

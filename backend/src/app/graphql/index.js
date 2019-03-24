@@ -15,13 +15,6 @@ const {
 
 module.exports = {
   register(container) {
-    const query = Query(container);
-    const mutation = Mutation(container);
-    const schema = new GraphQLSchema({
-      query,
-      mutation,
-    });
-    container.register('AppGraphQLSchema', schema);
     container.register('Account', Account, ['Team', 'Currency', 'Teams', 'Currencies']);
     container.register('Category', Category, ['Team', 'Teams']);
     container.register('Currency', Currency);
@@ -30,18 +23,21 @@ module.exports = {
     container.register('User', User, ['Team', 'Teams']);
   },
   run(container) {
-    const { router, AppGraphQLSchema } = container;
+    const { router } = container;
     const moduleRouter = router.create();
     moduleRouter.use(auth(container));
     moduleRouter.use('/', graphqlHTTP({
-      schema: AppGraphQLSchema,
+      schema: new GraphQLSchema({
+        query: Query(container),
+        mutation: Mutation(container),
+      }),
       graphiql: true,
     }));
-    core.registerRouter({
+    router.attach({
       version: 'v1',
       path: 'graphql',
       subRouter: moduleRouter,
-      name: 'GraphqlModule',
+      name: 'GraphqlModuleRouter',
     });
   },
 };

@@ -24,7 +24,7 @@ container.register('logger', logger, ['config']);
 container.register('jwt', jwt, ['config']);
 container.register('httpRequestsLogger', HttpRequestsLogger, ['logger']);
 container.register('db', db, ['config', 'logger']);
-container.register('router', Router, ['httpRequestsLogger', 'errorHandler', 'notFoundHandler']);
+container.register('router', Router, ['httpRequestsLogger', 'errorHandler', 'notFoundHandler', 'logger']);
 container.register('server', AppHttpServer, ['config', 'router', 'logger']);
 
 module.exports = container;

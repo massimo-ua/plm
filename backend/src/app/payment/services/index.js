@@ -4,10 +4,10 @@ const DeletePayment = require('./DeletePayment');
 const FindPayment = require('./FindPayment');
 const FindOnePayment = require('./FindOnePayment');
 
-module.exports = (...args) => ({
-  create: new CreatePayment(...args),
-  update: new UpdatePayment(...args),
-  remove: new DeletePayment(...args),
-  find: new FindPayment(...args),
-  findOne: new FindOnePayment(...args),
+module.exports = container => ({
+  create: new CreatePayment(container),
+  update: new UpdatePayment(container),
+  remove: new DeletePayment(container),
+  find: new FindPayment(container),
+  findOne: new FindOnePayment(container),
 });

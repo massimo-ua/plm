@@ -4,9 +4,8 @@ const { comparePassword } = require('./helpers');
 
 module.exports = {
   register(container) {
-    const { jwt, crypto } = container;
-    modelsCreator(container);
-    const { User } = db.models;
-    container.register('Users', serviceCreator(User, { jwt, crypto, comparePassword }));
+    container.register('comparePassword', comparePassword);
+    container.register('UserModel', modelsCreator, ['db', 'TeamModel', 'crypto'])
+    container.register('Users', serviceCreator, ['UserModel', 'jwt', 'crypto', 'comparePassword']);
   },
 };

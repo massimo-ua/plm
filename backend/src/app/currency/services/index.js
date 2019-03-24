@@ -5,11 +5,11 @@ const UpdateCurrency = require('./UpdateCurrency');
 const DeleteCurrency = require('./DeleteCurrency');
 const SetAsHomeCurrency = require('./SetAsHomeCurrency');
 
-module.exports = (...args) => ({
-  find: new FindCurrency(...args),
-  findOne: new FindOneCurrency(...args),
-  create: new CreateCurrency(...args),
-  update: new UpdateCurrency(...args),
-  remove: new DeleteCurrency(...args),
-  setAsHome: new SetAsHomeCurrency(...args),
+module.exports = container => ({
+  find: new FindCurrency(container),
+  findOne: new FindOneCurrency(container),
+  create: new CreateCurrency(container),
+  update: new UpdateCurrency(container),
+  remove: new DeleteCurrency(container),
+  setAsHome: new SetAsHomeCurrency(container),
 });

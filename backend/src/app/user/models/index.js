@@ -1,6 +1,5 @@
 const User = require('./user.model');
 
-module.exports = ({ db, crypto }) => {
-    db.registerModel(User({ crypto }));
+module.exports = container => {
+   return container.db.registerModel(User(container));
 }
-

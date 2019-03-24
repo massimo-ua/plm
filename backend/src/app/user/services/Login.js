@@ -1,6 +1,6 @@
 class Login {
-  constructor(model, { jwt, comparePassword, crypto }) {
-    this.model = model;
+  constructor({ UserModel, jwt, comparePassword, crypto }) {
+    this.model = UserModel;
     this.jwt = jwt;
     this.crypto = crypto;
     this.comparePassword = comparePassword;

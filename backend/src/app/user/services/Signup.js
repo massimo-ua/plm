@@ -1,6 +1,6 @@
 class Signup {
-  constructor(model, { jwt }) {
-    this.model = model;
+  constructor({ UserModel, jwt }) {
+    this.model = UserModel;
     this.jwt = jwt;
     this.execute = this.execute.bind(this);
   }

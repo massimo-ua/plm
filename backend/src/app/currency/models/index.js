@@ -1,5 +1,5 @@
 const Currency = require('./currency.model');
 
-module.exports = (db) => {
-  db.registerModel(Currency);
+module.exports = container => {
+  return container.db.registerModel(Currency(container));
 };

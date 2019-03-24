@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes, models) => {
+module.exports = ({ TeamModel }) => (sequelize, DataTypes) => {
   const Category = sequelize.define('Category', {
     name: DataTypes.STRING,
     type: DataTypes.ENUM('P', 'L'),
@@ -13,6 +13,6 @@ module.exports = (sequelize, DataTypes, models) => {
       },
     },
   });
-  Category.belongsTo(models.Team, { as: 'team' });
+  Category.belongsTo(TeamModel, { as: 'team' });
   return Category;
 };

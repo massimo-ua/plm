@@ -6,12 +6,12 @@ const Profile = require('./Profile');
 const UpdateProfile = require('./UpdateProfile');
 const UpdateUser = require('./UpdateUser');
 
-module.exports = (...args) => ({
-  find: new FindUser(...args),
-  findOne: new FindOneUser(...args),
-  signup: new Signup(...args),
-  login: new Login(...args),
-  profile: new Profile(...args),
-  updateProfile: new UpdateProfile(...args),
-  update: new UpdateUser(...args),
+module.exports = container => ({
+  find: new FindUser(container),
+  findOne: new FindOneUser(container),
+  signup: new Signup(container),
+  login: new Login(container),
+  profile: new Profile(container),
+  updateProfile: new UpdateProfile(container),
+  update: new UpdateUser(container),
 });

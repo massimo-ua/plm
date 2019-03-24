@@ -1,5 +1,5 @@
 const Team = require('./team.model');
 
-module.exports = db => {
-  db.registerModel(Team);
+module.exports = container => {
+  return container.db.registerModel(Team(container));
 };

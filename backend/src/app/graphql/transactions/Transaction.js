@@ -17,45 +17,47 @@ const createTransactionType = ({
   Accounts,
   Account,
   Team,
-  Account,
-}) => new GraphQLObjectType({
-  name: 'Transaction',
-  description: 'Transaction schema',
-  fields: {
-    id: {
-      type: GraphQLID,
-      description: 'Transaction id',
-    },
-    account: {
-      type: Account,
-      description: 'Account that Transaction belongs to',
-      resolve: Resolver().mapper(accountMapper).resolve(Accounts.findOne),
-    },
-    actualDate: {
-      type: GraphQLDate,
-      description: 'Transaction actual date',
-    },
-    type: {
-      type: GraphQLString,
-      description: 'Transaction type either D(Debit) or C(Credit)',
-    },
-    team: {
-      type: Team,
-      description: 'Team that Transaction belongs to',
-      resolve: Resolver().mapper(teamMapper).resolve(Teams.findOne),
-    },
-    mirror: {
-      get type() {
-        return Transaction;
+}) => {
+  const Transaction = new GraphQLObjectType({
+    name: 'Transaction',
+    description: 'Transaction schema',
+    fields: {
+      id: {
+        type: GraphQLID,
+        description: 'Transaction id',
       },
-      description: 'Currency that Transaction belongs to',
-      resolve: Resolver().mapper(mirrorMapper).resolve(Transactions.findOne),
+      account: {
+        type: Account,
+        description: 'Account that Transaction belongs to',
+        resolve: Resolver().mapper(accountMapper).resolve(Accounts.findOne),
+      },
+      actualDate: {
+        type: GraphQLDate,
+        description: 'Transaction actual date',
+      },
+      type: {
+        type: GraphQLString,
+        description: 'Transaction type either D(Debit) or C(Credit)',
+      },
+      team: {
+        type: Team,
+        description: 'Team that Transaction belongs to',
+        resolve: Resolver().mapper(teamMapper).resolve(Teams.findOne),
+      },
+      mirror: {
+        get type() {
+          return Transaction;
+        },
+        description: 'Currency that Transaction belongs to',
+        resolve: Resolver().mapper(mirrorMapper).resolve(Transactions.findOne),
+      },
+      notes: {
+        type: GraphQLString,
+        description: 'Transaction notes',
+      },
     },
-    notes: {
-      type: GraphQLString,
-      description: 'Transaction notes',
-    },
-  },
-});
+  });
+  return Transaction;
+};
 
 module.exports = container => createTransactionType(container);

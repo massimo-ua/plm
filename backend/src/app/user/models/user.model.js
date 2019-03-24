@@ -1,4 +1,4 @@
-module.exports = ({ crypto }) => (sequelize, DataTypes, models) => {
+module.exports = ({ TeamModel, crypto }) => (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     name: DataTypes.STRING,
     login: DataTypes.STRING,
@@ -14,7 +14,7 @@ module.exports = ({ crypto }) => (sequelize, DataTypes, models) => {
       },
     },
   });
-  User.belongsTo(models.Team, { as: 'team' });
+  User.belongsTo(TeamModel, { as: 'team' });
   async function hashUserPassword(user) {
     if (user.password) {
       const hash = await crypto.hash(user.password);
