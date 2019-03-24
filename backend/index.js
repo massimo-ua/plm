@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 require('module-alias/register');
-const app = require('./src/main');
+const app = require('./src/app');
 
 const { logger } = app;
 
