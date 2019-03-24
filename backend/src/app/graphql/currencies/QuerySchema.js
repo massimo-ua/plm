@@ -4,14 +4,12 @@ const {
   GraphQLNonNull,
   GraphQLObjectType,
 } = require('graphql');
-const Currency = require('./Currency');
 const { Resolver } = require('../helpers');
 
 module.exports = ({
-  find,
-  findOne,
-}, {
-  loggedIn,
+  Currency,
+  Currencies,
+  auth,
 }) => ({
   currencies: {
     type: new GraphQLObjectType({
@@ -21,8 +19,8 @@ module.exports = ({
         list: {
           type: GraphQLList(Currency),
           resolve: Resolver()
-            .middleware(loggedIn)
-            .resolve(find),
+            .middleware(auth.loggedIn)
+            .resolve(Currencies.find),
         },
         show: {
           type: Currency,
@@ -33,8 +31,8 @@ module.exports = ({
             },
           },
           resolve: Resolver()
-            .middleware(loggedIn)
-            .resolve(findOne),
+            .middleware(auth.loggedIn)
+            .resolve(Currencies.findOne),
         },
       },
     }),

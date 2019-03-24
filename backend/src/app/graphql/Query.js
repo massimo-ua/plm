@@ -1,17 +1,17 @@
 const { GraphQLObjectType } = require('graphql');
-const UsersSchema = require('./users/QuerySchema');
-const CategoriesSchema = require('./categories/QuerySchema');
-const CurrenciesSchema = require('./currencies/QuerySchema');
+const { UserQuery } = require('./users');
+const { CategoryQuery } = require('./categories');
+const { CurrencyQuery } = require('./currencies');
 const { AccountQuery } = require('./accounts');
 const { TransactionQuery } = require('./transactions');
 
 module.exports = container => new GraphQLObjectType({
   name: 'Query',
   fields: {
-    ...UsersSchema(container),
-    ...CategoriesSchema(container),
+    ...UserQuery(container),
+    ...CategoryQuery(container),
     ...AccountQuery(container),
-    ...CurrenciesSchema(container),
+    ...CurrencyQuery(container),
     ...TransactionQuery(container),
   },
 });

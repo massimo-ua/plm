@@ -1,5 +1,9 @@
-const Category = require('./Currency');
+const Currency = require('./Currency');
+const CurrencyQuery = require('./QuerySchema');
+const CurrencyMutation = require('./MutationSchema');
 
-module.exports.CategoryTypes = [
-  Category,
+module.exports = [
+  Currency,
+  CurrencyQuery,
+  CurrencyMutation,
 ];

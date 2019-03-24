@@ -6,6 +6,10 @@ const { auth } = require('./middleware');
 const {
   Account,
   Category,
+  Currency,
+  Team,
+  Transaction,
+  User,
 } = require('./Types');
 
 
@@ -20,6 +24,10 @@ module.exports = {
     container.register('AppGraphQLSchema', schema);
     container.register('Account', Account, ['Team', 'Currency', 'Teams', 'Currencies']);
     container.register('Category', Category, ['Team', 'Teams']);
+    container.register('Currency', Currency);
+    container.register('Team', Team);
+    container.register('Transaction', Transaction, ['Transactions', 'Teams', 'Accounts', 'Account', 'Team', 'Account']);
+    container.register('User', User, ['Team', 'Teams']);
   },
   run(container) {
     const { router, AppGraphQLSchema } = container;
