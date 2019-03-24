@@ -14,14 +14,14 @@ module.exports = ({
       name: 'TransactionQuery',
       description: 'Transaction query schema',
       fields: {
-        ...List({
+        ...List(
           Transaction,
-          resolve: Resolver().middleware(auth.loggedIn).resolve(Transactions.find),
-        }),
-        ...Show({
+          Resolver().middleware(auth.loggedIn).resolve(Transactions.find),
+        ),
+        ...Show(
           Transaction,
-          resolve: Resolver().middleware(auth.loggedIn).resolve(Transactions.findOne),
-        }),
+          Resolver().middleware(auth.loggedIn).resolve(Transactions.findOne),
+        ),
       },
     }),
     resolve: () => true,

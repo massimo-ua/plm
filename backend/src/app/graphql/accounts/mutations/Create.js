@@ -4,9 +4,9 @@ const {
   GraphQLInt,
 } = require('graphql');
 
-module.exports = ({ AccountType, resolve }) => ({
+module.exports = ({ Account, resolve }) => ({
   create: {
-    type: AccountType,
+    type: Account,
     args: {
       name: {
         type: GraphQLNonNull(GraphQLString),

@@ -8,9 +8,9 @@ const {
   GraphQLDate,
 } = require('graphql-iso-date');
 
-module.exports = ({ TransactionType, resolve }) => ({
+module.exports = ({ Transaction, resolve }) => ({
   create: {
-    type: TransactionType,
+    type: Transaction,
     args: {
       accountId: {
         type: GraphQLNonNull(GraphQLID),

@@ -5,9 +5,9 @@ const {
   GraphQLBoolean,
 } = require('graphql');
 
-module.exports = ({ CategoryType, resolver }) => ({
+module.exports = ({ Category, resolver }) => ({
   update: {
-    type: CategoryType,
+    type: Category,
     args: {
       id: {
         type: GraphQLNonNull(GraphQLID),

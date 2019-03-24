@@ -3,9 +3,9 @@ const {
   GraphQLNonNull,
 } = require('graphql');
 
-module.exports = ({ CurrencyType, resolver }) => ({
+module.exports = ({ Currency, resolver }) => ({
   home: {
-    type: CurrencyType,
+    type: Currency,
     args: {
       id: {
         type: GraphQLNonNull(GraphQLID),

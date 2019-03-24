@@ -15,14 +15,14 @@ module.exports = ({
       name: 'AccountQuery',
       description: 'Account query schema',
       fields: {
-        ...List({
+        ...List(
           Account,
-          resolve: Resolver().middleware(auth.loggedIn).resolve(Accounts.find),
-        }),
-        ...Show({
+          Resolver().middleware(auth.loggedIn).resolve(Accounts.find),
+        ),
+        ...Show(
           Account,
-          resolve: Resolver().middleware(auth.loggedIn).resolve(Accounts.findOne),
-        }),
+          Resolver().middleware(auth.loggedIn).resolve(Accounts.findOne),
+        ),
       },
     }),
     resolve: () => true,
