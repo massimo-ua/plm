@@ -12,11 +12,7 @@ class SequelizeAdapter {
   }
 
   registerModel(creatorFn) {
-    creatorFn(this.db, Sequelize, this.db.models);
-  }
-
-  get models() {
-    return this.db.models;
+    return creatorFn(this.db, Sequelize);
   }
 }
 module.exports = SequelizeAdapter;

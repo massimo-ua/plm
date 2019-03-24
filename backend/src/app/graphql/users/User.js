@@ -4,12 +4,9 @@ const {
   GraphQLBoolean,
   GraphQLID,
 } = require('graphql');
-const Team = require('../teams/Team');
 const { Resolver } = require('../helpers');
 
-let UserType = null;
-
-const createUserType = findTeam => new GraphQLObjectType({
+const createUserType = ({ Team, Teams }) => new GraphQLObjectType({
   name: 'User',
   description: 'User schema',
   fields: {
@@ -27,24 +24,18 @@ const createUserType = findTeam => new GraphQLObjectType({
     },
     isActive: {
       type: GraphQLBoolean,
-      description: 'Is user account active/suspended',
+      description: 'Is user active or suspended?',
     },
     team: {
       type: Team,
       description: 'Team that user belongs to',
-      resolve: Resolver()
-        .resolve(findTeam),
+      resolve: Resolver().resolve(Teams.findOne),
     },
     isAdmin: {
       type: GraphQLBoolean,
-      description: 'Is account belongs to admin/regular user',
+      description: 'Is admin or regular user?',
     },
   },
 });
 
-module.exports = ({ findTeam }) => {
-  if (!UserType) {
-    UserType = createUserType(findTeam);
-  }
-  return UserType;
-};
+module.exports = container => createUserType(container);

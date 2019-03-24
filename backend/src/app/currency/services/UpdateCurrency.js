@@ -2,6 +2,11 @@
 const { Update } = require('@core/services');
 
 class UpdateCurrency extends Update {
+
+  constructor({ CurrencyModel }) {
+    super(CurrencyModel);
+  }
+  
   async execute({ args: { id, ...body } }) {
     const record = await this.model.findOne({
       where: { id },

@@ -1,7 +1,9 @@
+const modules = require('./modules');
 class Application {
-  constructor(core) {
-    this.server = core.server;
-    this.logger = core.logger;
+  constructor(container, loader = modules) {
+    this.server = container.server;
+    this.logger = container.logger;
+    loader(container);
   }
 
   async start() {

@@ -4,9 +4,9 @@ const {
   GraphQLID,
 } = require('graphql');
 
-module.exports = ({ AccountType, resolve }) => ({
+module.exports = ({ Account, resolve }) => ({
   update: {
-    type: AccountType,
+    type: Account,
     args: {
       id: {
         type: GraphQLNonNull(GraphQLID),

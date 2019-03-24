@@ -1,13 +1,9 @@
 const modelsCreator = require('./models');
 const serviceCreator = require('./services');
 
-module.exports = (core) => {
-  const { db } = core;
-  modelsCreator(db);
-  const { Category } = db.models;
-  const api = serviceCreator(Category);
-  core.registerAPI({
-    namespace: 'Categories',
-    api,
-  });
+module.exports = {
+  register(container) {
+    container.register('CategoryModel', modelsCreator, ['db', 'TeamModel']);
+    container.register('Categories', serviceCreator, ['CategoryModel']);
+  },
 };

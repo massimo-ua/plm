@@ -1,6 +1,7 @@
 class SetAsHomeCurrency {
-  constructor(model, { db }) {
-    this.model = model;
+  
+  constructor({ CurrencyModel, db }) {
+    this.model = CurrencyModel;
     this.db = db;
   }
 

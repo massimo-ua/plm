@@ -2,10 +2,8 @@
 const { Find } = require('@core/services');
 
 class FindCategory extends Find {
-  constructor(model) {
-    super(model, {
-      include: ['team'],
-    });
+  constructor({ CategoryModel }) {
+    super(CategoryModel);
   }
 }
 

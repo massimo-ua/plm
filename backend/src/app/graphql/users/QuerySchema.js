@@ -4,52 +4,38 @@ const {
   GraphQLList,
   GraphQLObjectType,
 } = require('graphql');
-const User = require('./User');
 const { Resolver } = require('../helpers');
 
-
 module.exports = ({
-  find,
-  findOne,
-  profile,
-  findTeam,
-}, {
-  loggedIn,
-}) => {
-  const UserType = User({ findTeam });
-  return {
-    users: {
-      type: new GraphQLObjectType({
-        name: 'UserQuery',
-        description: 'User query schema',
-        fields: {
-          show: {
-            type: UserType,
-            args: {
-              id: {
-                type: GraphQLNonNull(GraphQLID),
-                description: 'User id',
-              },
+  User,
+  Users,
+  auth,
+}) => ({
+  users: {
+    type: new GraphQLObjectType({
+      name: 'UserQuery',
+      description: 'User query schema',
+      fields: {
+        show: {
+          type: User,
+          args: {
+            id: {
+              type: GraphQLNonNull(GraphQLID),
+              description: 'User id',
             },
-            resolve: Resolver()
-              .middleware(loggedIn)
-              .resolve(findOne),
           },
-          list: {
-            type: GraphQLList(UserType),
-            resolve: Resolver()
-              .middleware(loggedIn)
-              .resolve(find),
-          },
-          me: {
-            type: UserType,
-            resolve: Resolver()
-              .middleware(loggedIn)
-              .resolve(profile),
-          },
+          resolve: Resolver().middleware(auth.loggedIn).resolve(Users.findOne),
         },
-      }),
-      resolve: () => true,
-    },
-  };
-};
+        list: {
+          type: GraphQLList(User),
+          resolve: Resolver().middleware(auth.loggedIn).resolve(Users.find),
+        },
+        me: {
+          type: User,
+          resolve: Resolver().middleware(auth.loggedIn).resolve(Users.profile),
+        },
+      },
+    }),
+    resolve: () => true,
+  },
+});

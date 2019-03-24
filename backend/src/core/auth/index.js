@@ -1,1 +1,1 @@
-module.exports = require('./AuthModule');
+module.exports = require('./AuthService');

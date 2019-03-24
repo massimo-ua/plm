@@ -1,5 +1,5 @@
 const Team = require('./Team');
 
-module.exports.TeamTypes = [
+module.exports = {
   Team,
-];
+};

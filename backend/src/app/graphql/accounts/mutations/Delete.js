@@ -3,9 +3,9 @@ const {
   GraphQLNonNull,
 } = require('graphql');
 
-module.exports = ({ AccountType, resolve }) => ({
+module.exports = ({ Account, resolve }) => ({
   delete: {
-    type: AccountType,
+    type: Account,
     args: {
       id: {
         type: GraphQLNonNull(GraphQLID),

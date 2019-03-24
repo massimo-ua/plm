@@ -8,16 +8,11 @@ const {
   SetAsHome,
 } = require('./mutations');
 const { Resolver } = require('../helpers');
-const CurrencyType = require('./Currency');
 
 module.exports = ({
-  create,
-  update,
-  remove,
-  setAsHome,
-}, {
-  loggedIn,
-  isAdmin,
+  Currency,
+  Currencies,
+  auth,
 }) => ({
   currencies: {
     type: new GraphQLObjectType({
@@ -25,20 +20,20 @@ module.exports = ({
       description: 'Currency mutation schema',
       fields: {
         ...Create({
-          CurrencyType,
-          resolver: Resolver().middleware(loggedIn, isAdmin).resolve(create),
+          Currency,
+          resolver: Resolver().middleware(auth.loggedIn, auth.isAdmin).resolve(Currencies.create),
         }),
         ...Update({
-          CurrencyType,
-          resolver: Resolver().middleware(loggedIn, isAdmin).resolve(update),
+          Currency,
+          resolver: Resolver().middleware(auth.loggedIn, auth.isAdmin).resolve(Currencies.update),
         }),
         ...Delete({
-          CurrencyType,
-          resolver: Resolver().middleware(loggedIn, isAdmin).resolve(remove),
+          Currency,
+          resolver: Resolver().middleware(auth.loggedIn, auth.isAdmin).resolve(Currencies.remove),
         }),
         ...SetAsHome({
-          CurrencyType,
-          resolver: Resolver().middleware(loggedIn, isAdmin).resolve(setAsHome),
+          Currency,
+          resolver: Resolver().middleware(auth.loggedIn, auth.isAdmin).resolve(Currencies.setAsHome),
         }),
       },
     }),

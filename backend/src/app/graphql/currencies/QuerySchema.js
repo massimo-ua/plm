@@ -1,41 +1,27 @@
 const {
-  GraphQLID,
-  GraphQLList,
-  GraphQLNonNull,
   GraphQLObjectType,
 } = require('graphql');
-const Currency = require('./Currency');
 const { Resolver } = require('../helpers');
+const { List, Show } = require('./queries');
 
 module.exports = ({
-  find,
-  findOne,
-}, {
-  loggedIn,
+  Currency,
+  Currencies,
+  auth,
 }) => ({
   currencies: {
     type: new GraphQLObjectType({
       name: 'CurrencyQuery',
       description: 'Currency query schema',
       fields: {
-        list: {
-          type: GraphQLList(Currency),
-          resolve: Resolver()
-            .middleware(loggedIn)
-            .resolve(find),
-        },
-        show: {
-          type: Currency,
-          args: {
-            id: {
-              type: GraphQLNonNull(GraphQLID),
-              description: 'Currency id',
-            },
-          },
-          resolve: Resolver()
-            .middleware(loggedIn)
-            .resolve(findOne),
-        },
+        ...List(
+          Currency,
+          Resolver().middleware(auth.loggedIn).resolve(Currencies.find),
+        ),
+        ...Show(
+          Currency,
+          Resolver().middleware(auth.loggedIn).resolve(Currencies.findOne),
+        ),
       },
     }),
     resolve: () => true,
