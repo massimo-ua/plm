@@ -4,6 +4,7 @@ const { CategoryQuery } = require('./categories');
 const { CurrencyQuery } = require('./currencies');
 const { AccountQuery } = require('./accounts');
 const { TransactionQuery } = require('./transactions');
+const { PaymentQuery } = require('./payments');
 
 module.exports = container => new GraphQLObjectType({
   name: 'Query',
@@ -13,5 +14,6 @@ module.exports = container => new GraphQLObjectType({
     ...AccountQuery(container),
     ...CurrencyQuery(container),
     ...TransactionQuery(container),
+    ...PaymentQuery(container),
   },
 });
