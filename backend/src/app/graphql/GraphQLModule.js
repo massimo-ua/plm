@@ -20,9 +20,18 @@ module.exports = {
     container.register('Category', Category, ['Team', 'Teams']);
     container.register('Currency', Currency);
     container.register('Team', Team);
-    container.register('Transaction', Transaction, ['Transactions', 'Teams', 'Accounts', 'Account', 'Team', 'Account']);
+    container.register('Transaction', Transaction, [
+      'Transactions',
+      'Teams',
+      'Accounts',
+      'Account',
+      'Team',
+      'Account',
+      'Payment',
+      'Payments',
+    ]);
     container.register('User', User, ['Team', 'Teams']);
-    container.register('Payment', Payment, ['Transaction', 'Transactions', 'Categories', 'Category', 'Teams', 'Team']);
+    container.register('Payment', Payment, ['Categories', 'Category', 'Teams', 'Team']);
   },
   run(container) {
     const { router } = container;

@@ -4,6 +4,7 @@ const teamMapper = require('./teamMapper');
 const currencyMapper = require('./currencyMapper');
 const categoryMapper = require('./categoryMapper');
 const transactionMapper = require('./transactionMapper');
+const transactionPaymentsMapper = require('./transactionPaymentsMapper');
 
 module.exports = {
   mirrorMapper,
@@ -12,4 +13,5 @@ module.exports = {
   currencyMapper,
   categoryMapper,
   transactionMapper,
+  transactionPaymentsMapper,
 };

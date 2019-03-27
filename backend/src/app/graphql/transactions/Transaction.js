@@ -2,6 +2,7 @@ const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLID,
+  GraphQLList,
 } = require('graphql');
 
 const {
@@ -9,7 +10,12 @@ const {
 } = require('graphql-iso-date');
 
 const { Resolver } = require('../helpers');
-const { accountMapper, mirrorMapper, teamMapper } = require('../helpers/mappers');
+const {
+  accountMapper,
+  mirrorMapper,
+  teamMapper,
+  transactionPaymentsMapper,
+} = require('../helpers/mappers');
 
 const createTransactionType = ({
   Transactions,
@@ -17,6 +23,8 @@ const createTransactionType = ({
   Accounts,
   Account,
   Team,
+  Payment,
+  Payments,
 }) => {
   const Transaction = new GraphQLObjectType({
     name: 'Transaction',
@@ -55,6 +63,11 @@ const createTransactionType = ({
         type: GraphQLString,
         description: 'Transaction notes',
       },
+      payments: {
+        type: GraphQLList(Payment),
+        description: 'Transaction payments',
+        resolve: Resolver().mapper(transactionPaymentsMapper).resolve(Payments.find),
+      }
     },
   });
   return Transaction;

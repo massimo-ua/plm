@@ -8,8 +8,6 @@ const {
   const { categoryMapper, teamMapper, transactionMapper } = require('../helpers/mappers');
   
   const createPaymentType = ({
-      Transaction,
-      Transactions,
       Categories,
       Category,
       Teams,
@@ -30,11 +28,6 @@ const {
         amount: {
             type: GraphQLInt,
             description: 'Payment amount',
-        },
-        transaction: {
-            type: Transaction,
-            description: `Payment's transaction`,
-            resolve: Resolver().mapper(transactionMapper).resolve(Transactions.findOne),
         },
         team: {
             type: Team,
