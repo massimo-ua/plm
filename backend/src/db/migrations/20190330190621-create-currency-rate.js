@@ -1,34 +1,24 @@
 
+
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Transactions', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('CurrencyRates', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    accountId: {
+    currencyId: {
       type: Sequelize.INTEGER,
-      index: true,
       allowNull: false,
     },
-    actualDate: {
+    effectiveDate: {
       type: Sequelize.DATEONLY,
       allowNull: false,
     },
-    type: {
-      type: Sequelize.ENUM('P', 'L'),
+    exchangeRate: {
+      type: Sequelize.FLOAT,
       allowNull: false,
-    },
-    mirrorId: {
-      type: Sequelize.INTEGER,
-    },
-    notes: {
-      type: Sequelize.STRING,
-    },
-    teamId: {
-      type: Sequelize.INTEGER,
-      required: true,
     },
     deletedAt: {
       type: Sequelize.DATE,
@@ -43,9 +33,10 @@ module.exports = {
     },
   }, {
     indexes: [
-      { fields: ['sourceAccountId'] },
-      { fields: ['actualDate'] },
+      { fields: ['currencyId', 'effectiveDate'], unique: true },
+      { fields: ['currencyId'] },
+      { fields: ['effectiveDate'] },
     ],
   }),
-  down: queryInterface => queryInterface.dropTable('Transactions'),
+  down: queryInterface => queryInterface.dropTable('CurrencyRates'),
 };

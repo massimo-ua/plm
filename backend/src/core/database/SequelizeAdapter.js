@@ -6,6 +6,7 @@ class SequelizeAdapter {
     const { db } = config;
     if (db) {
       this.db = new Sequelize(db);
+      this.Op = Sequelize.Op;
     } else {
       logger.info('Database configuration not found, disabling database.');
     }

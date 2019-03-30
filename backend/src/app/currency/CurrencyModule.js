@@ -1,9 +1,13 @@
-const modelsCreator = require('./models');
+const {
+  Currency,
+  CurrencyRate,
+} = require('./models');
 const serviceCreator = require('./services');
 
 module.exports = {
   register(container) {
-    container.register('CurrencyModel', modelsCreator, ['db']);
-    container.register('Currencies', serviceCreator, ['db', 'CurrencyModel']);
+    container.register('CurrencyModel', Currency, ['db']);
+    container.register('CurrencyRateModel', CurrencyRate, ['db']);
+    container.register('Currencies', serviceCreator, ['db', 'CurrencyModel', 'CurrencyRateModel', 'Accounts']);
   },
 };

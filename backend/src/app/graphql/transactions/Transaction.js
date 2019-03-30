@@ -3,6 +3,8 @@ const {
   GraphQLString,
   GraphQLID,
   GraphQLList,
+  GraphQLInt,
+  GraphQLFloat,
 } = require('graphql');
 
 const {
@@ -15,10 +17,12 @@ const {
   mirrorMapper,
   teamMapper,
   transactionPaymentsMapper,
+  transactionRateMapper,
 } = require('../helpers/mappers');
 
 const createTransactionType = ({
   Transactions,
+  Currencies,
   Teams,
   Accounts,
   Account,
@@ -67,7 +71,12 @@ const createTransactionType = ({
         type: GraphQLList(Payment),
         description: 'Transaction payments',
         resolve: Resolver().mapper(transactionPaymentsMapper).resolve(Payments.find),
-      }
+      },
+      rate: {
+        type: GraphQLFloat,
+        description: 'Transaction currency exchange rate',
+        resolve: Resolver().mapper(transactionRateMapper).resolve(Currencies.getExchangeRate)
+      },
     },
   });
   return Transaction;
