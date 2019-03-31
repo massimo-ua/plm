@@ -6,6 +6,7 @@ const {
 } = require('graphql');
 
 const { Resolver } = require('../helpers');
+const { teamMapper } = require('../helpers/mappers');
 
 const createCategoryType = ({ Teams, Team, }) => new GraphQLObjectType({
   name: 'Category',
@@ -30,7 +31,7 @@ const createCategoryType = ({ Teams, Team, }) => new GraphQLObjectType({
     team: {
       type: Team,
       description: 'Team id that category belongs to',
-      resolve: Resolver().resolve(Teams.findOne),
+      resolve: Resolver().mapper(teamMapper).resolve(Teams.findOne),
     },
   },
 });

@@ -1,6 +1,6 @@
 const container = require('./container');
 const logger = require('./logger');
-const db = require('./database');
+const SequelizeAdapter = require('./database');
 const crypto = require('./crypto');
 const jwt = require('./jwt');
 const {
@@ -23,7 +23,7 @@ container.register('errorHandler', ErrorHandler, ['logger']);
 container.register('logger', logger, ['config']);
 container.register('jwt', jwt, ['config']);
 container.register('httpRequestsLogger', HttpRequestsLogger, ['logger']);
-container.register('db', db, ['config', 'logger']);
+container.register('db', SequelizeAdapter, ['config', 'logger']);
 container.register('router', Router, ['httpRequestsLogger', 'errorHandler', 'notFoundHandler', 'logger']);
 container.register('server', AppHttpServer, ['config', 'router', 'logger']);
 

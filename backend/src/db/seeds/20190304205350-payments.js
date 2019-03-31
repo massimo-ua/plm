@@ -1,38 +1,3 @@
-// id: {
-//   allowNull: false,
-//   autoIncrement: true,
-//   primaryKey: true,
-//   type: Sequelize.INTEGER,
-// },
-// categoryId: {
-//   type: Sequelize.INTEGER,
-//   allowNull: false,
-// },
-// amount: {
-//   type: Sequelize.INTEGER,
-//   allowNull: false,
-// },
-// transactionId: {
-//   type: Sequelize.INTEGER,
-//   allowNull: false,
-// },
-// teamId: {
-//   type: Sequelize.INTEGER,
-//   required: true,
-// },
-// deletedAt: {
-//   type: Sequelize.DATE,
-// },
-// createdAt: {
-//   allowNull: false,
-//   type: Sequelize.DATE,
-// },
-// updatedAt: {
-//   allowNull: false,
-//   type: Sequelize.DATE,
-// },
-
-
 module.exports = {
   up: queryInterface => queryInterface.bulkInsert('Payments', [
     {
@@ -67,6 +32,15 @@ module.exports = {
       categoryId: 2,
       amount: 12500,
       transactionId: 3,
+      teamId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: 5,
+      categoryId: 1,
+      amount: 10000,
+      transactionId: 4,
       teamId: 1,
       createdAt: new Date(),
       updatedAt: new Date(),

@@ -4,6 +4,7 @@ const { Currency } = require('./currencies');
 const { Team } = require('./teams');
 const { Transaction } = require('./transactions');
 const { User } = require('./users');
+const { Payment } = require('./payments');
 
 module.exports = {
     Account,
@@ -12,4 +13,5 @@ module.exports = {
     Team,
     Transaction,
     User,
+    Payment,
 };
