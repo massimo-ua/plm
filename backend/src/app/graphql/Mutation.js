@@ -4,6 +4,7 @@ const { CategoryMutation } = require('./categories');
 const { CurrencyMutation } = require('./currencies');
 const { AccountMutation } = require('./accounts');
 const { TransactionMutation } = require('./transactions');
+const { PaymentMutation } = require('./payments');
 
 module.exports = container => new GraphQLObjectType({
   name: 'Mutation',
@@ -13,5 +14,6 @@ module.exports = container => new GraphQLObjectType({
     ...CurrencyMutation(container),
     ...AccountMutation(container),
     ...TransactionMutation(container),
+    ...PaymentMutation(container),
   },
 });
