@@ -8,6 +8,10 @@ const {
     update: {
       type: Payment,
       args: {
+        id: {
+          type: GraphQLID,
+          description: 'Payment id',
+        },
         categoryId: {
           type: GraphQLID,
           description: 'Payment category id',
