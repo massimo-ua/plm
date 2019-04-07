@@ -6,6 +6,7 @@ const payment = require('./payment');
 const team = require('./team');
 const transaction = require('./transaction');
 const user = require('./user');
+const plan = require('./plan');
 
 const modules = [
     account,
@@ -16,6 +17,7 @@ const modules = [
     team,
     transaction,
     user,
+    plan,
 ];
 
 const execute = action => container => (moduleFactory = {}) => {

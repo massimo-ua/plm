@@ -6,6 +6,7 @@ class FindOneCurrency extends FindOne {
   constructor({ CurrencyModel }) {
     super(CurrencyModel);
   }
+
   execute({ args: { id } = {}, options = {} }) {
     return this.model.findOne(
       mergeDeep(

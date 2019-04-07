@@ -5,6 +5,7 @@ class FindCurrency extends Find {
   constructor({ CurrencyModel }) {
     super(CurrencyModel);
   }
+
   execute({ options = {} }) {
     return this.model.findAll({ ...this.defaultOptions, ...options });
   }

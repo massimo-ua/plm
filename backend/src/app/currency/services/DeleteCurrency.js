@@ -5,6 +5,7 @@ class DeleteCurrency extends Delete {
   constructor({ CurrencyModel }) {
     super(CurrencyModel);
   }
+
   async execute({ args: { id } }) {
     const record = await this.model.findOne({
       where: { id },
