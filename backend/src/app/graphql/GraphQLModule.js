@@ -11,6 +11,7 @@ const {
   Transaction,
   User,
   Payment,
+  Plan,
 } = require('./Types');
 
 
@@ -33,6 +34,7 @@ module.exports = {
     ]);
     container.register('User', User, ['Team', 'Teams']);
     container.register('Payment', Payment, ['Categories', 'Category', 'Teams', 'Team']);
+    container.register('Plan', Plan, ['Team', 'Teams']);
   },
   run(container) {
     const { router } = container;

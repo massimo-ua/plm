@@ -1,4 +1,5 @@
 const modules = require('./modules');
+
 class Application {
   constructor(container, loader = modules) {
     this.server = container.server;

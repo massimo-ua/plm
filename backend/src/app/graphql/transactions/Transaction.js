@@ -3,7 +3,6 @@ const {
   GraphQLString,
   GraphQLID,
   GraphQLList,
-  GraphQLInt,
   GraphQLFloat,
 } = require('graphql');
 
@@ -75,7 +74,7 @@ const createTransactionType = ({
       rate: {
         type: GraphQLFloat,
         description: 'Transaction currency exchange rate',
-        resolve: Resolver().mapper(transactionRateMapper).resolve(Currencies.getExchangeRate)
+        resolve: Resolver().mapper(transactionRateMapper).resolve(Currencies.getExchangeRate),
       },
     },
   });

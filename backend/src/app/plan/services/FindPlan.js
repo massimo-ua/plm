@@ -2,9 +2,9 @@
 const { Find } = require('@core/services');
 
 class FindPlan extends Find {
-    constructor({ PlanModel }) {
-        super(PlanModel);
-    }
+  constructor({ PlanModel }) {
+    super(PlanModel);
+  }
 }
 
 module.exports = FindPlan;

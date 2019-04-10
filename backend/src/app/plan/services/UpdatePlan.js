@@ -2,9 +2,9 @@
 const { Update } = require('@core/services');
 
 class UpdatePlan extends Update {
-    constructor({ PlanModel }) {
-        super(PlanModel);
-    }
+  constructor({ PlanModel }) {
+    super(PlanModel);
+  }
 }
 
 module.exports = UpdatePlan;

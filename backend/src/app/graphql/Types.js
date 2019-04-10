@@ -5,13 +5,15 @@ const { Team } = require('./teams');
 const { Transaction } = require('./transactions');
 const { User } = require('./users');
 const { Payment } = require('./payments');
+const { Plan } = require('./plans');
 
 module.exports = {
-    Account,
-    Category,
-    Currency,
-    Team,
-    Transaction,
-    User,
-    Payment,
+  Account,
+  Category,
+  Currency,
+  Team,
+  Transaction,
+  User,
+  Payment,
+  Plan,
 };

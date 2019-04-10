@@ -9,27 +9,27 @@ const user = require('./user');
 const plan = require('./plan');
 
 const modules = [
-    account,
-    category,
-    currency,
-    graphql,
-    payment,
-    team,
-    transaction,
-    user,
-    plan,
+  account,
+  category,
+  currency,
+  graphql,
+  payment,
+  team,
+  transaction,
+  user,
+  plan,
 ];
 
 const execute = action => container => (moduleFactory = {}) => {
-    if (typeof moduleFactory[action] === 'function') {
-        moduleFactory[action](container);
-    }
+  if (typeof moduleFactory[action] === 'function') {
+    moduleFactory[action](container);
+  }
 };
 
 const register = execute('register');
 const run = execute('run');
 
-module.exports = container => {
-    modules.forEach(register(container));
-    modules.forEach(run(container));
+module.exports = (container) => {
+  modules.forEach(register(container));
+  modules.forEach(run(container));
 };
