@@ -11,7 +11,7 @@ module.exports = ({
   Plans,
   auth,
 }) => ({
-  transactions: {
+  plans: {
     type: new GraphQLObjectType({
       name: 'PlanMutation',
       description: 'Plan mutation schema',

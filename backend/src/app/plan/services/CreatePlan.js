@@ -9,14 +9,14 @@ class CreatePlan extends Create {
     date,
   }) {
     super(PlanModel);
-    this.transaction = db.transaction;
+    this.db = db.db;
     this.accounts = Accounts;
     this.date = date;
   }
 
   async execute({ args, ctx: { user } }) {
     try {
-      return await this.transaction(async (transaction) => {
+      return await this.db.transaction(async (transaction) => {
         const { teamId } = user;
         const {
           currencyId,
@@ -25,7 +25,7 @@ class CreatePlan extends Create {
           endDate,
           targetAmount,
         } = args;
-        const periodInDays = this.date.differenceInCalendarDays(startDate, endDate);
+        const periodInDays = this.date.differenceInCalendarDays(endDate, startDate);
         const plan = await this.model.create({
           name,
           startDate,
@@ -34,14 +34,17 @@ class CreatePlan extends Create {
           dailyAmount: Math.round(targetAmount / periodInDays),
           teamId,
         }, { transaction });
-        const account = await this.accounts.create({
-          name: `1 ${name}`,
-          type: 'S',
-          currencyId,
-          balance: 0,
-          teamId,
+        const account = await this.accounts.create.execute({
+          args: {
+            name: `1 ${name}`,
+            type: 'S',
+            currencyId,
+            balance: 0,
+            teamId,
+          },
+          ctx: { user },
         });
-        plan.addAccount(account);
+        plan.addAccounts(account);
         return plan;
       });
     } catch (error) {

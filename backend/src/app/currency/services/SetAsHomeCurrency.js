@@ -1,8 +1,7 @@
 class SetAsHomeCurrency {
-  
   constructor({ CurrencyModel, db }) {
     this.model = CurrencyModel;
-    this.db = db;
+    this.db = db.db;
   }
 
   async execute({ args: { id } }) {
