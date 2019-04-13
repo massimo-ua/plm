@@ -13,14 +13,12 @@ const {
 const config = require('../../config');
 const utils = require('./utils');
 const Auth = require('./auth');
-const date = require('./date');
 
 container.register('config', config);
 container.register('crypto', crypto);
 container.register('notFoundHandler', notFoundHandler);
 container.register('utils', utils);
 container.register('auth', Auth);
-container.register('date', date);
 container.register('errorHandler', ErrorHandler, ['logger']);
 container.register('logger', logger, ['config']);
 container.register('jwt', jwt, ['config']);

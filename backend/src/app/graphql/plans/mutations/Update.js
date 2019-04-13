@@ -13,24 +13,24 @@ module.exports = (Plan, resolve) => ({
   create: {
     type: Plan,
     args: {
-      currencyId: {
+      id: {
         type: GraphQLNonNull(GraphQLID),
-        description: 'Plan account id',
+        description: 'Plan id',
       },
       name: {
-        type: GraphQLNonNull(GraphQLString),
+        type: GraphQLString,
         description: 'Plan name',
       },
       startDate: {
-        type: GraphQLNonNull(GraphQLDate),
+        type: GraphQLDate,
         description: 'Plan start date',
       },
       endDate: {
-        type: GraphQLNonNull(GraphQLDate),
+        type: GraphQLDate,
         description: 'Plan end date',
       },
       targetAmount: {
-        type: GraphQLNonNull(GraphQLInt),
+        type: GraphQLInt,
         description: 'Plan target amount',
       },
     },

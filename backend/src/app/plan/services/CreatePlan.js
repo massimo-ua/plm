@@ -1,17 +1,16 @@
 /* eslint-disable import/no-unresolved */
 const { Create } = require('@core/services');
+const { planDailyTarget } = require('../helpers');
 
 class CreatePlan extends Create {
   constructor({
     PlanModel,
     Accounts,
     db,
-    date,
   }) {
     super(PlanModel);
     this.db = db.db;
     this.accounts = Accounts;
-    this.date = date;
   }
 
   async execute({ args, ctx: { user } }) {
@@ -25,13 +24,12 @@ class CreatePlan extends Create {
           endDate,
           targetAmount,
         } = args;
-        const periodInDays = this.date.differenceInCalendarDays(endDate, startDate);
         const plan = await this.model.create({
           name,
           startDate,
           endDate,
           targetAmount,
-          dailyAmount: Math.round(targetAmount / periodInDays),
+          dailyAmount: planDailyTarget(startDate, endDate, targetAmount),
           teamId,
         }, { transaction });
         const account = await this.accounts.create.execute({
