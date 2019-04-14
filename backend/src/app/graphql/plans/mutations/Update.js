@@ -10,7 +10,7 @@ const {
 } = require('graphql-iso-date');
 
 module.exports = (Plan, resolve) => ({
-  create: {
+  update: {
     type: Plan,
     args: {
       id: {

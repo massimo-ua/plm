@@ -1,6 +1,7 @@
 const {
   GraphQLID,
   GraphQLInt,
+  GraphQLString,
   GraphQLObjectType,
 } = require('graphql');
 
@@ -23,6 +24,10 @@ const createPlanType = ({
     id: {
       type: GraphQLID,
       description: 'Plan id',
+    },
+    name: {
+      type: GraphQLString,
+      description: 'Plan name',
     },
     startDate: {
       type: GraphQLDate,
