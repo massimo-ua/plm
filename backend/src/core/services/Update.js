@@ -4,13 +4,14 @@ class Update {
     this.execute = this.execute.bind(this);
   }
 
-  async execute({ args: { id, ...body }, ctx: { user } }) {
+  async execute({ args: { id, ...body }, ctx: { user }, options = {} }) {
     const { teamId } = user;
     const record = await this.model.findOne({
       where: {
         id,
         teamId,
       },
+      ...options,
     });
     if (record) {
       Object.assign(record, body);

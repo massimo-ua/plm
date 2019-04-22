@@ -2,9 +2,9 @@
 const { FindOne } = require('@core/services');
 
 class FindOneTransaction extends FindOne {
-    constructor({ TransactionModel }) {
-        super(TransactionModel);
-    }
+  constructor({ TransactionModel }) {
+    super(TransactionModel);
+  }
 }
 
 module.exports = FindOneTransaction;

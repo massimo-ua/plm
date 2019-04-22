@@ -2,9 +2,9 @@
 const { Create } = require('@core/services');
 
 class CreatePayment extends Create {
-    constructor({ PaymentModel }) {
-        super(PaymentModel);
-    }
+  constructor({ PaymentModel }) {
+    super(PaymentModel);
+  }
 }
 
 module.exports = CreatePayment;

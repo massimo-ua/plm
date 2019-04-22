@@ -2,9 +2,9 @@
 const { Update } = require('@core/services');
 
 class UpdateTransaction extends Update {
-    constructor({ TransactionModel }) {
-        super(TransactionModel);
-    }
+  constructor({ TransactionModel }) {
+    super(TransactionModel);
+  }
 }
 
 module.exports = UpdateTransaction;
