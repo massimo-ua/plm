@@ -1,24 +1,15 @@
 const {
   GraphQLNonNull,
-  GraphQLInt,
   GraphQLID,
 } = require('graphql');
 
 module.exports = (Payment, resolve) => ({
-  update: {
+  rollback: {
     type: Payment,
     args: {
       id: {
         type: GraphQLNonNull(GraphQLID),
         description: 'Payment id',
-      },
-      categoryId: {
-        type: GraphQLID,
-        description: 'Payment category id',
-      },
-      amount: {
-        type: GraphQLInt,
-        description: 'Payment amount',
       },
     },
     resolve,

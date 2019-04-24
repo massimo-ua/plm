@@ -3,6 +3,7 @@ const {
 } = require('graphql');
 const {
   Create,
+  Rollback,
 } = require('./mutations');
 const { Resolver } = require('../helpers');
 
@@ -20,6 +21,10 @@ module.exports = ({
           Transaction,
           resolve: Resolver().middleware(auth.loggedIn).resolve(Transactions.create),
         }),
+        ...Rollback(
+          Transaction,
+          Resolver().middleware(auth.loggedIn).resolve(Transactions.rollback),
+        ),
       },
     }),
     resolve: () => true,

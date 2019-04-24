@@ -7,7 +7,7 @@ const FindOneTransaction = require('./FindOneTransaction');
 module.exports = container => ({
   create: new CreateTransaction(container),
   update: new UpdateTransaction(container),
-  remove: new RollbackTransaction(container),
+  rollback: new RollbackTransaction(container),
   find: new FindTransaction(container),
   findOne: new FindOneTransaction(container),
 });
