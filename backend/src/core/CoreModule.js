@@ -1,3 +1,4 @@
+const Events = require('./events');
 const container = require('./container');
 const logger = require('./logger');
 const SequelizeAdapter = require('./database');
@@ -26,5 +27,6 @@ container.register('httpRequestsLogger', HttpRequestsLogger, ['logger']);
 container.register('db', SequelizeAdapter, ['config', 'logger']);
 container.register('router', Router, ['httpRequestsLogger', 'errorHandler', 'notFoundHandler', 'logger']);
 container.register('server', AppHttpServer, ['config', 'router', 'logger']);
+container.register('events', Events);
 
 module.exports = container;

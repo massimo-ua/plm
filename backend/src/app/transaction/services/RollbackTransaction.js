@@ -2,9 +2,11 @@ class RollbackTransaction {
   constructor({
     TransactionModel,
     logger,
+    events,
   }) {
     this.model = TransactionModel;
     this.logger = logger;
+    this.events = events;
   }
 
   async execute({ args: { id }, ctx: { user } }) {
@@ -16,6 +18,7 @@ class RollbackTransaction {
       }
       Object.assign(transaction, { deletedAt: new Date() });
       await transaction.save();
+      this.events.emit('TRANSACTION_ROLLEDBACK', transaction);
       return transaction;
     } catch (error) {
       this.logger.error(error);
