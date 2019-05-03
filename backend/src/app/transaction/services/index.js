@@ -3,6 +3,7 @@ const UpdateTransaction = require('./UpdateTransaction');
 const RollbackTransaction = require('./RollbackTransaction');
 const FindTransaction = require('./FindTransaction');
 const FindOneTransaction = require('./FindOneTransaction');
+const FindOneWithRolledbackTransaction = require('./FindOneWithRolledbackTransaction');
 
 module.exports = container => ({
   create: new CreateTransaction(container),
@@ -10,4 +11,5 @@ module.exports = container => ({
   rollback: new RollbackTransaction(container),
   find: new FindTransaction(container),
   findOne: new FindOneTransaction(container),
+  findOneWithRolledback: new FindOneWithRolledbackTransaction(container),
 });

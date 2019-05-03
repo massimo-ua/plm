@@ -21,12 +21,10 @@ class RollbackPayment {
         if (!payment) {
           throw new Error('Record not found');
         }
-        const transaction = await this.transactions.findOne.execute({
-          options: {
-            where: { id: payment.transactionId },
-            transaction: t,
-          },
+        const transaction = await this.transactions.findOneWithRolledback.execute({
+          args: { id: payment.transactionId },
           ctx: { user },
+          options: { transaction: t },
         });
         const { accountId, type } = transaction;
         const factor = type === 'P' ? -1 : 1;
