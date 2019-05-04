@@ -1,5 +1,5 @@
-const User = require('./user.model');
+const User = require ('./user.model');
 
 module.exports = container => {
-   return container.db.registerModel(User(container));
-}
+  return container.db.registerModel (User (container));
+};

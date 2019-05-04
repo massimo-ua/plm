@@ -1,2 +1,3 @@
-const Container = require('./container');
-module.exports = new Container();
+const Container = require ('./container');
+
+module.exports = new Container ();

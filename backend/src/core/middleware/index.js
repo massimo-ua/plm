@@ -1,4 +1,4 @@
-const HttpRequestsLogger = require('./httpRequestsLogger');
+const HttpRequestsLogger = require ('./httpRequestsLogger');
 
 module.exports = {
   HttpRequestsLogger,

@@ -1,14 +1,14 @@
-const modules = require('./modules');
+const modules = require ('./modules');
 
 class Application {
-  constructor(container, loader = modules) {
+  constructor (container, loader = modules) {
     this.server = container.server;
     this.logger = container.logger;
-    loader(container);
+    loader (container);
   }
 
-  async start() {
-    await this.server.start();
+  async start () {
+    await this.server.start ();
   }
 }
 

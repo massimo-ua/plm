@@ -1,7 +1,8 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require ('bcrypt');
 
-const hash = password => bcrypt.hash(password, 10);
-const compare = (password, hashedPassword) => bcrypt.compare(password, hashedPassword);
+const hash = password => bcrypt.hash (password, 10);
+const compare = (password, hashedPassword) =>
+  bcrypt.compare (password, hashedPassword);
 
 module.exports = {
   hash,

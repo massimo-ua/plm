@@ -1,11 +1,11 @@
 class FindOneUser {
-  constructor({ UserModel }) {
+  constructor({UserModel}) {
     this.model = UserModel;
     this.defaultOptions = {};
   }
 
-  execute({ args = {}, options = {} }) {
-    return this.model.findByPk(args.id, { ...this.defaultOptions, ...options });
+  execute({args = {}, options = {}}) {
+    return this.model.findByPk (args.id, {...this.defaultOptions, ...options});
   }
 }
 

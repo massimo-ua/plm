@@ -1,19 +1,19 @@
-const Sequelize = require('sequelize');
+const Sequelize = require ('sequelize');
 
 class SequelizeAdapter {
-  constructor({ config, logger }) {
+  constructor({config, logger}) {
     this.logger = logger;
-    const { db } = config;
+    const {db} = config;
     if (db) {
-      this.db = new Sequelize(db);
+      this.db = new Sequelize (db);
       this.Op = Sequelize.Op;
     } else {
-      logger.info('Database configuration not found, disabling database.');
+      logger.info ('Database configuration not found, disabling database.');
     }
   }
 
-  registerModel(creatorFn) {
-    return creatorFn(this.db, Sequelize);
+  registerModel (creatorFn) {
+    return creatorFn (this.db, Sequelize);
   }
 }
 module.exports = SequelizeAdapter;

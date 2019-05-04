@@ -1,14 +1,12 @@
 class Create {
-  constructor(model) {
+  constructor (model) {
     this.model = model;
-    this.execute = this.execute.bind(this);
+    this.execute = this.execute.bind (this);
   }
 
-  execute({ args, ctx: { user } }) {
-    const { teamId } = user;
-    return this.model.create(
-      { ...args, teamId },
-    );
+  execute({args, ctx: {user}}) {
+    const {teamId} = user;
+    return this.model.create ({...args, teamId});
   }
 }
 

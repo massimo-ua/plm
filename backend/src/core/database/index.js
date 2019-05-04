@@ -1,1 +1,1 @@
-module.exports = require('./SequelizeAdapter');
+module.exports = require ('./SequelizeAdapter');

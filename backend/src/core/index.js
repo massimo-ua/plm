@@ -1,1 +1,1 @@
-module.exports = require('./CoreModule');
+module.exports = require ('./CoreModule');

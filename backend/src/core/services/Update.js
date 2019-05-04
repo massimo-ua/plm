@@ -1,12 +1,12 @@
 class Update {
-  constructor(model) {
+  constructor (model) {
     this.model = model;
-    this.execute = this.execute.bind(this);
+    this.execute = this.execute.bind (this);
   }
 
-  async execute({ args: { id, ...body }, ctx: { user }, options = {} }) {
-    const { teamId } = user;
-    const record = await this.model.findOne({
+  async execute({args: {id, ...body}, ctx: {user}, options = {}}) {
+    const {teamId} = user;
+    const record = await this.model.findOne ({
       where: {
         id,
         teamId,
@@ -14,11 +14,11 @@ class Update {
       ...options,
     });
     if (record) {
-      Object.assign(record, body);
-      await record.save();
+      Object.assign (record, body);
+      await record.save ();
       return record;
     }
-    throw new Error('Record not found');
+    throw new Error ('Record not found');
   }
 }
 

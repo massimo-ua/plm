@@ -1,11 +1,11 @@
 class Profile {
-  constructor({ UserModel }) {
+  constructor({UserModel}) {
     this.model = UserModel;
-    this.execute = this.execute.bind(this);
+    this.execute = this.execute.bind (this);
   }
 
-  execute({ ctx }) {
-    return this.model.findByPk(ctx.user.id);
+  execute({ctx}) {
+    return this.model.findByPk (ctx.user.id);
   }
 }
 

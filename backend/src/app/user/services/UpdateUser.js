@@ -1,17 +1,17 @@
 class Update {
-  constructor({ UserModel }) {
+  constructor({UserModel}) {
     this.model = UserModel;
-    this.execute = this.execute.bind(this);
+    this.execute = this.execute.bind (this);
   }
 
-  async execute({ args: { id, ...body } }) {
-    const user = await this.model.unscoped().findByPk(id);
+  async execute({args: {id, ...body}}) {
+    const user = await this.model.unscoped ().findByPk (id);
     if (user) {
-      Object.assign(user, body);
-      await user.save();
+      Object.assign (user, body);
+      await user.save ();
       return user;
     }
-    throw new Error('User not found');
+    throw new Error ('User not found');
   }
 }
 
