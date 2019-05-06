@@ -14,6 +14,7 @@ const {
 const config = require ('../../config');
 const utils = require ('./utils');
 const Auth = require ('./auth');
+const CurrencyExchange = require ('./exchange-rater');
 
 container.register ('config', config);
 container.register ('crypto', crypto);
@@ -33,5 +34,6 @@ container.register ('router', Router, [
 ]);
 container.register ('server', AppHttpServer, ['config', 'router', 'logger']);
 container.register ('events', Events);
+container.register ('CurrencyExchange', CurrencyExchange, ['config']);
 
 module.exports = container;
