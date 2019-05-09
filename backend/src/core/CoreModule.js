@@ -36,6 +36,6 @@ container.register ('router', Router, [
 container.register ('server', AppHttpServer, ['config', 'router', 'logger']);
 container.register ('events', Events);
 container.register ('CurrencyExchange', CurrencyExchange, ['config']);
-container.register ('scheduler', scheduler);
+container.register ('scheduler', scheduler, ['logger']);
 
 module.exports = container;

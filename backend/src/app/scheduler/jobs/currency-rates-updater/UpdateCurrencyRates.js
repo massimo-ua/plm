@@ -6,9 +6,9 @@ function UpdateCurrencyRatesFactory({CurrencyExchange, Currencies, logger}) {
       const receivedRates = await CurrencyExchange.getCurrentRates ();
       const rates = new Map ();
       const mapper = mapperFactory (rates);
-      receivedRates.forEach (mapper);
+      receivedRates.forEach(mapper);
 
-      const currencies = await Currencies.find.execute ();
+      const currencies = await Currencies.find.execute ({});
       const promises = currencies.reduce ((acc, currency) => {
         if (rates.has (currency.shortName)) {
           const {rate} = rates.get (currency.shortName);
@@ -31,5 +31,5 @@ function UpdateCurrencyRatesFactory({CurrencyExchange, Currencies, logger}) {
     }
   };
 }
-
 module.exports = UpdateCurrencyRatesFactory;
+

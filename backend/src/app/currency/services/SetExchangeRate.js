@@ -1,10 +1,10 @@
 class SetExchangeRate {
-  constructor({ CurrencyRateModel }) {
+  constructor({CurrencyRateModel}) {
     this.model = CurrencyRateModel;
   }
 
-  async execute({ args: { currencyId, effectiveDate, exchangeRate } }) {
-    return this.model.create({
+  execute({args: {currencyId, effectiveDate, exchangeRate}}) {
+    return this.model.create ({
       currencyId,
       effectiveDate,
       exchangeRate,

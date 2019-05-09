@@ -12,7 +12,7 @@ const PbExchangeRatesFactory = ({config}) => {
               data += chunk;
             });
             response.on ('end', () => {
-              resolve (data);
+              resolve (JSON.parse(data));
             });
           })
           .on ('error', error => {
