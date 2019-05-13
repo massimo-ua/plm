@@ -1,1 +1,1 @@
-module.exports = require('./GraphQLModule');
+module.exports = require ('./GraphQLModule');

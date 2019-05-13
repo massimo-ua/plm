@@ -6,14 +6,16 @@ const categoryMapper = require('./categoryMapper');
 const transactionMapper = require('./transactionMapper');
 const transactionPaymentsMapper = require('./transactionPaymentsMapper');
 const transactionRateMapper = require('./transactionRateMapper');
+const selfMapper = require('./selfMapper');
 
 module.exports = {
+  selfMapper,
+  teamMapper,
   mirrorMapper,
   accountMapper,
-  teamMapper,
   currencyMapper,
   categoryMapper,
   transactionMapper,
-  transactionPaymentsMapper,
   transactionRateMapper,
+  transactionPaymentsMapper,
 };

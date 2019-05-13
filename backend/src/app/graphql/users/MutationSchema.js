@@ -4,17 +4,12 @@ const {
   GraphQLString,
   GraphQLBoolean,
   GraphQLObjectType,
-} = require('graphql');
-const { Resolver } = require('../helpers');
-const User = require('./User');
+} = require ('graphql');
+const {Resolver} = require ('../helpers');
 
-module.exports = ({
-  User,
-  Users,
-  auth,
-}) => ({
+module.exports = ({User, Users, auth}) => ({
   users: {
-    type: new GraphQLObjectType({
+    type: new GraphQLObjectType ({
       name: 'UserMutation',
       description: 'User mutation schema',
       fields: {
@@ -22,39 +17,45 @@ module.exports = ({
           type: GraphQLString,
           args: {
             username: {
-              type: GraphQLNonNull(GraphQLString),
+              type: GraphQLNonNull (GraphQLString),
               description: 'User display name',
             },
             login: {
-              type: GraphQLNonNull(GraphQLString),
+              type: GraphQLNonNull (GraphQLString),
               description: 'User login name',
             },
             password: {
-              type: GraphQLNonNull(GraphQLString),
+              type: GraphQLNonNull (GraphQLString),
               description: 'User password',
             },
           },
-          resolve: Resolver().context({ isLoginRequired: false }).middleware(auth.loggedIn).resolve(Users.signup),
+          resolve: Resolver ()
+            .context ({isLoginRequired: false})
+            .middleware (auth.loggedIn)
+            .resolve (Users.signup),
         },
         login: {
           type: GraphQLString,
           args: {
             login: {
-              type: GraphQLNonNull(GraphQLString),
+              type: GraphQLNonNull (GraphQLString),
               description: 'User login name',
             },
             password: {
-              type: GraphQLNonNull(GraphQLString),
+              type: GraphQLNonNull (GraphQLString),
               description: 'User password',
             },
           },
-          resolve: Resolver().context({ isLoginRequired: false }).middleware(auth.loggedIn).resolve(Users.login),
+          resolve: Resolver ()
+            .context ({isLoginRequired: false})
+            .middleware (auth.loggedIn)
+            .resolve (Users.login),
         },
         update: {
           type: User,
           args: {
             id: {
-              type: GraphQLNonNull(GraphQLID),
+              type: GraphQLNonNull (GraphQLID),
               description: 'User id',
             },
             name: {
@@ -78,7 +79,9 @@ module.exports = ({
               description: 'is User admin?',
             },
           },
-          resolve: Resolver().middleware(auth.loggedIn, auth.isAdmin).resolve(Users.update),
+          resolve: Resolver ()
+            .middleware (auth.loggedIn, auth.isAdmin)
+            .resolve (Users.update),
         },
         me: {
           type: User,
@@ -92,7 +95,9 @@ module.exports = ({
               description: 'User password',
             },
           },
-          resolve: Resolver().middleware(auth.loggedIn).resolve(Users.updateProfile),
+          resolve: Resolver ()
+            .middleware (auth.loggedIn)
+            .resolve (Users.updateProfile),
         },
       },
     }),

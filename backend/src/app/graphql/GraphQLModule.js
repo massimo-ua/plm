@@ -1,8 +1,8 @@
-const graphqlHTTP = require('express-graphql');
-const { GraphQLSchema } = require('graphql');
-const Query = require('./Query');
-const Mutation = require('./Mutation');
-const { auth } = require('./middleware');
+const graphqlHTTP = require ('express-graphql');
+const {GraphQLSchema} = require ('graphql');
+const Query = require ('./Query');
+const Mutation = require ('./Mutation');
+const {auth} = require ('./middleware');
 const {
   Account,
   Category,
@@ -12,16 +12,20 @@ const {
   User,
   Payment,
   Plan,
-} = require('./Types');
-
+} = require ('./Types');
 
 module.exports = {
-  register(container) {
-    container.register('Account', Account, ['Team', 'Currency', 'Teams', 'Currencies']);
-    container.register('Category', Category, ['Team', 'Teams']);
-    container.register('Currency', Currency);
-    container.register('Team', Team);
-    container.register('Transaction', Transaction, [
+  register (container) {
+    container.register ('Account', Account, [
+      'Team',
+      'Currency',
+      'Teams',
+      'Currencies',
+    ]);
+    container.register ('Category', Category, ['Team', 'Teams']);
+    container.register ('Currency', Currency);
+    container.register ('Team', Team);
+    container.register ('Transaction', Transaction, [
       'Currencies',
       'Transactions',
       'Teams',
@@ -32,22 +36,30 @@ module.exports = {
       'Payment',
       'Payments',
     ]);
-    container.register('User', User, ['Team', 'Teams']);
-    container.register('Payment', Payment, ['Categories', 'Category', 'Teams', 'Team']);
-    container.register('Plan', Plan, ['Team', 'Teams']);
+    container.register ('User', User, ['Team', 'Teams']);
+    container.register ('Payment', Payment, [
+      'Categories',
+      'Category',
+      'Teams',
+      'Team',
+    ]);
+    container.register ('Plan', Plan, ['Team', 'Teams', 'Plans']);
   },
-  run(container) {
-    const { router } = container;
-    const moduleRouter = router.create();
-    moduleRouter.use(auth(container));
-    moduleRouter.use('/', graphqlHTTP({
-      schema: new GraphQLSchema({
-        query: Query(container),
-        mutation: Mutation(container),
-      }),
-      graphiql: true,
-    }));
-    router.attach({
+  run (container) {
+    const {router} = container;
+    const moduleRouter = router.create ();
+    moduleRouter.use (auth (container));
+    moduleRouter.use (
+      '/',
+      graphqlHTTP ({
+        schema: new GraphQLSchema ({
+          query: Query (container),
+          mutation: Mutation (container),
+        }),
+        graphiql: true,
+      })
+    );
+    router.attach ({
       version: 'v1',
       path: 'graphql',
       subRouter: moduleRouter,
