@@ -4,6 +4,7 @@ const DeletePlan = require ('./DeletePlan');
 const FindPlan = require ('./FindPlan');
 const FindOnePlan = require ('./FindOnePlan');
 const ExpectedAmount = require ('./ExpectedAmount');
+const FindRelatedAccounts = require('./FindRelatedAccounts');
 
 module.exports = container => ({
   create: new CreatePlan (container),
@@ -12,4 +13,5 @@ module.exports = container => ({
   find: new FindPlan (container),
   findOne: new FindOnePlan (container),
   expectedAmount: new ExpectedAmount (container),
+  findRelatedAccounts: new FindRelatedAccounts(container),
 });

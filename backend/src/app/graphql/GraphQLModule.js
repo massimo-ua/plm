@@ -43,7 +43,7 @@ module.exports = {
       'Teams',
       'Team',
     ]);
-    container.register ('Plan', Plan, ['Team', 'Teams', 'Plans']);
+    container.register ('Plan', Plan, ['Team', 'Teams', 'Plans', 'Account']);
   },
   run (container) {
     const {router} = container;

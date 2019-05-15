@@ -1,9 +1,9 @@
 /* eslint-disable import/no-unresolved */
-const { Find } = require('@core/services');
+const {Find} = require ('@core/services');
 
 class FindTransaction extends Find {
-  constructor({ TransactionModel }) {
-    super(TransactionModel);
+  constructor({TransactionModel}) {
+    super (TransactionModel);
   }
 }
 

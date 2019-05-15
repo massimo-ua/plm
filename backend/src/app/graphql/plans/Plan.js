@@ -1,6 +1,7 @@
 const {
   GraphQLID,
   GraphQLInt,
+  GraphQLList,
   GraphQLString,
   GraphQLObjectType,
 } = require ('graphql');
@@ -10,7 +11,7 @@ const {GraphQLDate} = require ('graphql-iso-date');
 const {Resolver} = require ('../helpers');
 const {teamMapper, selfMapper} = require ('../helpers/mappers');
 
-const createPlanType = ({Teams, Team, Plans}) =>
+const createPlanType = ({Teams, Team, Plans, Account}) =>
   new GraphQLObjectType ({
     name: 'Plan',
     description: 'Plan schema',
@@ -48,6 +49,13 @@ const createPlanType = ({Teams, Team, Plans}) =>
         type: GraphQLInt,
         description: 'Expected current plan amount',
         resolve: Resolver ().mapper (selfMapper).resolve (Plans.expectedAmount),
+      },
+      accounts: {
+        type: GraphQLList (Account),
+        description: 'Related accounts list',
+        resolve: Resolver ()
+          .mapper (selfMapper)
+          .resolve (Plans.findRelatedAccounts),
       },
     },
   });

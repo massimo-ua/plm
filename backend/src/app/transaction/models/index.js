@@ -1,5 +1,5 @@
-const Transaction = require('./transaction.model');
+const Transaction = require ('./transaction.model');
 
 module.exports = container => {
-  return container.db.registerModel(Transaction(container));
+  return container.db.registerModel (Transaction (container));
 };

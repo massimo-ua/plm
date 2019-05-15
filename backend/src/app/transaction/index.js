@@ -1,1 +1,1 @@
-module.exports = require('./TransactionModule');
+module.exports = require ('./TransactionModule');

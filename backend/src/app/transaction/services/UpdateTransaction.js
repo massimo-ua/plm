@@ -1,9 +1,9 @@
 /* eslint-disable import/no-unresolved */
-const { Update } = require('@core/services');
+const {Update} = require ('@core/services');
 
 class UpdateTransaction extends Update {
-  constructor({ TransactionModel }) {
-    super(TransactionModel);
+  constructor({TransactionModel}) {
+    super (TransactionModel);
   }
 }
 
