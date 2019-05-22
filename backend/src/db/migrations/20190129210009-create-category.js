@@ -13,7 +13,7 @@ module.exports = {
       unique: true,
     },
     type: {
-      type: Sequelize.ENUM('P', 'L'),
+      type: Sequelize.ENUM('P', 'L', 'T'),
       allowNull: false,
     },
     isHidden: {

@@ -10,7 +10,7 @@ module.exports = {
     },
     categoryId: {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     amount: {
       type: Sequelize.INTEGER,

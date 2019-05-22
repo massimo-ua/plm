@@ -5,7 +5,7 @@ const eventHandlers = require('./handlers');
 module.exports = {
   register(container) {
     container.register('PaymentModel', modelsCreator, ['db', 'CategoryModel', 'TransactionModel', 'TeamModel']);
-    container.register('Payments', serviceCreator, ['PaymentModel', 'Transactions', 'Accounts', 'db', 'logger']);
+    container.register('Payments', serviceCreator, ['PaymentModel', 'logger']);
   },
   run(container) {
     eventHandlers(container);

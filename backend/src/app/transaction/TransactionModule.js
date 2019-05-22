@@ -12,6 +12,9 @@ module.exports = {
       'TransactionModel',
       'logger',
       'events',
+      'Payments',
+      'Accounts',
+      'db',
     ]);
   },
 };
