@@ -1,9 +1,10 @@
 const {
-  GraphQLObjectType,
-  GraphQLString,
   GraphQLID,
+  GraphQLInt,
   GraphQLList,
   GraphQLFloat,
+  GraphQLString,
+  GraphQLObjectType,
 } = require('graphql');
 
 const {
@@ -13,14 +14,12 @@ const {
 const { Resolver } = require('../helpers');
 const {
   accountMapper,
-  mirrorMapper,
   teamMapper,
   transactionPaymentsMapper,
   transactionRateMapper,
 } = require('../helpers/mappers');
 
 const createTransactionType = ({
-  Transactions,
   Currencies,
   Teams,
   Accounts,
@@ -37,30 +36,28 @@ const createTransactionType = ({
         type: GraphQLID,
         description: 'Transaction id',
       },
-      account: {
+      srcAccount: {
         type: Account,
-        description: 'Account that Transaction belongs to',
+        description: 'Source account that assets was debit from',
+        resolve: Resolver().mapper(accountMapper).resolve(Accounts.findOne),
+      },
+      dstAccount: {
+        type: Account,
+        description: 'Destination account that assets was credit to',
         resolve: Resolver().mapper(accountMapper).resolve(Accounts.findOne),
       },
       actualDate: {
         type: GraphQLDate,
         description: 'Transaction actual date',
       },
-      type: {
-        type: GraphQLString,
-        description: 'Transaction type either D(Debit) or C(Credit)',
-      },
       team: {
         type: Team,
         description: 'Team that Transaction belongs to',
         resolve: Resolver().mapper(teamMapper).resolve(Teams.findOne),
       },
-      mirror: {
-        get type() {
-          return Transaction;
-        },
-        description: 'Currency that Transaction belongs to',
-        resolve: Resolver().mapper(mirrorMapper).resolve(Transactions.findOne),
+      total: {
+        type: GraphQLInt,
+        description: 'Total amount of Transaction',
       },
       notes: {
         type: GraphQLString,

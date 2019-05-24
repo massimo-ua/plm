@@ -7,21 +7,23 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    accountId: {
+    srcAccountId: {
       type: Sequelize.INTEGER,
       index: true,
-      allowNull: false,
+    },
+    dstAccountId: {
+      type: Sequelize.INTEGER,
+      index: true,
     },
     actualDate: {
       type: Sequelize.DATEONLY,
       allowNull: false,
+      index: true,
     },
-    type: {
-      type: Sequelize.ENUM('P', 'L'),
-      allowNull: false,
-    },
-    mirrorId: {
+    total: {
       type: Sequelize.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
     },
     notes: {
       type: Sequelize.STRING,
@@ -41,11 +43,6 @@ module.exports = {
       allowNull: false,
       type: Sequelize.DATE,
     },
-  }, {
-    indexes: [
-      { fields: ['sourceAccountId'] },
-      { fields: ['actualDate'] },
-    ],
   }),
   down: queryInterface => queryInterface.dropTable('Transactions'),
 };

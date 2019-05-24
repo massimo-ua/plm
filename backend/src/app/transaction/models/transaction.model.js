@@ -2,11 +2,11 @@ module.exports = ({AccountModel, TeamModel}) => (sequelize, DataTypes) => {
   const Transaction = sequelize.define (
     'Transaction',
     {
-      accountId: DataTypes.INTEGER,
+      srcAccountId: DataTypes.INTEGER,
+      dstAccountId: DataTypes.INTEGER,
+      total: DataTypes.INTEGER,
       actualDate: DataTypes.DATEONLY,
-      type: DataTypes.ENUM ('P', 'L'),
       teamId: DataTypes.INTEGER,
-      mirrorId: DataTypes.INTEGER,
       notes: DataTypes.STRING,
       deletedAt: DataTypes.DATE,
     },
@@ -18,12 +18,16 @@ module.exports = ({AccountModel, TeamModel}) => (sequelize, DataTypes) => {
       },
     }
   );
-  Transaction.belongsTo (AccountModel, {as: 'account'});
-  Transaction.belongsTo (TeamModel, {as: 'team'});
-  Transaction.belongsTo (Transaction, {
-    foreignKey: 'mirrorId',
+  Transaction.belongsTo (AccountModel, {
+    foreignKey: 'srcAccountId',
     targetKey: 'id',
-    as: 'mirror',
+    as: 'srcAccount'
   });
+  Transaction.belongsTo (AccountModel, {
+    foreignKey: 'dstAccountId',
+    targetKey: 'id',
+    as: 'dstAccount'
+  });
+  Transaction.belongsTo (TeamModel, {as: 'team'});
   return Transaction;
 };
