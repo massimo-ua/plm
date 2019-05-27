@@ -4,7 +4,6 @@ const {CategoryMutation} = require ('./categories');
 const {CurrencyMutation} = require ('./currencies');
 const {AccountMutation} = require ('./accounts');
 const {TransactionMutation} = require ('./transactions');
-const {PaymentMutation} = require ('./payments');
 const {PlanMutation} = require ('./plans');
 
 module.exports = container =>
@@ -16,7 +15,6 @@ module.exports = container =>
       ...CurrencyMutation (container),
       ...AccountMutation (container),
       ...TransactionMutation (container),
-      ...PaymentMutation (container),
       ...PlanMutation (container),
     },
   });
