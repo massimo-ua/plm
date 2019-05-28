@@ -1,16 +1,29 @@
 const {
   GraphQLID,
   GraphQLInt,
+  GraphQLList,
   GraphQLString,
   GraphQLNonNull,
   GraphQLInputObjectType,
-} = require('graphql');
+} = require ('graphql');
 
-const {
-  GraphQLDate,
-} = require('graphql-iso-date');
+const {GraphQLDate} = require ('graphql-iso-date');
 
-const TransactionInput = new GraphQLInputObjectType({
+const TransactionPaymentInput = new GraphQLInputObjectType ({
+  name: 'TransactionPaymentInput',
+  fields: {
+    categoryId: {
+      type: GraphQLNonNull (GraphQLID),
+      description: "Payment's category id",
+    },
+    amount: {
+      type: GraphQLNonNull (GraphQLInt),
+      description: 'Payment amount',
+    },
+  },
+});
+
+const TransactionInput = new GraphQLInputObjectType ({
   name: 'TransactionInput',
   fields: {
     srcAccountId: {
@@ -21,29 +34,31 @@ const TransactionInput = new GraphQLInputObjectType({
       type: GraphQLID,
       description: 'Destination account id',
     },
-    total: {
-      type: GraphQLInt,
-      description: 'Total transaction amount'
-    },
     actualDate: {
-      type: GraphQLNonNull(GraphQLDate),
+      type: GraphQLNonNull (GraphQLDate),
       description: 'Transaction date',
     },
     notes: {
       type: GraphQLString,
       description: 'Transaction notes',
     },
+    payments: {
+      type: GraphQLNonNull (
+        GraphQLList (GraphQLNonNull (TransactionPaymentInput))
+      ),
+      description: 'Transaction payments',
+    },
   },
   description: 'Create transaction input',
 });
 
-module.exports = ({ Transaction, resolve }) => ({
+module.exports = ({Transaction, resolve}) => ({
   create: {
     type: Transaction,
     args: {
       transaction: {
-        type: TransactionInput
-      }
+        type: TransactionInput,
+      },
     },
     resolve,
   },

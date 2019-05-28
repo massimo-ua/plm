@@ -4,7 +4,6 @@ module.exports = ({AccountModel, TeamModel}) => (sequelize, DataTypes) => {
     {
       srcAccountId: DataTypes.INTEGER,
       dstAccountId: DataTypes.INTEGER,
-      total: DataTypes.INTEGER,
       actualDate: DataTypes.DATEONLY,
       teamId: DataTypes.INTEGER,
       notes: DataTypes.STRING,

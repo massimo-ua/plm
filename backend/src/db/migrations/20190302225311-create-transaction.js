@@ -20,11 +20,6 @@ module.exports = {
       allowNull: false,
       index: true,
     },
-    total: {
-      type: Sequelize.INTEGER,
-      defaultValue: 0,
-      allowNull: false,
-    },
     notes: {
       type: Sequelize.STRING,
     },
