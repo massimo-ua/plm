@@ -1,4 +1,4 @@
-module.exports = ({AccountModel, TeamModel}) => (sequelize, DataTypes) => {
+module.exports = ({AccountModel, TeamModel, PaymentModel}) => (sequelize, DataTypes) => {
   const Transaction = sequelize.define (
     'Transaction',
     {
@@ -27,6 +27,7 @@ module.exports = ({AccountModel, TeamModel}) => (sequelize, DataTypes) => {
     targetKey: 'id',
     as: 'dstAccount'
   });
+  Transaction.hasMany(PaymentModel);
   Transaction.belongsTo (TeamModel, {as: 'team'});
   return Transaction;
 };
