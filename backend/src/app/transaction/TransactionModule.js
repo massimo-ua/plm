@@ -7,6 +7,7 @@ module.exports = {
       'db',
       'AccountModel',
       'TeamModel',
+      'PaymentModel',
     ]);
     container.register ('Transactions', serviceCreator, [
       'TransactionModel',

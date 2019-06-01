@@ -1,4 +1,7 @@
-module.exports = ({AccountModel, TeamModel, PaymentModel}) => (sequelize, DataTypes) => {
+module.exports = ({AccountModel, TeamModel, PaymentModel}) => (
+  sequelize,
+  DataTypes
+) => {
   const Transaction = sequelize.define (
     'Transaction',
     {
@@ -20,14 +23,18 @@ module.exports = ({AccountModel, TeamModel, PaymentModel}) => (sequelize, DataTy
   Transaction.belongsTo (AccountModel, {
     foreignKey: 'srcAccountId',
     targetKey: 'id',
-    as: 'srcAccount'
+    as: 'srcAccount',
   });
   Transaction.belongsTo (AccountModel, {
     foreignKey: 'dstAccountId',
     targetKey: 'id',
-    as: 'dstAccount'
+    as: 'dstAccount',
   });
-  Transaction.hasMany(PaymentModel);
+  Transaction.hasMany (PaymentModel, {
+    foreignKey: 'transactionId',
+    targetKey: 'id',
+    as: 'payments',
+  });
   Transaction.belongsTo (TeamModel, {as: 'team'});
   return Transaction;
 };

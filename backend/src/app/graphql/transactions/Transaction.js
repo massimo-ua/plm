@@ -39,12 +39,12 @@ const createTransactionType = ({
       srcAccount: {
         type: Account,
         description: 'Source account that assets was debit from',
-        resolve: Resolver().mapper(accountMapper).resolve(Accounts.findOne),
+        resolve: Resolver().mapper(accountMapper('srcAccountId')).resolve(Accounts.findOne),
       },
       dstAccount: {
         type: Account,
         description: 'Destination account that assets was credit to',
-        resolve: Resolver().mapper(accountMapper).resolve(Accounts.findOne),
+        resolve: Resolver().mapper(accountMapper('dstAccountId')).resolve(Accounts.findOne),
       },
       actualDate: {
         type: GraphQLDate,

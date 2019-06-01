@@ -56,7 +56,7 @@ module.exports = ({Transaction, resolve}) => ({
   create: {
     type: Transaction,
     args: {
-      transaction: {
+      input: {
         type: TransactionInput,
       },
     },

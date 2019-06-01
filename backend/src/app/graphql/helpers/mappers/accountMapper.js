@@ -1,4 +1,4 @@
-module.exports = (ctx) => {
+module.exports = (targetPropertyName = 'accountId') => ctx => {
   const { parent, args = {} } = ctx;
-  return { ...ctx, args: { ...args, id: parent.accountId } };
+  return { ...ctx, args: { ...args, id: parent[targetPropertyName] } };
 };
