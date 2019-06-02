@@ -7,17 +7,17 @@ class RollbackPayment {
     this.logger = logger;
   }
 
-  async execute({ args: { id }, ctx: { user: teamId } }) {
+  async execute({ args: { id }, ctx: { user: {teamId} = {} }, options = {} }) {
     try {
-        const payment = await this.payments.findOne({ where: { teamId, id }});
+        const payment = await this.payments.findOne({ where: { teamId, id }, ...options });
         if (!payment) {
           throw new Error('Record not found');
         }
         payment.deletedAt = new Date();
-        await payment.save();
+        await payment.save(options);
         return payment;
     } catch (error) {
-      this.logger.error(error);
+      this.logger.error(error.message);
       throw new Error('Operation failed');
     }
   }
