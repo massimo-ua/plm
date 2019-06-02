@@ -19,7 +19,7 @@ class CreateTransaction {
         );
         const promises = payments.map (payment =>
           this.payments.create.execute ({
-            args: { ...payment, transactionId: createdTransaction.id },
+            args: {...payment, transactionId: createdTransaction.id},
             ctx: {user: {teamId}},
             options: {transaction},
           })
