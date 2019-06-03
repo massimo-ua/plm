@@ -17,6 +17,7 @@ const {
   teamMapper,
   transactionPaymentsMapper,
   transactionRateMapper,
+  selfMapper,
 } = require('../helpers/mappers');
 
 const createTransactionType = ({
@@ -58,6 +59,7 @@ const createTransactionType = ({
       total: {
         type: GraphQLInt,
         description: 'Total amount of Transaction',
+        resolve: Resolver().mapper(selfMapper).resolve(Payments.totalAmount),
       },
       notes: {
         type: GraphQLString,
