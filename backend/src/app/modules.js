@@ -9,22 +9,22 @@ const user = require ('./user');
 const plan = require ('./plan');
 const scheduler = require ('./scheduler');
 
-const modules = [
-  account,
-  category,
-  currency,
-  graphql,
-  payment,
-  team,
-  transaction,
-  user,
-  plan,
-  scheduler,
+const equip = container => [
+  account(container),
+  category(container),
+  currency(container),
+  graphql(container),
+  payment(container),
+  team(container),
+  transaction(container),
+  user(container),
+  plan(container),
+  scheduler(container),
 ];
 
-const execute = action => container => (moduleFactory = {}) => {
+const execute = action => (moduleFactory = {}) => {
   if (typeof moduleFactory[action] === 'function') {
-    moduleFactory[action] (container);
+    moduleFactory[action] ();
   }
 };
 
@@ -32,6 +32,7 @@ const register = execute ('register');
 const run = execute ('run');
 
 module.exports = container => {
-  modules.forEach (register (container));
-  modules.forEach (run (container));
+  const modules = equip(container);
+  modules.forEach (register);
+  modules.forEach (run);
 };

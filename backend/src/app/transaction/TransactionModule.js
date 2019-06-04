@@ -1,8 +1,8 @@
 const modelsCreator = require ('./models');
 const serviceCreator = require ('./services');
 
-module.exports = {
-  register (container) {
+module.exports = container => ({
+  register () {
     container.register ('TransactionModel', modelsCreator, [
       'db',
       'AccountModel',
@@ -18,4 +18,4 @@ module.exports = {
       'db',
     ]);
   },
-};
+});

@@ -1,9 +1,17 @@
-const modelsCreator = require('./models');
-const serviceCreator = require('./services');
+const modelsCreator = require ('./models');
+const serviceCreator = require ('./services');
 
-module.exports = {
-  register(container) {
-    container.register('PlanModel', modelsCreator, ['db', 'AccountModel', 'TeamModel']);
-    container.register('Plans', serviceCreator, ['db', 'PlanModel', 'Accounts']);
+module.exports = container => ({
+  register () {
+    container.register ('PlanModel', modelsCreator, [
+      'db',
+      'AccountModel',
+      'TeamModel',
+    ]);
+    container.register ('Plans', serviceCreator, [
+      'db',
+      'PlanModel',
+      'Accounts',
+    ]);
   },
-};
+});

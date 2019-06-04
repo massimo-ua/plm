@@ -14,8 +14,8 @@ const {
   Plan,
 } = require ('./Types');
 
-module.exports = {
-  register (container) {
+module.exports = container => ({
+  register () {
     container.register ('Account', Account, [
       'Team',
       'Currency',
@@ -45,7 +45,7 @@ module.exports = {
     ]);
     container.register ('Plan', Plan, ['Team', 'Teams', 'Plans', 'Account']);
   },
-  run (container) {
+  run () {
     const {router} = container;
     const moduleRouter = router.create ();
     moduleRouter.use (auth (container));
@@ -66,4 +66,4 @@ module.exports = {
       name: 'GraphqlModuleRouter',
     });
   },
-};
+});

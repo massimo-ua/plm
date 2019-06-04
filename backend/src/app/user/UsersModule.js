@@ -2,8 +2,8 @@ const modelsCreator = require ('./models');
 const serviceCreator = require ('./services');
 const {comparePassword} = require ('./helpers');
 
-module.exports = {
-  register (container) {
+module.exports = container => ({
+  register () {
     container.register ('comparePassword', comparePassword);
     container.register ('UserModel', modelsCreator, [
       'db',
@@ -17,4 +17,4 @@ module.exports = {
       'comparePassword',
     ]);
   },
-};
+});

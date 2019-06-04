@@ -1,7 +1,7 @@
-const jobs = require('./jobs');
+const jobs = require ('./jobs');
 
-module.exports = {
-  run(container) {
-      jobs(container);
+module.exports = container => ({
+  run () {
+    jobs (container);
   },
-};
+});
