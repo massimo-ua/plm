@@ -15,6 +15,7 @@ module.exports = container => ({
       'events',
       'Payments',
       'Accounts',
+      'Currencies',
       'db',
     ]);
   },
