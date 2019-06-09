@@ -1,10 +1,9 @@
 class CreateTransaction {
-  constructor({TransactionModel, Payments, Accounts, Currencies, db}) {
+  constructor({TransactionModel, Payments, events, db}) {
     this.transactions = TransactionModel;
     this.payments = Payments;
-    this.accounts = Accounts;
-    this.currencies = Currencies;
     this.db = db.db;
+    this.events = events;
   }
 
   async execute({
@@ -30,34 +29,12 @@ class CreateTransaction {
         await createdTransaction.setPayments ([...createdPayments], {
           transaction,
         });
-        // const srcAccount = srcAccountId && await this.accounts.findOne.execute({
-        //   args: {id: srcAccountId},
-        //   ctx: {user: {teamId}},
-        //   options: {transaction},
-        // });
-        // const dstAccount = dstAccountId && await this.accounts.findOne.execute({
-        //   args: {id: dstAccountId},
-        //   ctx: {user: {teamId}},
-        //   options: {transaction},
-        // });
-        if (srcAccountId && dstAccountId) {
-          const srcCurrencyRate = await this.currencies.getExchangeRate.execute (
-            {
-              args: {accountId: srcAccountId, actualDate},
-              ctx: {user: {teamId}},
-            }
-          );
-          const dstCurrencyRate = await this.currencies.getExchangeRate.execute (
-            {
-              args: {accountId: dstAccountId, actualDate},
-              ctx: {user: {teamId}},
-            }
-          );
-          const conversionRate = srcCurrencyRate / (exchangeRate || dstCurrencyRate);
-
-        } else {
-
-        }
+        this.events.emit('TRANSACTION_CREATED', {
+          srcAccountId,
+          dstAccountId,
+          exchangeRate,
+          total: createdPayments.reduce((acc, payment) => acc + payment.amount, 0),
+        });
         return createdTransaction;
       });
     } catch (error) {

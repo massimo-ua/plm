@@ -1,9 +1,10 @@
 class RollbackTransaction {
-  constructor({TransactionModel, Payments, logger, db}) {
+  constructor({TransactionModel, Payments, logger, db, events}) {
     this.model = TransactionModel;
     this.logger = logger;
     this.payments = Payments;
     this.db = db.db;
+    this.events = events;
   }
 
   async execute({args: {id}, ctx: {user: {teamId} = {}}}) {
@@ -36,6 +37,7 @@ class RollbackTransaction {
             });
           })
         );
+        this.events.emit('TRANSACTION_ROLLED_BACK', transaction.id);
         return transaction;
       });
     } catch (error) {

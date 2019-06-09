@@ -1,5 +1,6 @@
 const modelsCreator = require ('./models');
 const serviceCreator = require ('./services');
+const handlers = require('./handlers');
 
 module.exports = container => ({
   register () {
@@ -10,4 +11,7 @@ module.exports = container => ({
     ]);
     container.register ('Accounts', serviceCreator, ['AccountModel']);
   },
+  run() {
+    handlers(container);
+  }
 });
