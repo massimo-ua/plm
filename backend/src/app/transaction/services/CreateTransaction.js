@@ -34,6 +34,7 @@ class CreateTransaction {
           dstAccountId,
           exchangeRate,
           total: createdPayments.reduce((acc, payment) => acc + payment.amount, 0),
+          ctx: {user: {teamId}},
         });
         return createdTransaction;
       });
