@@ -33,6 +33,7 @@ class CreateTransaction {
           srcAccountId,
           dstAccountId,
           exchangeRate,
+          actualDate,
           total: createdPayments.reduce((acc, payment) => acc + payment.amount, 0),
           ctx: {user: {teamId}},
         });
