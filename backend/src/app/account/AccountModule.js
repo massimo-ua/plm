@@ -9,7 +9,7 @@ module.exports = container => ({
       'TeamModel',
       'CurrencyModel',
     ]);
-    container.register ('Accounts', serviceCreator, ['AccountModel']);
+    container.register ('Accounts', serviceCreator, ['AccountModel', 'Transactions', 'db']);
   },
   run() {
     handlersCreator(container);

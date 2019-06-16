@@ -17,6 +17,7 @@ module.exports = container => ({
       'Currencies',
       'events',
       'db',
+      'logger',
     ]);
   },
 });

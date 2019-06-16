@@ -9,7 +9,6 @@ module.exports = container => ({
       'db',
       'CurrencyModel',
       'CurrencyRateModel',
-      'Accounts',
     ]);
   },
 });
