@@ -2,6 +2,7 @@ const {
   GraphQLID,
   GraphQLInt,
   GraphQLList,
+  GraphQLFloat,
   GraphQLString,
   GraphQLNonNull,
   GraphQLInputObjectType,
@@ -33,6 +34,10 @@ const TransactionInput = new GraphQLInputObjectType ({
     dstAccountId: {
       type: GraphQLID,
       description: 'Destination account id',
+    },
+    exchangeRate: {
+      type: GraphQLFloat,
+      description: 'Destination account exchange rate',
     },
     actualDate: {
       type: GraphQLNonNull (GraphQLDate),

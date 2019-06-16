@@ -15,6 +15,11 @@ module.exports = {
       type: Sequelize.INTEGER,
       index: true,
     },
+    dstExchangeRate: {
+      type: Sequelize.FLOAT,
+      allowNull: false,
+      defaultValue: 1,
+    },
     actualDate: {
       type: Sequelize.DATEONLY,
       allowNull: false,

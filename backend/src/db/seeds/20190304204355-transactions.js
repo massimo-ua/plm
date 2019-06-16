@@ -3,6 +3,7 @@ module.exports = {
     {
       id: 1,
       srcAccountId: 1,
+      dstExchangeRate: 1,
       actualDate: new Date(),
       teamId: 1,
       createdAt: new Date(),
@@ -11,6 +12,7 @@ module.exports = {
     {
       id: 2,
       srcAccountId: 1,
+      dstExchangeRate: 1,
       actualDate: new Date(),
       teamId: 1,
       createdAt: new Date(),
@@ -19,6 +21,7 @@ module.exports = {
     {
       id: 3,
       srcAccountId: 1,
+      dstExchangeRate: 1,
       actualDate: new Date(),
       teamId: 1,
       createdAt: new Date(),
@@ -27,6 +30,7 @@ module.exports = {
     {
       id: 4,
       dstAccountId: 2,
+      dstExchangeRate: 1,
       actualDate: new Date(),
       teamId: 1,
       createdAt: new Date(),
@@ -36,6 +40,7 @@ module.exports = {
       id: 5,
       srcAccountId: 1,
       dstAccountId: 3,
+      dstExchangeRate: 28.67,
       actualDate: new Date(),
       teamId: 1,
       createdAt: new Date(),

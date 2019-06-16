@@ -7,6 +7,7 @@ module.exports = ({AccountModel, TeamModel, PaymentModel}) => (
     {
       srcAccountId: DataTypes.INTEGER,
       dstAccountId: DataTypes.INTEGER,
+      dstExchangeRate: DataTypes.FLOAT,
       actualDate: DataTypes.DATEONLY,
       teamId: DataTypes.INTEGER,
       notes: DataTypes.STRING,

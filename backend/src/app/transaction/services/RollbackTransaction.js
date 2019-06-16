@@ -37,13 +37,6 @@ class RollbackTransaction {
             });
           })
         );
-        const { srcAccountId, dstAccountId } = transaction;
-        this.events.emit('TRANSACTION_ROLLED_BACK', {
-          srcAccountId,
-          dstAccountId,
-          total: payments.reduce((acc, payment) => acc + payment.amount, 0),
-          ctx: {user: {teamId}},
-        });
         return transaction;
       });
     } catch (error) {
