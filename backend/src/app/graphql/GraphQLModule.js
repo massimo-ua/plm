@@ -24,7 +24,7 @@ module.exports = container => ({
       'Accounts',
     ]);
     container.register ('Category', Category, ['Team', 'Teams']);
-    container.register ('Currency', Currency);
+    container.register ('Currency', Currency, ['Currencies']);
     container.register ('Team', Team);
     container.register ('Transaction', Transaction, [
       'Currencies',

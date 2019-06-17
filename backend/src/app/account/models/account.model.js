@@ -4,7 +4,6 @@ module.exports = ({ TeamModel, CurrencyModel }) => (sequelize, DataTypes) => {
     type: DataTypes.ENUM('S', 'C', 'SC'),
     currencyId: DataTypes.INTEGER,
     teamId: DataTypes.INTEGER,
-    balance: DataTypes.INTEGER,
     deletedAt: DataTypes.DATE,
   },
   {

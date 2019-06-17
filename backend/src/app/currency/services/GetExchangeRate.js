@@ -4,7 +4,7 @@ class GetExchangeRate {
     this.Op = db.Op;
   }
 
-  async execute({ args: { currencyId, effectiveDate } }) {
+  async execute({ args: { currencyId, effectiveDate = new Date() } }) {
     const record = await this.model.findOne({
       where: {
         currencyId,
